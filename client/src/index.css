@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+body{
+  background-color: #2D0A47;
+}
+
+@theme{
+  --color-purple-01: #2D0A47;
+  --color-purple-02: #3c0c70;
+
+  --color-yellow-01: #fac92a
+}
