@@ -4,6 +4,9 @@ import viteLogo from '/vite.svg'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import RootLayout from './layout/RootLayout'
 import Login from './pages/Login'
+import Home from './pages/Home'
+import NewTournament from './components/NewTournament'
+import ViewAllTournaments from './components/ViewAllTournaments'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,7 +16,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<RootLayout/>}>
-            <Route path="/" element={<h1>Home Page</h1>} />
+            <Route path="/" element={<Home/>} />
+            <Route path='new-tournament' element={<NewTournament/>}/>
+            <Route path='view-all' element={<ViewAllTournaments/>}/>
+            <Route path='new-tournament' element={<NewTournament/>}/>
           </Route>
           <Route path='login' element={<Login/>} />
         </Routes>
