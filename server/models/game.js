@@ -9,7 +9,11 @@ const gameSchema = new mongoose.Schema({
     teams: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team',
-    }]
+    }],
+    winner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Team',    
+    },
 })
 
 const Game = mongoose.model("Game", gameSchema);
