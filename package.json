@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "client": "file:client",
-    "server": "file:server"
-  }
-}
