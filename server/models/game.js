@@ -14,6 +14,9 @@ const gameSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team',    
     },
+    scheduledDate : {
+        type: Date,
+    }
 })
 
 const Game = mongoose.model("Game", gameSchema);

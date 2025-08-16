@@ -115,7 +115,7 @@ const TournamentDetails = () => {
             </li>
           </ul>
         </div>
-        {activeTab == "games" && <Games games={tournament.games} />}
+        {activeTab == "games" && <Games tournamentId={tournament._id} />}
         {activeTab == "points" && <PointsTable />}
         {activeTab == "teams" && <Teams />}
       </div>

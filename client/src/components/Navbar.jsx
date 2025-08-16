@@ -4,11 +4,11 @@ const Navbar = () => {
   return (
     <div className="h-16 font-dynapuff text-yellow-01 w-screen absolute top-0 left-0 bg-purple-02 p-4 flex justify-between">
       <Link to="/">
-        <h1 className="text-2xl">Carrom Tracker</h1>
+        <h1 className="text-2xl">Carrom</h1>
       </Link>
       <div>
         <ul className="flex gap-x-6 text-xl">
-          <li>Home</li>
+          
           <Link to='all-tournaments'>
             <li>Tournaments</li>
           </Link>

@@ -28,7 +28,35 @@ const useTeams = () => {
             console.error("Error creating team:", error);
         }
     }
-  return {getTournamentTeams, createTeam}
+
+    const getTeamData = async (teamId) => {
+      
+        try {
+            const response = await axios.get(`${server}/api/teams/${teamId}`);
+            if(response.status === 200) {
+                console.log("Team data fetched successfully:", response.data);
+                return response.data; // Return the fetched team data
+            }
+        } catch (error) {
+            console.error("Error fetching team data:", error);
+        }
+
+    }
+
+    const addPlayerToTeam = async (teamId, newPlayer) => {
+        console.log("Adding player",newPlayer," to team ",teamId)
+        try {
+            const response = await axios.post(`${server}/api/teams/${teamId}/players`, newPlayer);
+            if(response.status === 201) {
+                console.log("Player added successfully:", response.data);
+                return response.data; // Return the added player data
+            }
+        } catch (error) {
+            console.error("Error adding player to team:", error);
+        }
+    }
+
+  return {getTournamentTeams, createTeam, getTeamData, addPlayerToTeam}
 }
 
 export default useTeams

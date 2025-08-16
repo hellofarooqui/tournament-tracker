@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import NewTournament from './components/NewTournament'
 import ViewAllTournaments from './components/ViewAllTournaments'
 import TournamentDetails from './pages/TournamentDetails'
+import TeamDetails from './components/TeamData'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,6 +23,7 @@ function App() {
             <Route path="all-tournaments" element={<ViewAllTournaments />} />
             <Route path="new-tournament" element={<NewTournament />} />
             <Route path='tournament/:id' element={<TournamentDetails />} />
+            <Route path='team/:id' element={<TeamDetails />} />
           </Route>
           <Route path="login" element={<Login />} />
         </Routes>

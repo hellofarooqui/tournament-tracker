@@ -6,6 +6,9 @@ import path from 'path';
 import connectDB from './config/db.js';
 
 import tournamentRouter from './routers/tournamentRouter.js';
+import teamRouter from './routers/teamRouter.js';
+
+
 
 
 dotenv.config();
@@ -18,6 +21,7 @@ app.use(express.json());
 connectDB();
 
 app.use('/api/tournaments', tournamentRouter);
+app.use('/api/teams', teamRouter);
 
 
 app.listen(PORT, () => {

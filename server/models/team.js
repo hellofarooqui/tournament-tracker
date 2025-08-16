@@ -12,6 +12,9 @@ const teamSchema = new mongoose.Schema({
       ref: "Player",
     },
   ],
+  // members: [
+  //   {type: String}
+  // ],
   tournaments: [
     {
       type: mongoose.Schema.Types.ObjectId,
