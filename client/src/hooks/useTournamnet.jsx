@@ -48,8 +48,25 @@ const useTournamnet = () => {
             console.error("Error creating tournament:", error);
         }
     }
+
+    const deleteTournament = async (id) => {
+        try {
+            const response = await axios.delete(`${server}/api/tournaments/${id}`);
+            if(response.status === 200) {
+                console.log("Tournament deleted successfully:", response.data);
+                return response.data; // Return the deletion confirmation
+            }
+        } catch (error) {
+            console.error("Error deleting tournament:", error);
+        }
+    }
             
-  return { getAllTournaments, createTournament, getTournamentById };
+  return {
+    getAllTournaments,
+    createTournament,
+    getTournamentById,
+    deleteTournament,
+  };
 }
 
 export default useTournamnet

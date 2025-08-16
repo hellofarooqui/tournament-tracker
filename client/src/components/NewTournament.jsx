@@ -18,6 +18,7 @@ const NewTournament = () => {
 
   const handleReset = () => {
     setTournament(defaultTournament);
+    navigate(-1); // Navigate back to the previous page
   };
 
 
@@ -63,7 +64,7 @@ const NewTournament = () => {
               <input
                 type="date"
                 placeholder="Give a name"
-                className="p-2 border-3 border-yellow-300/40 rounded-[10px] focus:outline-none focus:border-yellow-300/70"
+                className="w-full p-2 border-3 border-yellow-300/40 rounded-[10px] focus:outline-none focus:border-yellow-300/70"
                 onChange={(e) =>
                   setTournament({ ...tournament, startDate: e.target.value })
                 }
@@ -75,7 +76,7 @@ const NewTournament = () => {
               <input
                 type="date"
                 placeholder="Give a name"
-                className="p-2 border-3 border-yellow-300/40 rounded-[10px] focus:outline-none focus:border-yellow-300/70"
+                className="w-full p-2 border-3 border-yellow-300/40 rounded-[10px] focus:outline-none focus:border-yellow-300/70"
                 onChange={(e) =>
                   setTournament({ ...tournament, endDate: e.target.value })
                 }
