@@ -22,7 +22,7 @@ const tournamentSchema = new mongoose.Schema({
     games : [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Game',
-        required: true,
+        //required: true,
     }],
     teams: [{
         type: mongoose.Schema.Types.ObjectId,

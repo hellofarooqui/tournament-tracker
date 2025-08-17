@@ -54,6 +54,7 @@ const PointsTable = () => {
         <thead className=''>
           <tr className="bg-purple-700 text-yellow-200 rounded-md overflow-hidden">
             <th className="px-4 py-2 border-b border-purple-500">Team</th>
+            <th className="px-4 py-2 border-b border-purple-500">P</th>
             <th className="px-4 py-2 border-b border-purple-500">W</th>
             <th className="px-4 py-2 border-b border-purple-500">L</th>
             <th className="px-4 py-2 border-b border-purple-500">D</th>
@@ -80,6 +81,9 @@ const PointsTable = () => {
               <tr key={index} className="hover:bg-purple-800 transition-colors">
                 <td className="px-4 py-2 border-b border-purple-500">
                   {abbrevation(entry.team.name)}
+                </td>
+                <td className="px-4 py-2 border-b border-purple-500">
+                  {entry.gamesPlayed}
                 </td>
                 <td className="px-4 py-2 border-b border-purple-500">
                   {entry.wins}

@@ -7,6 +7,7 @@ import connectDB from './config/db.js';
 
 import tournamentRouter from './routers/tournamentRouter.js';
 import teamRouter from './routers/teamRouter.js';
+import gameRouter from './routers/gameRouter.js';
 
 
 
@@ -22,6 +23,7 @@ connectDB();
 
 app.use('/api/tournaments', tournamentRouter);
 app.use('/api/teams', teamRouter);
+app.use('/api/games', gameRouter);
 
 
 app.listen(PORT, () => {

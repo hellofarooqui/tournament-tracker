@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 const defaultNewGame = {
-  name: "",
+  tournament: "",
   teams: [],
   scheduledDate: "",
 };
@@ -47,6 +47,7 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
   };
 
   useEffect(() => {
+    setNewGame({ ...newGame, tournament: tournamentId });
     fetchTournamentTeams(tournamentId);
   }, []);
   return (
@@ -89,14 +90,13 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
               onChange={(e) =>
                 setNewGame({
                   ...newGame,
-                  teams: [ ...newGame.teams, newGame.teams[0]=e.target.value,],
-                  
+                  teams: [e.target.value, newGame.teams[1] || ""], // fix index 0
                 })
               }
             >
               <option value="">Select First Team</option>
               {tournamentTeams.map((team) => (
-                <option key={team._id}  id={team.name} value={team._id}>
+                <option key={team._id} value={team._id}>
                   {team.name}
                 </option>
               ))}
@@ -106,14 +106,13 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
               onChange={(e) =>
                 setNewGame({
                   ...newGame,
-                  teams: [ ...newGame.teams, newGame.teams[1]=e.target.value,],
-                  
+                  teams: [newGame.teams[0] || "", e.target.value], // fix index 1
                 })
               }
             >
               <option value="">Select Second Team</option>
               {tournamentTeams.map((team) => (
-                <option key={team._id} id={team.name} value={team._id}>
+                <option key={team._id} value={team._id}>
                   {team.name}
                 </option>
               ))}

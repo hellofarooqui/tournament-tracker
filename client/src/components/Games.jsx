@@ -40,7 +40,7 @@ const {getGames} = useGame();
         <h2>Games</h2>
         <button onClick={()=>setShowAddNewGameModal(true)} className="text-sm bg-yellow-01 text-purple-02 px-2 rounded-md">New Game</button>
       </div>
-      {games && <GamesList games={games} />}
+      {games.length > 0 ? <GamesList games={games} /> : <p className="mt-4 bg-purple-02 text-slate-200 text-sm p-4 rounded-[10px] font-thin">No games found</p>}
 
       {showAddNewGameModal && <NewGameModal tournamentId={tournamentId} setShowAddNewGameModal={setShowAddNewGameModal} />}
     </div>

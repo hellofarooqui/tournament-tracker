@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const gameSchema = new mongoose.Schema({
+    tournament: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Tournament',
+    },
     teams: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team',
