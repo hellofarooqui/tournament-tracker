@@ -14,11 +14,9 @@ export const getAllTournaments = async (req, res) => {
 
 export const createTournament = async (req, res) => {
   try {
-    
-
     console.log("Creating tournament with data:", req.body);
     const tournament = await Tournament.create({ ...req.body });
-    
+
     //await tournament.save();
 
     const pointsTable = await PointsTable.create({
@@ -32,7 +30,7 @@ export const createTournament = async (req, res) => {
 
     res.status(201).json(tournament);
   } catch (error) {
-    console.log("Error: ",error)
+    console.log("Error: ", error);
     res.status(500).json({ message: "Error creating tournament", error });
   }
 };
@@ -136,12 +134,13 @@ export const getPointsTable = async (req, res) => {
     // if (!tournament || !tournament.pointsTable) {
     //   return res.status(404).json({ message: "Points table not found", tournament:tournament });
     // }
-    const tournament = await Tournament.findById(req.params.id)
-    const pointsTable = await PointsTable.findById(tournament.pointsTable).populate('entries.team', 'name');
+    const tournament = await Tournament.findById(req.params.id);
+    const pointsTable = await PointsTable.findById(
+      tournament.pointsTable
+    ).populate("entries.team", "name");
     res.status(200).json(pointsTable);
   } catch (error) {
     console.error("Error fetching points table:", error);
     res.status(500).json({ message: "Error fetching points table", error });
   }
-}
-
+};

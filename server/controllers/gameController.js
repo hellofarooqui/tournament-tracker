@@ -27,7 +27,13 @@ export const getTournamentGames = async (req, res) => {
     const { tournamentId } = req.params;
 
     try {
-        const tournament = await Tournament.findById(tournamentId).populate("games");
+        const tournament = await Tournament.findById(tournamentId).populate({
+            path: "games",
+            populate: [
+                { path: "teams" },
+                { path: "winner" },
+            ],
+        });
         if (!tournament) {
             return res.status(404).json({ message: "Tournament not found" });
         }

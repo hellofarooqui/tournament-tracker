@@ -5,17 +5,17 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 const defaultNewGame = {
-    name:"",
-    teams:[],
-    scheduledDate:""
-  }
+  name: "",
+  teams: [],
+  scheduledDate: "",
+};
 
-const NewGameModal = ({ tournamentId,setShowAddNewGameModal }) => {
+const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
   const [tournamentTeams, setTournamentTeams] = useState([]);
-  const [newGame,setNewGame] = useState(defaultNewGame)
+  const [newGame, setNewGame] = useState(defaultNewGame);
   const { getTournamentTeams } = useTeams();
-  const {createGame} = useGame();
-  const navigate = useNavigate()
+  const { createGame } = useGame();
+  const navigate = useNavigate();
 
   const fetchTournamentTeams = async (tournamentId) => {
     try {
@@ -34,18 +34,17 @@ const NewGameModal = ({ tournamentId,setShowAddNewGameModal }) => {
       console.log("Game created successfully:", createdGame);
       toast.success("Game Created");
       setNewGame(defaultNewGame);
-      setShowAddNewGameModal(false)
+      setShowAddNewGameModal(false);
     } catch (error) {
       console.error("Error creating game:", error);
       toast.error("Error creating game");
     }
-  }
+  };
 
   const handleCancel = () => {
-    setNewGame(defaultNewGame)
+    setNewGame(defaultNewGame);
     navigate(-1); // Navigate back to the previous page
-  }
-
+  };
 
   useEffect(() => {
     fetchTournamentTeams(tournamentId);
@@ -56,32 +55,86 @@ const NewGameModal = ({ tournamentId,setShowAddNewGameModal }) => {
         <div className="border-3 border-yellow-01 rounded-lg p-4">
           <h2 className="text-xl font-bold mb-2">New Game</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
-            <input
+            {/* <input
               list="teams"
               placeholder="First Team"
               className="text-lg mb-2 p-2 rounded-md bg-purple-02"
-               onChange={(e) => setNewGame({...newGame, teams: [e.target.key, ...newGame.teams], name: e.target.value + " vs "})}
+              onChange={(e) =>
+                setNewGame({
+                  ...newGame,
+                  teams: [e.target.key, ...newGame.teams],
+                  name: e.target.value + " vs ",
+                })
+              }
             />
             <input
-             list="teams"
+              list="teams"
               placeholder="Second Team"
               className="text-lg mb-2 p-2 rounded-md bg-purple-02"
-               onChange={(e) => setNewGame({...newGame, teams: [...newGame.teams, e.target.key], name: newGame.name + e.target.value})}
-            />
-            <datalist id="teams">
+              onChange={(e) =>
+                setNewGame({
+                  ...newGame,
+                  teams: [...newGame.teams, e.target.key],
+                  name: newGame.name + e.target.value,
+                })
+              }
+            /> */}
+            {/* <datalist id="teams">
               {tournamentTeams.map((team) => (
                 <option key={team._id} value={team.name} />
               ))}
-            </datalist>
+            </datalist> */}
+            <select
+              className="text-lg mb-2 p-2 rounded-md bg-purple-02"
+              onChange={(e) =>
+                setNewGame({
+                  ...newGame,
+                  teams: [ ...newGame.teams, newGame.teams[0]=e.target.value,],
+                  
+                })
+              }
+            >
+              <option value="">Select First Team</option>
+              {tournamentTeams.map((team) => (
+                <option key={team._id}  id={team.name} value={team._id}>
+                  {team.name}
+                </option>
+              ))}
+            </select>
+            <select
+              className="text-lg mb-2 p-2 rounded-md bg-purple-02"
+              onChange={(e) =>
+                setNewGame({
+                  ...newGame,
+                  teams: [ ...newGame.teams, newGame.teams[1]=e.target.value,],
+                  
+                })
+              }
+            >
+              <option value="">Select Second Team</option>
+              {tournamentTeams.map((team) => (
+                <option key={team._id} id={team.name} value={team._id}>
+                  {team.name}
+                </option>
+              ))}
+            </select>
             <input
               type="date"
               className="text-lg mb-2 p-2 rounded-md bg-purple-02"
-              onChange={(e) => setNewGame({...newGame, scheduledDate: e.target.value})}
+              onChange={(e) =>
+                setNewGame({ ...newGame, scheduledDate: e.target.value })
+              }
             />
-            <button type="submit" className="bg-yellow-01 text-purple-02 px-4 py-2 rounded-md">
+            <button
+              type="submit"
+              className="bg-yellow-01 text-purple-02 px-4 py-2 rounded-md"
+            >
               Create Game
             </button>
-            <button onClick={handleCancel} className="border-3 border-yellow-01 text-yellow-01 px-4 py-2 rounded-md">
+            <button
+              onClick={handleCancel}
+              className="border-3 border-yellow-01 text-yellow-01 px-4 py-2 rounded-md"
+            >
               Cancel
             </button>
           </form>

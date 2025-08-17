@@ -35,7 +35,7 @@ const {getGames} = useGame();
   if(error) return <div>Error fetching games: {error.message}</div>;
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 pb-6">
       <div className="flex justify-between items-center">
         <h2>Games</h2>
         <button onClick={()=>setShowAddNewGameModal(true)} className="text-sm bg-yellow-01 text-purple-02 px-2 rounded-md">New Game</button>
