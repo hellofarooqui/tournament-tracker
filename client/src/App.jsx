@@ -19,13 +19,13 @@ function App() {
         <Routes>
           <Route element={<RootLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="new-tournament" element={<NewTournament />} />
-            <Route path="all-tournaments" element={<ViewAllTournaments />} />
-            <Route path="new-tournament" element={<NewTournament />} />
-            <Route path='tournament/:id' element={<TournamentDetails />} />
-            <Route path='team/:id' element={<TeamDetails />} />
+            <Route path="/new-tournament" element={<NewTournament />} />
+            <Route path="/all-tournaments" element={<ViewAllTournaments />} />
+            <Route path="/new-tournament" element={<NewTournament />} />
+            <Route path='/tournament/:id' element={<TournamentDetails />} />
+            <Route path='/team/:id' element={<TeamDetails />} />
           </Route>
-          <Route path="login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>
