@@ -33,8 +33,9 @@ export default defineConfig({
       workbox: {
         runtimeCaching: [
           {
-            // urlPattern: /^https:\/\/your-backend-api\.com\/.*$/,
-            urlPattern: /^http:\/\/localhost:(3000|5173)\/.*$/,
+            urlPattern:
+              /^https:\/\/tournament-tracker-jku4\.onrender\.com\/.*$/,
+            // urlPattern: /^http:\/\/localhost:(3000|5173)\/.*$/,
             handler: "NetworkFirst",
             options: {
               cacheName: "api-cache",
