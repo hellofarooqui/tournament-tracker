@@ -85,11 +85,11 @@ const Teams = () => {
   return (
     <div className="w-full h-screen font-dynapuff">
       <div className="w-full flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 py-2">
-        <div className="flex justify-between items-center border-b-2 border-yellow-300/40 pb-2">
-          <h2 className="text-2xl">Teams</h2>
-          {token && <button
+        <div className="flex justify-between items-center pb-2">
+          <h2 className="text-2xl text-white">Teams</h2>
+          {true && <button
             onClick={() => setShowAddTeamModal(true)}
-            className="bg-yellow-01 text-purple-01 px-4 rounded-md"
+            className="bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] shadow-pink-300/30 shadow-md text-slate-700 px-6 py-2 rounded-full text-sm"
           >
             Add
           </button>}

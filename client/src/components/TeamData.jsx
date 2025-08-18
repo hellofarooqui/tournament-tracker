@@ -67,7 +67,7 @@ const TeamData = ({ teamId, setShowTeamData }) => {
   }
 
   return (
-    <div className="absolute top-0 left-0 w-screen h-screen bg-gray-900/70 flex items-center justify-center p-6">
+    <div className="fixed top-0 left-0 z-20 w-screen h-screen bg-gray-900/70 flex items-center justify-center p-6">
       <CircleX onClick={(e)=>handleModalClose(e)} className="absolute top-2 z-20 bg-dark-brown-01 text-center text-2xl text-dark-brbg-dark-brown-03 rounded-full" size={30}/>
       <div className="max-w-sm w-full h-full bg-dark-brown-03 p-4 rounded-[10px] relative">
         <div className="w-full h-full p-4">

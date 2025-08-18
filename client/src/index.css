@@ -13,7 +13,8 @@
 
 body {
   /* background-color: #2D0A47; */
-  background-color: #3a2317;
+  /* background-color: #3a2317; */
+  background: linear-gradient(to bottom, #22427D, #254B8C);
 }
 
 @theme {

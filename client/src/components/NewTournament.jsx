@@ -40,43 +40,43 @@ const NewTournament = () => {
     }
   };
   return (
-    <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff text-yellow-01">
+    <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
       <div className="flex flex-col gap-y-4 text-xl font-semibold text-yellow-01">
-        <h2>New Tournament</h2>
+        <h2 className="text-3xl text-white text-center mb-6">New <br></br> Tournament</h2>
         <div>
           <form
             onSubmit={handleSubmit}
             onReset={handleReset}
-            className="flex flex-col gap-y-4"
+            className="flex flex-col gap-y-4 items-center justify-center text-[16px]"
           >
             <div className="flex gap-x-2 items-center w-full">
               <input
                 placeholder="Give a name"
-                className="p-2 border-3 border-yellow-300/40 rounded-[10px] focus:outline-none focus:border-yellow-300/70"
+                className="p-2 px-4 bg-slate-200/20 backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
                 onChange={(e) =>
                   setTournament({ ...tournament, name: e.target.value })
                 }
               />
             </div>
 
-            <div className="flex gap-x-2 items-center w-full">
-              <label>Start</label>
+            <div className="flex flex-col gap-x-2 items-start w-full">
+              <label className="text-amber-300">Start</label>
               <input
                 type="date"
                 placeholder="Give a name"
-                className="w-full p-2 border-3 border-yellow-300/40 rounded-[10px] focus:outline-none focus:border-yellow-300/70"
+                className="w-full p-2 px-4 bg-slate-200/20 backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
                 onChange={(e) =>
                   setTournament({ ...tournament, startDate: e.target.value })
                 }
               />
             </div>
 
-            <div className="flex gap-x-2 items-center w-full">
-              <label>End</label>
+            <div className="flex flex-col gap-x-2 items-start w-full">
+              <label className="text-amber-300">End</label>
               <input
                 type="date"
                 placeholder="Give a name"
-                className="w-full p-2 border-3 border-yellow-300/40 rounded-[10px] focus:outline-none focus:border-yellow-300/70"
+                className="w-full  p-2 px-4 bg-slate-200/20 backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
                 onChange={(e) =>
                   setTournament({ ...tournament, endDate: e.target.value })
                 }
@@ -85,14 +85,14 @@ const NewTournament = () => {
 
             <button
               type="submit"
-              className="bg-yellow-01 text-purple-01 p-2 rounded-[10px]"
+              className="w-full bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] text-slate-700 p-2 mt-6 py-3 rounded-[20px]"
             >
               {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
             </button>
 
             <button
               type="reset"
-              className="border-yellow-01 border-2 text-yellow-01 p-2 rounded-[10px]"
+              className="w-full border-slate-200/30 border-2 text-slate-200 p-2 rounded-[20px]"
             >
               Cancel
             </button>
