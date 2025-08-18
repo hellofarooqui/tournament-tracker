@@ -1,33 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap");
 
 @import "tailwindcss";
 
 @plugin 'tailwind-scrollbar' {
-    nocompatible: true;
-    preferredStrategy: 'pseudoelements';
+  nocompatible: true;
+  preferredstrategy: "pseudoelements";
 }
 
-body{
-  background-color: #2D0A47;
+body {
+  /* background-color: #2D0A47; */
+  background-color: #3a2317;
 }
 
-@theme{
-  --color-purple-01: #2D0A47;
+@theme {
+  --color-purple-01: #2d0a47;
   --color-purple-02: #3c0c70;
 
   --color-dark-brown-01: #311f13;
-  --color-dark-brown-02: #3a2317;  
+  --color-dark-brown-02: #3a2317;
+  --color-dark-brown-03: #503626;
+  --color-dark-brown-04: #774b31;
   --color-light-brown-01: #b07154;
   --color-light-brown-02: #a87e62;
   --color-light-brown-03: #f4decb;
 
   --color-yellow-01: #fac92a;
-  --font-lucky : Luckiest Guy, "sans-serif";
-  --font-dynapuff : Gabarito , "sans-serif"
-
-
+  --font-lucky: Luckiest Guy, "sans-serif";
+  --font-dynapuff: Gabarito, "sans-serif";
 }

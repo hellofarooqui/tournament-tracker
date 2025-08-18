@@ -2,17 +2,17 @@ import { Link } from "react-router"
 
 const Navbar = () => {
   return (
-    <div className="h-16 font-dynapuff text-yellow-01 w-screen absolute top-0 left-0 bg-purple-02 p-4 flex justify-between">
+    <div className="h-16 font-dynapuff text-dark-brown-01 w-screen absolute top-0 left-0 bg-light-brown-01 p-4 flex justify-between">
       <Link to="/">
-        <h1 className="text-2xl">Carrom</h1>
+        <h1 className="text-2xl font-semibold">Carrom</h1>
       </Link>
       <div>
-        <ul className="flex gap-x-6 text-xl">
+        <ul className="flex gap-x-2 text-xl">
           
           <Link to='all-tournaments'>
-            <li>Tournaments</li>
+            <li className="border-2 border-light-brown-03 px-2 rounded-full text-light-brown-03 text-sm py-1">Tournaments</li>
           </Link>
-          <li>Login</li>
+          <li className="border-2 border-light-brown-03 px-2 rounded-full text-light-brown-03 text-sm py-1">Login</li>
         </ul>
       </div>
     </div>

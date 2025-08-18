@@ -9,9 +9,9 @@ const TournamentCard = ({tournament}) => {
         navigate(`/tournament/${tournament._id}`)
     }
   return (
-    <div onClick={handleTournamentClick} className="w-full group font-dynapuff text-yellow-01 bg-purple-02 p-4 rounded-lg shadow-lg cursor-pointer hover:bg-yellow-01 hover:text-purple-02 transition-colors ease-in-out duration-200">
+    <div onClick={handleTournamentClick} className="w-full group font-dynapuff text-light-brown-03 bg-dark-brown-04 p-4 rounded-lg shadow-lg cursor-pointer hover:bg-yellow-01 hover:text-dark-bg-dark-brown-04 transition-colors ease-in-out duration-200">
       <div className="flex justify-between items-center">
-        <h2 className='text-lg opacity-90 text-emerald-400 group-hover:text-purple-02'>{tournament.name}</h2>
+        <h2 className='text-lg opacity-90 text-light-brown-03 group-hover:text-dark-bg-dark-brown-04'>{tournament.name}</h2>
 
         <div>
           <ShieldCheck className='text-green-500'/>

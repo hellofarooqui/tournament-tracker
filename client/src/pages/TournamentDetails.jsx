@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useTournamnet from "../hooks/useTournamnet";
 import { Loader2 } from "lucide-react";
@@ -6,8 +6,10 @@ import Games from "../components/Games";
 import PointsTable from "../components/PointsTable";
 import Teams from "../components/Teams";
 import toast from "react-hot-toast";
+import { AuthContext } from "../context/AuthContext";
 
 const TournamentDetails = () => {
+  const { token} = useContext(AuthContext);
   const { getTournamentById, deleteTournament } = useTournamnet();
   const params = useParams();
   const navigate = useNavigate();
@@ -61,7 +63,7 @@ const TournamentDetails = () => {
   if (loading)
     return (
       <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
-        <div className="flex flex-col gap-y-4 text-xl font-semibold text-yellow-01">
+        <div className="flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03">
           <Loader2 className="animate-spin" />
         </div>
       </div>
@@ -70,15 +72,15 @@ const TournamentDetails = () => {
 
   return (
     <div className="w-full h-screen flex  py-16 font-dynapuff">
-      <div className="w-full flex flex-col gap-y-4 text-xl font-semibold text-yellow-01 p-6">
+      <div className="w-full flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 p-6">
         <div className="flex justify-between items-center">
           <h2>{tournament.name} </h2>
-          <button
+          {token && <button
             onClick={handleDeleteTournament}
-            className="bg-purple-02 hover:bg-yellow-01 hover:text-purple-02 px-4 py-2 rounded-md text-sm"
+            className="bg-dark-brown-04 hover:bg-yellow-01 hover:text-purple-02 px-4 py-2 rounded-md text-sm"
           >
             Delete
-          </button>
+          </button>}
         </div>
 
         <div className="w-full text-lg">
@@ -87,8 +89,8 @@ const TournamentDetails = () => {
               onClick={() => setActiveTab("games")}
               className={`flex-1 text-center cursor-pointer  p-2 ${
                 activeTab == "games"
-                  ? "bg-yellow-01 text-purple-01"
-                  : "bg-purple-02 text-yellow-01"
+                  ? "bg-dark-brown-01 text-light-brown-03"
+                  : "bg-dark-brown-04 text-light-brown-03"
               } `}
             >
               Games
@@ -97,8 +99,8 @@ const TournamentDetails = () => {
               onClick={() => setActiveTab("points")}
               className={`flex-1 text-center cursor-pointer  p-2 ${
                 activeTab == "points"
-                  ? "bg-yellow-01 text-purple-01"
-                  : "bg-purple-02 text-yellow-01"
+                  ? "bg-dark-brown-01 text-light-brown-03"
+                  : "bg-dark-brown-04 text-light-brown-03"
               } `}
             >
               Points
@@ -107,8 +109,8 @@ const TournamentDetails = () => {
               onClick={() => setActiveTab("teams")}
               className={`flex-1 text-center cursor-pointer  p-2 ${
                 activeTab == "teams"
-                  ? "bg-yellow-01 text-purple-01"
-                  : "bg-purple-02 text-yellow-01"
+                  ? "bg-dark-brown-01 text-light-brown-03"
+                  : "bg-dark-brown-04 text-light-brown-03"
               } `}
             >
               Teams

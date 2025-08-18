@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NewGameModal from "./NewGameModal";
 import useGame from "../hooks/useGame";
 import GamesList from "./GamesList";
+import { AuthContext } from "../context/AuthContext";
 
 const Games = ({tournamentId}) => {
   const [showAddNewGameModal, setShowAddNewGameModal] = useState(false);
   const [games,setGames] = useState([]);
   const [loading,setLoading] = useState(false);
   const [error,setError] = useState(null);
+
+  const {token} = useContext(AuthContext)
 
 
 const {getGames} = useGame();
@@ -38,9 +41,9 @@ const {getGames} = useGame();
     <div className="mt-4 pb-6">
       <div className="flex justify-between items-center">
         <h2>Games</h2>
-        <button onClick={()=>setShowAddNewGameModal(true)} className="text-sm bg-yellow-01 text-purple-02 px-2 rounded-md">New Game</button>
+        { token && <button onClick={()=>setShowAddNewGameModal(true)} className="text-sm bg-yellow-01 text-dark-bbg-dark-brown-04 px-2 rounded-md">New Game</button>}
       </div>
-      {games.length > 0 ? <GamesList games={games} /> : <p className="mt-4 bg-purple-02 text-slate-200 text-sm p-4 rounded-[10px] font-thin">No games found</p>}
+      {games.length > 0 ? <GamesList games={games} /> : <p className="mt-4 bg-dark-brown-04 text-slate-200 text-sm p-4 rounded-[10px] font-thin">No games found</p>}
 
       {showAddNewGameModal && <NewGameModal tournamentId={tournamentId} setShowAddNewGameModal={setShowAddNewGameModal} />}
     </div>

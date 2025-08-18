@@ -1,14 +1,16 @@
-import React, { use, useEffect } from "react";
+import React, { use, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import useTeams from "../hooks/useTeams";
 import { Loader2 } from "lucide-react";
 import TournamentTeamCard from "./TournamentTeamCard";
+import { AuthContext } from "../context/AuthContext";
 
 const defaultNewTeam = {
   name: "",
 };
 
 const Teams = () => {
+  const {token} = useContext(AuthContext);
   const params = useParams();
   const navigate = useNavigate();
   const [teams, setTeams] = React.useState([]);
@@ -63,7 +65,7 @@ const Teams = () => {
   if (loading) {
     return (
       <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
-        <div className="flex flex-col gap-y-4 text-xl font-semibold text-yellow-01">
+        <div className="flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03">
           <Loader2 className="animate-spin" size={40} />
         </div>
       </div>
@@ -73,7 +75,7 @@ const Teams = () => {
   if (error) {
     return (
       <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
-        <div className="flex flex-col gap-y-4 text-xl font-semibold text-yellow-01">
+        <div className="flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03">
           Error
         </div>
       </div>
@@ -82,21 +84,21 @@ const Teams = () => {
 
   return (
     <div className="w-full h-screen font-dynapuff">
-      <div className="w-full flex flex-col gap-y-4 text-xl font-semibold text-yellow-01 py-2">
+      <div className="w-full flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 py-2">
         <div className="flex justify-between items-center border-b-2 border-yellow-300/40 pb-2">
           <h2 className="text-2xl">Teams</h2>
-          <button
+          {token && <button
             onClick={() => setShowAddTeamModal(true)}
             className="bg-yellow-01 text-purple-01 px-4 rounded-md"
           >
             Add
-          </button>
+          </button>}
         </div>
         {teams.length < 1 ? <p>No Teams Found</p> : <div className="flex flex-col gap-y-4">{teams.map(team => <TournamentTeamCard key={team._id} team={team} />)}</div>}
       </div>
       {showAddTeamModal && (
         <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center">
-          <div className="bg-purple-02 p-6 rounded-lg text-yellow-01">
+          <div className="bg-purple-02 p-6 rounded-lg text-light-brown-03">
             <h3 className="text-xl font-semibold mb-4">Add New Team</h3>
             <form onSubmit={handleAddTeam} className="flex flex-col gap-y-4">
               <input

@@ -49,52 +49,52 @@ const PointsTable = () => {
     }
 
   return (
-    <div className="w-full p-4 bg-purple-02 rounded-lg shadow-lg text-yellow-01 font-dynapuff overflow-x-auto">
+    <div className="w-full p-4 bg-dark-brown-03 rounded-lg shadow-lg text-light-brown-03 font-dynapuff overflow-x-auto">
       <table className="w-full text-center border-collapse">
         <thead className=''>
-          <tr className="bg-purple-700 text-yellow-200 rounded-md overflow-hidden">
-            <th className="px-4 py-2 border-b border-purple-500">Team</th>
-            <th className="px-4 py-2 border-b border-purple-500">P</th>
-            <th className="px-4 py-2 border-b border-purple-500">W</th>
-            <th className="px-4 py-2 border-b border-purple-500">L</th>
-            <th className="px-4 py-2 border-b border-purple-500">D</th>
-            <th className="px-4 py-2 border-b border-purple-500">Points</th>
+          <tr className="bg-dark-brown-02 text-light-brown-03 rounded-md overflow-hidden">
+            <th className="px-4 py-2 border-b border-light-brown-03">Team</th>
+            <th className="px-4 py-2 border-b border-light-brown-03">P</th>
+            <th className="px-4 py-2 border-b border-light-brown-03">W</th>
+            <th className="px-4 py-2 border-b border-light-brown-03">L</th>
+            <th className="px-4 py-2 border-b border-light-brown-03">D</th>
+            <th className="px-4 py-2 border-b border-light-brown-03">Points</th>
           </tr>
         </thead>
         <tbody>
-          {/* <tr className="hover:bg-purple-800 transition-colors">
-            <td className="px-4 py-2 border-b border-purple-500">TA</td>
-            <td className="px-4 py-2 border-b border-purple-500">5</td>
-            <td className="px-4 py-2 border-b border-purple-500">1</td>
-            <td className="px-4 py-2 border-b border-purple-500">0</td>
-            <td className="px-4 py-2 border-b border-purple-500">15</td>
+          {/* <tr className="hover:bg-dark-brown-02 transition-colors">
+            <td className="px-4 py-2 border-b border-light-brown-03">TA</td>
+            <td className="px-4 py-2 border-b border-light-brown-03">5</td>
+            <td className="px-4 py-2 border-b border-light-brown-03">1</td>
+            <td className="px-4 py-2 border-b border-light-brown-03">0</td>
+            <td className="px-4 py-2 border-b border-light-brown-03">15</td>
           </tr>
-          <tr className="bg-purple-900 hover:bg-purple-800 transition-colors">
-            <td className="px-4 py-2 border-b border-purple-500">TB</td>
-            <td className="px-4 py-2 border-b border-purple-500">4</td>
-            <td className="px-4 py-2 border-b border-purple-500">2</td>
-            <td className="px-4 py-2 border-b border-purple-500">0</td>
-            <td className="px-4 py-2 border-b border-purple-500">12</td>
+          <tr className="bg-dark-brown-02 hover:bg-dark-brown-02 transition-colors">
+            <td className="px-4 py-2 border-b border-light-brown-03">TB</td>
+            <td className="px-4 py-2 border-b border-light-brown-03">4</td>
+            <td className="px-4 py-2 border-b border-light-brown-03">2</td>
+            <td className="px-4 py-2 border-b border-light-brown-03">0</td>
+            <td className="px-4 py-2 border-b border-light-brown-03">12</td>
           </tr> */}
           {pointsTable && pointsTable.length > 0 ? (
             pointsTable.map((entry, index) => (
-              <tr key={index} className="hover:bg-purple-800 transition-colors">
-                <td className="px-4 py-2 border-b border-purple-500">
+              <tr key={index} className="hover:bg-dark-brown-02 transition-colors">
+                <td className="px-4 py-2 border-b border-light-brown-03">
                   {abbrevation(entry.team.name)}
                 </td>
-                <td className="px-4 py-2 border-b border-purple-500">
+                <td className="px-4 py-2 border-b border-light-brown-03">
                   {entry.gamesPlayed}
                 </td>
-                <td className="px-4 py-2 border-b border-purple-500">
+                <td className="px-4 py-2 border-b border-light-brown-03">
                   {entry.wins}
                 </td>
-                <td className="px-4 py-2 border-b border-purple-500">
+                <td className="px-4 py-2 border-b border-light-brown-03">
                   {entry.losses}
                 </td>
-                <td className="px-4 py-2 border-b border-purple-500">
+                <td className="px-4 py-2 border-b border-light-brown-03">
                   {entry.draws}
                 </td>
-                <td className="px-4 py-2 border-b border-purple-500">
+                <td className="px-4 py-2 border-b border-light-brown-03">
                   {entry.points}
                 </td>
               </tr>
@@ -103,7 +103,7 @@ const PointsTable = () => {
             <tr>
               <td
                 colSpan="5"
-                className="px-4 py-2 border-b border-purple-500 text-center"
+                className="px-4 py-2 border-b border-light-brown-03 text-center"
               >
                 No points table entries found.
               </td>
