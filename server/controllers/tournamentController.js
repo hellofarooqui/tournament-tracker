@@ -76,9 +76,17 @@ export const deleteTournament = async (req, res) => {
 export const getTournamentTeams = async (req, res) => {
   try {
     console.log("Fetching teams for tournament with ID:", req.params.id);
-    const tournament = await Tournament.findById(req.params.id).populate(
-      "teams"
-    );
+    // const tournament = await Tournament.findById(req.params.id).populate(
+    //   "teams"
+    // );
+
+    const tournament = await Tournament.findById(req.params.id).populate({
+      path: "teams",
+      populate: {
+        path: "members",
+        select: "name",
+      },
+    });
 
     if (!tournament) {
       console.error("Tournament not found for ID:", req.params.id);

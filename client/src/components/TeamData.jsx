@@ -67,15 +67,15 @@ const TeamData = ({ teamId, setShowTeamData }) => {
   }
 
   return (
-    <div className="absolute top-0 left-0 w-screen h-screen bg-gray-900/30 flex items-center justify-center p-6">
-      <CircleX onClick={(e)=>handleModalClose(e)} className="absolute top-2 z-20 bg-yellow-01 text-purple-02 rounded-full" size={30}/>
-      <div className="max-w-sm w-full h-full bg-purple-02 p-4 rounded-[10px] relative">
-        <div className="w-full h-full p-4 border-4 border-amber-400/80 rounded-[10px]">
-          <h2 className="bg-yellow-01 text-purple-02 rounded-[10px] px-4 py-2">
+    <div className="absolute top-0 left-0 w-screen h-screen bg-gray-900/70 flex items-center justify-center p-6">
+      <CircleX onClick={(e)=>handleModalClose(e)} className="absolute top-2 z-20 bg-dark-brown-01 text-center text-2xl text-dark-brbg-dark-brown-03 rounded-full" size={30}/>
+      <div className="max-w-sm w-full h-full bg-dark-brown-03 p-4 rounded-[10px] relative">
+        <div className="w-full h-full p-4">
+          <h2 className="bg-dark-brown-01 text-center text-2xl text-dark-brbg-dark-brown-03 rounded-[10px] px-4 py-2">
             {teamData.name}
           </h2>
 
-          <div className=" mt-6 bg-purple-01 p-2 rounded-md">
+          <div className=" mt-6 bg-dark-brown-02 p-4 rounded-md">
             <div className="">
               <div className="flex justify-between items-center">
                 <h3 className="mb-2">Players</h3>
@@ -89,7 +89,7 @@ const TeamData = ({ teamId, setShowTeamData }) => {
             </div>
             <ul className="mt-2 flex flex-col gap-y-2">
               {teamData.members.map((player,index) => (
-                <li key={player._id} className=" bg-purple-02 group p-2 rounded-md flex justify-between items-center">
+                <li key={player._id} className=" bg-dark-brown-03 group p-2 rounded-md flex justify-between items-center">
                   {index+1}{". "}{player.name} <Trash className="hidden group-hover:block opacity-15"/>
                 </li>
               ))}
@@ -99,7 +99,7 @@ const TeamData = ({ teamId, setShowTeamData }) => {
       </div>
       {showAddPlayerForm && (
         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-gray-900/60 p-4">
-          <div className="bg-purple-02 p-4 rounded-[10px] w-full max-w-sm">
+          <div className="bg-dark-brown-03 p-4 rounded-[10px] w-full max-w-sm">
             <h2 className="mb-4">Add New Player</h2>
             <form
               onSubmit={handleAddPlayerSubmit}
@@ -115,7 +115,7 @@ const TeamData = ({ teamId, setShowTeamData }) => {
               />
               <button
                 type="submit"
-                className="bg-yellow-01 text-purple-02 px-2 py-2 rounded-md"
+                className="bg-dark-brown-01 text-center text-2xl text-dark-brbg-dark-brown-03 px-2 py-2 rounded-md"
               >
                 Add
               </button>
