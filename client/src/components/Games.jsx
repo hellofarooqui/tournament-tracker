@@ -3,6 +3,7 @@ import NewGameModal from "./NewGameModal";
 import useGame from "../hooks/useGame";
 import GamesList from "./GamesList";
 import { AuthContext } from "../context/AuthContext";
+import { Loader2 } from "lucide-react";
 
 const Games = ({tournamentId}) => {
   const [showAddNewGameModal, setShowAddNewGameModal] = useState(false);
@@ -33,7 +34,15 @@ const {getGames} = useGame();
     fetchGames(tournamentId)
   },[])
 
-  if(loading) return <div>Loading...</div>;
+    if (loading) {
+      return (
+        <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
+          <div className="flex flex-col gap-y-4 text-xl font-semibold text-slate-200">
+            <Loader2 className="animate-spin" size={40} />
+          </div>
+        </div>
+      );
+    }
 
   if(error) return <div>Error fetching games: {error.message}</div>;
 
