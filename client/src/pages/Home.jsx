@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router";
 import CarromLogo from "./../assets/carrom.png";
+import GradientLogo from "../components/GradientLogo";
 
 const Home = () => {
   
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center py-16 font-dynapuff px-8">
       <div className="flex flex-col items-center gap-y-4 mb-8">
-        <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" />
-        <h1 className="text-4xl text-center text-slate-200 leading-0.5 ">
+        {/* <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" /> */}
+        <GradientLogo/>
+        <h1 className="mt-6 text-4xl text-center text-slate-200 leading-0.5 ">
           Carrom 
         </h1>
         <p className="text-sm text-slate-400">Championship Tracker</p>
