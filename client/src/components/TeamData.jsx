@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {createPortal} from 'react-dom'
 import useTeams from "../hooks/useTeams";
 import { CircleX, Loader2, Trash } from "lucide-react";
 
@@ -56,7 +57,8 @@ const TeamData = ({ teamId, setShowTeamData }) => {
 
   if (loading) {
     return (
-      <div>
+          <div className="fixed inset-0 z-50 bg-slate-200/20 backdrop-blur-lg flex items-start justify-center p-6">
+
         <Loader2 className="animate-spin" size={24} />
       </div>
     );
@@ -66,19 +68,19 @@ const TeamData = ({ teamId, setShowTeamData }) => {
     return <div>{error}</div>;
   }
 
-  return (
-    <div className="fixed top-0 left-0 z-20 w-screen h-screen bg-gray-900/70 flex items-center justify-center p-6">
-      <CircleX onClick={(e)=>handleModalClose(e)} className="absolute top-2 z-20 bg-dark-brown-01 text-center text-2xl text-dark-brbg-dark-brown-03 rounded-full" size={30}/>
-      <div className="max-w-sm w-full h-full bg-dark-brown-03 p-4 rounded-[10px] relative">
-        <div className="w-full h-full p-4">
-          <h2 className="bg-dark-brown-01 text-center text-2xl text-dark-brbg-dark-brown-03 rounded-[10px] px-4 py-2">
+  const modalContent =  (
+    <div className="fixed inset-0 z-50 bg-slate-200/20 backdrop-blur-lg flex items-start justify-center p-6">
+      <CircleX onClick={(e)=>handleModalClose(e)} className="absolute top-2 z-20 bg-slate-200/20 text-center text-2xl text-white rounded-full" size={30}/>
+      <div className="max-w-sm w-full bg-slate-200/20 p-6 pb-10 rounded-[20px] border-2 border-slate-200/30 shadow-lgrelative">
+        
+          <h2 className=" text-2xl text-white font-bold ">
             {teamData.name}
           </h2>
 
-          <div className=" mt-6 bg-dark-brown-02 p-4 rounded-md">
-            <div className="">
+          <div className="  rounded-md">
+            
               <div className="flex justify-between items-center">
-                <h3 className="mb-2">Players</h3>
+                <h3 className=" text-white text-lg">Players</h3>
                 {teamData.members.length < 2 && <button
                   onClick={() => setShowAddPlayerForm(true)}
                   className="text-xs text-yellow-01 underline px-2 py-1 rounded-[10px] font-thin"
@@ -86,16 +88,16 @@ const TeamData = ({ teamId, setShowTeamData }) => {
                   + Players
                 </button>}
               </div>
-            </div>
+            
             <ul className="mt-2 flex flex-col gap-y-2">
               {teamData.members.map((player,index) => (
-                <li key={player._id} className=" bg-dark-brown-03 group p-2 rounded-md flex justify-between items-center">
+                <li key={player._id} className=" bg-white/10 border-2 border-slate-200/40 backdrop-blur-lg group p-2 rounded-md flex justify-between items-center">
                   {index+1}{". "}{player.name} <Trash className="hidden group-hover:block opacity-15"/>
                 </li>
               ))}
             </ul>
           </div>
-        </div>
+        
       </div>
       {showAddPlayerForm && (
         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center bg-gray-900/60 p-4">
@@ -131,5 +133,6 @@ const TeamData = ({ teamId, setShowTeamData }) => {
       )}
     </div>
   );
+  return createPortal(modalContent, document.body)
 };
 export default TeamData;

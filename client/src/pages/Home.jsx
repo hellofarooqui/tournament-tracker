@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import CarromLogo from "./../assets/carrom.png";
 
 const Home = () => {
+  
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center py-16 font-dynapuff px-8">
       <div className="flex flex-col items-center gap-y-4 mb-8">
@@ -26,10 +27,10 @@ const Home = () => {
           View Tournaments
         </Link>
         <Link
-          to="settings"
+          to="login"
           className="bg-slate-100/20 border-2 border-slate-100/30 p-2 rounded-[20px] px-8 py-4 text-center"
         >
-          Settings
+          Login
         </Link>
       </div>
     </div>
