@@ -6,7 +6,7 @@ import GradientLogo from "../components/GradientLogo";
 const Home = () => {
   
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center py-16 font-dynapuff px-8">
+    <div className="w-full h-screen flex flex-col items-center justify-center font-dynapuff px-8">
       <div className="flex flex-col items-center gap-y-4 mb-8">
         {/* <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" /> */}
         <GradientLogo/>
