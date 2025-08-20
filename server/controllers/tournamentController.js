@@ -146,6 +146,9 @@ export const getPointsTable = async (req, res) => {
     const pointsTable = await PointsTable.findById(
       tournament.pointsTable
     ).populate("entries.team", "name");
+
+    pointsTable.entries.sort((a, b) => b.points - a.points);
+    
     res.status(200).json(pointsTable);
   } catch (error) {
     console.error("Error fetching points table:", error);
