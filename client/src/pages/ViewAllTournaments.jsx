@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useTournamnet from "../hooks/useTournamnet";
-import TournamentCard from "./TournamentCard";
+import TournamentCard from "../components/TournamentCard";
 import { useNavigate } from "react-router";
 import { Loader2 } from "lucide-react";
 
@@ -41,7 +41,7 @@ const ViewAllTournaments = () => {
 
   return (
     <div className="w-full h-screen flex py-16 font-dynapuff">
-      <div className="w-full flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 p-4">
+      <div className="w-full max-w-sm mx-auto flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 p-4">
         <div className="flex justify-between items-center">
           <h2 className=" text-white">All Tournaments</h2>
           <div className="flex gap-x-2">

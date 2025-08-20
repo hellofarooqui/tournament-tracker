@@ -72,7 +72,7 @@ const TournamentDetails = () => {
 
   return (
     <div className="w-full h-screen flex  py-16">
-      <div className="w-full flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6">
+      <div className="w-full max-w-sm mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6">
         <div className="flex justify-between items-center">
           <h2 className="text-2xl text-slate-200">{tournament.name} </h2>
           {token && <button

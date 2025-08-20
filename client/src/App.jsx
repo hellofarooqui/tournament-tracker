@@ -5,13 +5,16 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import RootLayout from "./layout/RootLayout";
 
 import Home from "./pages/Home";
-import NewTournament from "./components/NewTournament";
-import ViewAllTournaments from "./components/ViewAllTournaments";
+import NewTournament from "./pages/NewTournament";
+import ViewAllTournaments from "./pages/ViewAllTournaments";
 import TournamentDetails from "./pages/TournamentDetails";
 import TeamDetails from "./components/TeamData";
 import { Settings } from "lucide-react";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import TournamentRules from "./pages/TournamentRules";
+import StandardRules from "./pages/StandardRules";
+import Questions from "./pages/Questions";
 
 
 function App() {
@@ -27,8 +30,11 @@ function App() {
             <Route path="/all-tournaments" element={<ViewAllTournaments />} />
             <Route path="/new-tournament" element={<NewTournament />} />
             <Route path="/tournament/:id" element={<TournamentDetails />} />
+             <Route path="/tournament/:id/rules" element={<TournamentRules />} />
             <Route path="/team/:id" element={<TeamDetails />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="standard-rules" element={<StandardRules/>} />
+            <Route path="questions" element={<Questions />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />

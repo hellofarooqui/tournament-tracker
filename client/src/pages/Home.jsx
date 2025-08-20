@@ -15,22 +15,22 @@ const Home = () => {
         </h1>
         <p className="text-sm text-slate-400">Championship Tracker</p>
       </div>
-      <div className="w-full flex flex-col gap-y-4 text-lg font-semibold  text-white">
+      <div className="w-full max-w-sm flex flex-col gap-y-4 text-lg font-semibold  text-white">
         <Link
           to="new-tournament"
-          className="w-full bg-gradient-to-r from-[#FD6861] to-[#F05C2E]  p-2 rounded-[20px] px-8 py-4 text-center"
+          className=" bg-gradient-to-r from-[#FD6861] to-[#F05C2E]  p-2 rounded-[20px] px-8 py-4 text-center"
         >
           Create Tournament
         </Link>
         <Link
           to="all-tournaments"
-          className="bg-gradient-to-r from-[#0AC2F8] to-[#3385D9] p-2 rounded-[20px] px-8 py-4 text-center"
+          className=" bg-gradient-to-r from-[#0AC2F8] to-[#3385D9] p-2 rounded-[20px] px-8 py-4 text-center"
         >
           View Tournaments
         </Link>
         <Link
           to="login"
-          className="bg-slate-100/20 border-2 border-slate-100/30 p-2 rounded-[20px] px-8 py-4 text-center"
+          className=" bg-slate-100/20 border-2 border-slate-100/30 p-2 rounded-[20px] px-8 py-4 text-center"
         >
           Login
         </Link>
