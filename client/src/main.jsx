@@ -9,6 +9,8 @@ import AuthProvider from './context/AuthContext.jsx';
 registerSW({ immediate: true });
 
 
+
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>

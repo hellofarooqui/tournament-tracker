@@ -20,6 +20,27 @@ import Questions from "./pages/Questions";
 function App() {
   const [count, setCount] = useState(0);
 
+    useEffect(() => {
+      if ("serviceWorker" in navigator && "PushManager" in window) {
+        navigator.serviceWorker.ready.then(async (reg) => {
+          const permission = await Notification.requestPermission();
+          if (permission === "granted") {
+            const subscription = await reg.pushManager.subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: import.meta.env.VITE_VAPID_PUBLIC_KEY, // frontend env
+            });
+
+            // Send subscription to backend
+            await fetch("http://localhost:5000/api/subscribe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(subscription),
+            });
+          }
+        });
+      }
+    }, []);
+
   return (
     <>
       <BrowserRouter>
