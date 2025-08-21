@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import { BrowserRouter, Route, Routes } from "react-router";
@@ -15,7 +15,9 @@ import Signup from "./pages/Signup";
 import TournamentRules from "./pages/TournamentRules";
 import StandardRules from "./pages/StandardRules";
 import Questions from "./pages/Questions";
+import { urlBase64ToUint8Array } from "./utils/urlBase64ToUint8Array.js";
 
+const server = import.meta.env.VITE_SERVER_URL;
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,11 +29,11 @@ function App() {
           if (permission === "granted") {
             const subscription = await reg.pushManager.subscribe({
               userVisibleOnly: true,
-              applicationServerKey: import.meta.env.VITE_VAPID_PUBLIC_KEY, // frontend env
+              applicationServerKey: urlBase64ToUint8Array(import.meta.env.VITE_VAPID_PUBLIC_KEY), // frontend env
             });
 
             // Send subscription to backend
-            await fetch("http://localhost:5000/api/subscribe", {
+            await fetch(`${server}/api/subscribe`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(subscription),
