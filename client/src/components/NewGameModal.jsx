@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 const defaultNewGame = {
-  name:"",
+  name: "",
   tournament: "",
   teams: [],
   scheduledDate: "",
@@ -89,9 +89,7 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
             <input
               type="text"
               placeholder="Game Name"
-              onChange={(e) =>
-                setNewGame({ ...newGame, name: e.target.value })
-              }
+              onChange={(e) => setNewGame({ ...newGame, name: e.target.value })}
             />
             <select
               className="text-lg mb-2 p-2 rounded-md bg-purple-02"
@@ -139,6 +137,7 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
               Create Game
             </button>
             <button
+              type="button"
               onClick={handleCancel}
               className="border-3 border-yellow-01 text-yellow-01 px-4 py-2 rounded-md"
             >
