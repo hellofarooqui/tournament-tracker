@@ -50,11 +50,29 @@ const {getGames} = useGame();
     <div className="mt-4 pb-6">
       <div className="flex justify-between items-center">
         <h2>Games</h2>
-        { token && <button onClick={()=>setShowAddNewGameModal(true)} className="text-sm bg-yellow-01 text-dark-bbg-dark-brown-04 px-2 rounded-md">New Game</button>}
+        {true && (
+          <button
+            onClick={() => setShowAddNewGameModal(true)}
+            className="text-sm bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] text-gray-700 px-2 py-2 rounded-md"
+          >
+            New Game
+          </button>
+        )}
       </div>
-      {games.length > 0 ? <GamesList games={games} /> : <p className="mt-4 bg-dark-brown-04 text-slate-200 text-sm p-4 rounded-[10px] font-thin">No games found</p>}
+      {games.length > 0 ? (
+        <GamesList games={games} />
+      ) : (
+        <p className="mt-4 bg-dark-brown-04 text-slate-200 text-sm p-4 rounded-[10px] font-thin">
+          No games found
+        </p>
+      )}
 
-      {showAddNewGameModal && <NewGameModal tournamentId={tournamentId} setShowAddNewGameModal={setShowAddNewGameModal} />}
+      {showAddNewGameModal && (
+        <NewGameModal
+          tournamentId={tournamentId}
+          setShowAddNewGameModal={setShowAddNewGameModal}
+        />
+      )}
     </div>
   );
 };
