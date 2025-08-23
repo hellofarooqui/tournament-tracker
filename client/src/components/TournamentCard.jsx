@@ -11,7 +11,7 @@ const TournamentCard = ({tournament}) => {
         navigate(`/tournament/${tournament._id}`)
     }
   return (
-    <div onClick={handleTournamentClick} className="w-full group text-white bg-slate-200/20 backdrop-blur-2xl border-2 border-slate-200/30 p-4 rounded-lg shadow-lg cursor-pointer hover:bg-yellow-01 hover:text-dark-bg-dark-brown-04 transition-colors ease-in-out duration-200">
+    <div onClick={handleTournamentClick} className="w-full group text-white bg-slate-200/20 backdrop-blur-2xl border-2 border-slate-200/30 p-4 rounded-lg shadow-lg cursor-pointer hover:scale-105 transition-transform ease-in-out duration-200">
       <div className="flex justify-between items-center">
         <div className='flex gap-x-4 '>
           <img src={CarromIcon} alt="Carrom" className="w-12 h-12" />

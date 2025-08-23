@@ -11,14 +11,16 @@ const GameListCard = ({ game }) => {
   return (
     <div
       onClick={() => setShowWinnerUpdateModal(true)}
-      className="bg-slate-200/20 backdrop-blur-2xl rounded-[20px] border-2 border-slate-200/20 overflow-hidden flex flex-col gap-y-1 p-6"
+      className="bg-slate-200/20 backdrop-blur-2xl rounded-[20px] border-2 border-slate-200/20 overflow-hidden flex flex-col gap-y-1 p-6  hover:scale-105 transition-transform ease-in-out duration-200"
     >
       {game.winner && (
         <CircleCheck className="absolute top-2 right-2 text-green-500" />
       )}
       {/* <h3 className="text-sm font-semibold">{game.teams[0].name} vs {game.teams[1].name}</h3> */}
       <div>
-        <h2 className="text-white text-[16px] text-center bg-slate-200/20 rounded-[10px] mb-2 leading-10">{game.name && game.name}</h2>
+        <h2 className="text-white text-[16px] text-center bg-slate-200/20 rounded-[10px] mb-2 leading-10">
+          {game.name && game.name}
+        </h2>
       </div>
       <div className="grid grid-cols-[40%_auto_40%] w-full items-center">
         <div className="flex flex-col gap-y-2 justify-center items-center">

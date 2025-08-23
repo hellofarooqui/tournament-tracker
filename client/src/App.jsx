@@ -22,26 +22,26 @@ const server = import.meta.env.VITE_SERVER_URL;
 function App() {
   const [count, setCount] = useState(0);
 
-    useEffect(() => {
-      if ("serviceWorker" in navigator && "PushManager" in window) {
-        navigator.serviceWorker.ready.then(async (reg) => {
-          const permission = await Notification.requestPermission();
-          if (permission === "granted") {
-            const subscription = await reg.pushManager.subscribe({
-              userVisibleOnly: true,
-              applicationServerKey: urlBase64ToUint8Array(import.meta.env.VITE_VAPID_PUBLIC_KEY), // frontend env
-            });
+    // useEffect(() => {
+    //   if ("serviceWorker" in navigator && "PushManager" in window) {
+    //     navigator.serviceWorker.ready.then(async (reg) => {
+    //       const permission = await Notification.requestPermission();
+    //       if (permission === "granted") {
+    //         const subscription = await reg.pushManager.subscribe({
+    //           userVisibleOnly: true,
+    //           applicationServerKey: urlBase64ToUint8Array(import.meta.env.VITE_VAPID_PUBLIC_KEY), // frontend env
+    //         });
 
-            // Send subscription to backend
-            await fetch(`${server}/api/subscribe`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(subscription),
-            });
-          }
-        });
-      }
-    }, []);
+    //         // Send subscription to backend
+    //         await fetch(`${server}/api/subscribe`, {
+    //           method: "POST",
+    //           headers: { "Content-Type": "application/json" },
+    //           body: JSON.stringify(subscription),
+    //         });
+    //       }
+    //     });
+    //   }
+    // }, []);
 
   return (
     <>
