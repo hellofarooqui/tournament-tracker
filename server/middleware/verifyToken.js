@@ -14,7 +14,7 @@ export const verifyToken = async (req,res,next) => {
     }
     req.token = token;
     try{
-        const user = await jwt.verify(token, process.env.JWT_SECRET);
+        const user = jwt.verify(token, process.env.JWT_SECRET);
         req.user = user;
         next();
     }
