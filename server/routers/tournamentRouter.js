@@ -12,6 +12,7 @@ import {
 } from "../controllers/tournamentController.js";
 import { createTournamentGame,getTournamentGames } from '../controllers/gameController.js';
 import { getToken } from '../middleware/getToken.js';
+import { verifyToken } from '../middleware/verifyToken.js';
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.delete('/:id', deleteTournament);
 router.post('/:tournamentId/games', createTournamentGame);
 router.get('/:tournamentId/games', getTournamentGames);
 
-router.post('/:tournamentId/enroll', getToken, enrollIntoTournament);
+router.post('/:tournamentId/enroll', verifyToken, enrollIntoTournament);
 
 router.get('/:id/teams', getTournamentTeams);
 router.post('/:id/teams', addTournamentTeam)

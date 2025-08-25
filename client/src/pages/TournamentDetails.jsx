@@ -10,8 +10,9 @@ import { AuthContext } from "../context/AuthContext";
 
 const TournamentDetails = () => {
   const { user, token } = useContext(AuthContext);
-  const [enrolled,setEnrolled] = useState(false)
-  const { getTournamentById, deleteTournament } = useTournamnet();
+  const [enrolled, setEnrolled] = useState(false);
+  const { getTournamentById, deleteTournament, enrollIntoTournament } =
+    useTournamnet();
   const params = useParams();
   const navigate = useNavigate();
   const tournamentId = params.id;
@@ -60,7 +61,7 @@ const TournamentDetails = () => {
   const handleEnroll = async () => {
     if (!user || !token) {
       toast.error("User is not authenticated");
-      navigate('/login');
+      navigate("/login");
       return;
     }
 
@@ -75,15 +76,15 @@ const TournamentDetails = () => {
     }
   };
 
-  useEffect(()=>{
-    if(tournament && user){
-      if(tournament.enrolledUser.includes(user._id)){
-        setEnrolled(true)
+  useEffect(() => {
+    if (tournament && user) {
+      if (tournament.enrolledUser.includes(user._id)) {
+        setEnrolled(true);
       } else {
-        setEnrolled(false)
+        setEnrolled(false);
       }
     }
-  },[tournament])
+  }, [tournament]);
 
   useEffect(() => {
     fetchTournamentDetails();
@@ -161,7 +162,12 @@ const TournamentDetails = () => {
             <div className="text-center text-slate-200 bg-yellow-200/20 p-2 rounded-lg border-yellow-200/40 border-2">
               Upcoming Tournament
             </div>
-            <button onClick={handleEnroll} className="bg-emerald-200 text-emerald-950 px-8 py-2 rounded-lg">{enrolled ? "Enrolled" :"Enroll"}</button>
+            <button
+              onClick={handleEnroll}
+              className="bg-emerald-200 text-emerald-950 px-8 py-2 rounded-lg"
+            >
+              {enrolled ? "Enrolled" : "Enroll"}
+            </button>
           </div>
         )}
       </div>

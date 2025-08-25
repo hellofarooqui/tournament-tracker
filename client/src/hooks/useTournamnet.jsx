@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 
 const server = import.meta.env.VITE_SERVER_URL;
+const token = localStorage.getItem("token");
 
 const useTournamnet = () => {
     // const [tournaments,setTournaments] = React.useState([]);
@@ -62,10 +63,13 @@ const useTournamnet = () => {
     }
 
     const enrollIntoTournament = async (tournamentId) => {
+        const token = localStorage.getItem("token");
         try {
             const response = await axios.post(`${server}/api/tournaments/${tournamentId}/enroll`, {
+                // No body needed for enrollment
+            }, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 }
             });
             if (response.status === 200) {
