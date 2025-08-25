@@ -42,6 +42,10 @@ export const getTournamentById = async (req, res) => {
     if (!tournament) {
       return res.status(404).json({ message: "Tournament not found" });
     }
+
+    if(tournament?.status === "scheduled"){
+      await tournament.populate('enrolledUser');
+    }
     res.status(200).json(tournament);
   } catch (error) {
     res.status(500).json({ message: "Error fetching tournament", error });

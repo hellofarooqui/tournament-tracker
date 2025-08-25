@@ -12,7 +12,7 @@ const useTournamnet = () => {
             const response = await axios.get(`${server}/api/tournaments`);
             //setTournaments(response.data);
             if(response.status === 200) {
-                console.log("Tournaments fetched successfully:", response.data);
+                //console.log("Tournaments fetched successfully:", response.data);
                 return response.data; // Return the fetched tournaments
             }
            
@@ -26,7 +26,7 @@ const useTournamnet = () => {
         try {
             const response = await axios.get(`${server}/api/tournaments/${id}`);
             if(response.status === 200) {
-                console.log("Tournament fetched successfully:", response.data);
+                //console.log("Tournament fetched successfully:", response.data);
                 return response.data; // Return the fetched tournament
             }
         } catch (error) {

@@ -10,7 +10,7 @@ const usePointsTable = () => {
               `${server}/api/tournaments/${tournamentId}/points-table`
             );
             if (response.status === 200) {
-                console.log("Points table fetched successfully:", response.data);
+                //console.log("Points table fetched successfully:", response.data);
                 return response.data; // Return the fetched points table
             }
         } catch (error) {

@@ -17,7 +17,7 @@ const useGame = () => {
   const getGames = async (tournamentId) => {
     try {
       const response = await axios.get(`${server}/api/tournaments/${tournamentId}/games`);
-      console.log(response.data)
+      //console.log(response.data)
       return response.data;
     } catch (error) {
       console.error("Error fetching games:", error);

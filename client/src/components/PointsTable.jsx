@@ -17,7 +17,7 @@ const PointsTable = () => {
         try {
             const data = await fetchTournamentPointsTable(tournamentId);
             if (data) {
-                console.log("Points table fetched successfully:", data.entries);
+                //console.log("Points table fetched successfully:", data.entries);
                 setPointsTable(data.entries);
             } else {
                 console.error("Points table not found");
@@ -52,7 +52,7 @@ const PointsTable = () => {
     <div className="mt-4 w-full rounded-[20px] bg-slate-100/10 backdrop-blur-lg shadow-lg text-light-brown-03 font-dynapuff overflow-x-auto">
       <table className="w-full text-center border-collapse">
         <thead className=''>
-          <tr className="bg-gradient-to-r from-[#677AE3] via-[#6D65C8] to-[#7551A9]  text-slate-200 text-[16px] rounded-[20px] overflow-hidden">
+          <tr className=" bg-gradient-to-r from-[#0AC2F8] to-[#3385D9]  text-slate-200 text-[16px] rounded-[20px] overflow-hidden">
             <th className="pl-6 py-3 text-center border-b border-slate-200/30">Team</th>
             <th className="px-4 py-3 text-center border-b border-slate-200/30">P</th>
             <th className="px-4 py-3 text-center border-b border-slate-200/30">W</th>

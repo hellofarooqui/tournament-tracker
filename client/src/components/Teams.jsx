@@ -27,7 +27,7 @@ const Teams = () => {
     try {
       const teamsFetched = await getTournamentTeams(tournamentId);
       if (teams) {
-        console.log("Teams fetched successfully:", teamsFetched);
+        //console.log("Teams fetched successfully:", teamsFetched);
         setTeams(teamsFetched);
       }
     } catch (error) {

@@ -33,10 +33,5 @@ export const carromQA = [
     question: "How many points does a Carrom game have?",
     answer:
       "Officially, matches are played to 25 points or 8 boards. A winner scores points equal to the opponent’s remaining coins, plus 3 points if the queen is covered. The maximum per board is 10 points."
-  },
-  {
-    question: "What if a coin touches the striker again while returning?",
-    answer:
-      "If a coin rebounds and touches the striker again in the same shot, it is considered a double strike (foul). Penalty: one of the player’s pocketed coins is returned to the board, along with any coin pocketed in that foul."
   }
 ];

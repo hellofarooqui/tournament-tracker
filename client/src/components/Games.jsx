@@ -25,7 +25,7 @@ const {getGames} = useGame();
       setError(error);
     } finally {
       setLoading(false);  
-      console.log("Games fetched successfully:", games);
+      //console.log("Games fetched successfully:", games);
     }
   };
 

@@ -39,7 +39,7 @@ const AuthProvider = ({children}) => {
           },
           });
           const data = response.data;
-          console.log("Fetched user data:", data);
+          //console.log("Fetched user data:", data);
           setUser(data);
         
         }catch(error){

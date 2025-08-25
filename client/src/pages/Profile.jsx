@@ -30,21 +30,21 @@ const Profile = () => {
             <p className="font-thin text-slate-200/60 text-[18px]">
               {"@" + user.username}
             </p>
-            <div className="flex gap-x-8 mt-4 border-2 border-slate-200/40 bg-slate-200/10 px-4 py-2 rounded-lg">
+            <div className="w-full flex justify-between mt-4 border-2 border-slate-200/40 bg-slate-200/10 px-6 py-2 rounded-lg">
               <div className="flex flex-col items-center">
-                <p className="text-3xl text-[#00c9ff]">0</p>
-                <p className="text-sm font-thin">Games Played</p>
+                <p className="text-2xl text-[#00c9ff]">0</p>
+                <p className="text-sm font-thin">Games</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-3xl text-[#00c9ff]">0</p>
+                <p className="text-2xl text-[#00c9ff]">0</p>
                 <p className="text-sm font-thin">Wins</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-3xl text-[#00c9ff]">0</p>
+                <p className="text-2xl text-[#00c9ff]">0</p>
                 <p className="text-sm font-thin">Win Rate</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-3xl text-[#00c9ff]">0</p>
+                <p className="text-2xl text-[#00c9ff]">0</p>
                 <p className="text-sm font-thin">Rank</p>
               </div>
             </div>

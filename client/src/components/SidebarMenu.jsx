@@ -15,7 +15,7 @@ const SidebarMenu = ({ showMenu, setShowMenu }) => {
     <div
       className={`w-screen h-screen flex flex-col justify-between fixed inset-0 font-dynapuff  ${
         showMenu ? "translate-x-0" : "-translate-x-[100%]"
-      } transition-all duration-150 ease-in-out z-50 bg-gradient-to-b from-[#22427D] via-[] to-[#254B8C]   backdrop-blur-2xl `}
+      } transition-all duration-150 ease-in-out z-50 bg-gradient-to-br from-[#667eea] to-[#764ba2] backdrop-blur-2xl `}
     >
       <ul className="w-full flex flex-col text-2xl text-slate-200/80 font-thin px-2 py-8 text-start">
         <Link to="all-tournaments">

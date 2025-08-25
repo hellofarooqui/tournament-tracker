@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useTournamnet from "../hooks/useTournamnet";
-import { Loader2 } from "lucide-react";
+import { Loader2, Trash } from "lucide-react";
 import Games from "../components/Games";
 import PointsTable from "../components/PointsTable";
 import Teams from "../components/Teams";
 import toast from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
+import EnrolledUsers from "../components/EnrolledUsers";
+import { readableDate } from "../utils/readableDate";
 
 const TournamentDetails = () => {
   const { user, token } = useContext(AuthContext);
@@ -78,7 +80,7 @@ const TournamentDetails = () => {
 
   useEffect(() => {
     if (tournament && user) {
-      if (tournament.enrolledUser.includes(user._id)) {
+      if (tournament.enrolledUser.find((u) => u._id === user._id)) {
         setEnrolled(true);
       } else {
         setEnrolled(false);
@@ -103,16 +105,24 @@ const TournamentDetails = () => {
   return (
     <div className="w-full h-screen flex  py-16">
       <div className="w-full max-w-sm mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6">
-        <div className="w-full flex justify-between items-center">
-          <h2 className="text-2xl text-slate-200">{tournament.name} </h2>
-          {user && user.role === "root-admin" && (
-            <button
-              onClick={handleDeleteTournament}
-              className="bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100 px-4 py-2 rounded-full text-sm"
-            >
-              Delete
-            </button>
-          )}
+        <div className="w-full bg-slate-200/20 border-2 border-slate-200/40 rounded-[15px]  p-4">
+          <div className="flex justify-between items-center">
+            <h2 className="text-2xl text-slate-200 font-bold">
+              {tournament.name}{" "}
+            </h2>
+            {user && user.role === "root-admin" && (
+              <button
+                onClick={handleDeleteTournament}
+                className="bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100 p-2 rounded-md text-sm"
+              >
+                <Trash className="" size={18} />
+              </button>
+            )}
+          </div>
+
+          <p className="text-xs font-thin italic text-slate-200/80 mt-2">
+            Start: {readableDate(tournament.startDate)}
+          </p>
         </div>
 
         {tournament.status == "ongoing" && (
@@ -151,23 +161,29 @@ const TournamentDetails = () => {
             </ul>
           </div>
         )}
-        {tournament.status == "ongoing" ? (
+        {tournament.status == "ongoing" ||
+        tournament.status == "completed" ||
+        tournament.status == "cancelled" ? (
           <div>
             {activeTab == "games" && <Games tournamentId={tournament._id} />}
             {activeTab == "points" && <PointsTable />}
             {activeTab == "teams" && <Teams />}
           </div>
         ) : (
-          <div className="py-12 flex  gap-y-4 flex-col items-center">
-            <div className="text-center text-slate-200 bg-yellow-200/20 p-2 rounded-lg border-yellow-200/40 border-2">
-              Upcoming Tournament
+          <div className="py-6 flex  gap-y-4 flex-col items-start">
+            <div className="flex gap-x-2 items-center">
+              <div className="text-center text-slate-200 bg-yellow-200/20 py-2 px-4 rounded-lg border-yellow-200/40 border-2">
+                Upcoming
+              </div>
+              <button
+                onClick={handleEnroll}
+                className="bg-emerald-200 text-emerald-950 py-2 px-4 rounded-lg"
+              >
+                {enrolled ? "Enrolled" : "Enroll"}
+              </button>
             </div>
-            <button
-              onClick={handleEnroll}
-              className="bg-emerald-200 text-emerald-950 px-8 py-2 rounded-lg"
-            >
-              {enrolled ? "Enrolled" : "Enroll"}
-            </button>
+
+            <EnrolledUsers players={tournament.enrolledUser} />
           </div>
         )}
       </div>
