@@ -60,12 +60,29 @@ const useTournamnet = () => {
             console.error("Error deleting tournament:", error);
         }
     }
-            
+
+    const enrollIntoTournament = async (tournamentId) => {
+        try {
+            const response = await axios.post(`${server}/api/tournaments/${tournamentId}/enroll`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (response.status === 200) {
+                console.log("Successfully enrolled into tournament:", response.data);
+                return response.data;
+            }
+        } catch (error) {
+            console.error("Error enrolling into tournament:", error);
+        }
+    }
+
   return {
     getAllTournaments,
     createTournament,
     getTournamentById,
     deleteTournament,
+    enrollIntoTournament
   };
 }
 

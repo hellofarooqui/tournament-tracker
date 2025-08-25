@@ -1,7 +1,16 @@
 import { CircleX } from "lucide-react";
-import { Link } from "react-router";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../context/AuthContext";
 
 const SidebarMenu = ({ showMenu, setShowMenu }) => {
+  const {user, logout} = useContext(AuthContext)
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/")
+  }
   return (
     <div
       className={`w-screen h-screen flex flex-col justify-between fixed inset-0 font-dynapuff  ${
@@ -25,7 +34,21 @@ const SidebarMenu = ({ showMenu, setShowMenu }) => {
             Settings
           </li>
         </Link>
-        <li className="  p-2 py-3 border-b-2 border-slate-200/30">Login</li>
+        {user ? (
+          <>
+          <li className="  p-2 py-3 border-b-2 border-slate-200/30">
+           <Link to='/profile'>Profile</Link>
+          </li>
+          <li className="  p-2 py-3 border-b-2 border-slate-200/30">
+           <button onClick={handleLogout}>Logout</button>
+          </li>
+          </>
+        ) : (
+          <Link to="login">
+            <li className="  p-2 py-3 border-b-2 border-slate-200/30">Login</li>
+          </Link>
+        )}
+        
       </ul>
 
       <div className="py-6">

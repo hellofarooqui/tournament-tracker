@@ -2,9 +2,13 @@ import React from "react";
 import { Link } from "react-router";
 import CarromLogo from "./../assets/carrom.png";
 import GradientLogo from "../components/GradientLogo";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Home = () => {
-  
+
+  const { user } = useContext(AuthContext)
+
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center font-dynapuff px-8">
       <div className="flex flex-col items-center gap-y-4 mb-8">
@@ -28,12 +32,12 @@ const Home = () => {
         >
           View Tournaments
         </Link>
-        <Link
+        {user ? <h2 className="text-center mt-4">Welcome, {user.username}!</h2> :<Link
           to="login"
           className=" bg-slate-100/20 border-2 border-slate-100/30 p-2 rounded-[20px] px-8 py-4 text-center"
         >
           Login
-        </Link>
+        </Link>}
       </div>
     </div>
   );

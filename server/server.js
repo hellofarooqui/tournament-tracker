@@ -8,6 +8,7 @@ import connectDB from './config/db.js';
 import tournamentRouter from './routers/tournamentRouter.js';
 import teamRouter from './routers/teamRouter.js';
 import gameRouter from './routers/gameRouter.js';
+import authRouter from './routers/authRouter.js';
 
 import webpush from "web-push";
 
@@ -31,6 +32,7 @@ connectDB();
 app.use('/api/tournaments', tournamentRouter);
 app.use('/api/teams', teamRouter);
 app.use('/api/games', gameRouter);
+app.use('/api/auth', authRouter);
 
 app.use('api/subscribe', (req, res) => (req, res) => {
   const subscription = req.body;

@@ -1,6 +1,7 @@
 import PointsTable from "../models/pointsTable.js";
 import Team from "../models/team.js";
 import Tournament from "../models/tournament.js";
+import User from "../models/user.js";
 
 export const getAllTournaments = async (req, res) => {
   try {
@@ -153,5 +154,34 @@ export const getPointsTable = async (req, res) => {
   } catch (error) {
     console.error("Error fetching points table:", error);
     res.status(500).json({ message: "Error fetching points table", error });
+  }
+};
+
+export const enrollIntoTournament = async (req, res) => {
+  try {
+    const tournament = await Tournament.findById(req.params.tournamentId);
+    if (!tournament) {
+      return res.status(404).json({ message: "Tournament not found" });
+    }
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if user is already enrolled
+    if (tournament.enrolledUser.includes(user._id)) {
+      return res.status(400).json({ message: "User is already enrolled" });
+    }
+
+    tournament.enrolledUser.push(user._id);
+    user.tournaments.push(tournament._id);
+    await tournament.save();
+    await user.save();
+
+    res.status(200).json({ message: "Successfully enrolled into tournament" });
+  } catch (error) {
+    console.error("Error enrolling into tournament:", error);
+    res.status(500).json({ message: "Error enrolling into tournament", error });
   }
 };

@@ -28,6 +28,10 @@ const tournamentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team',
     }],
+    enrolledUser: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }],
     status: {
         type: String,
         enum: ['scheduled', 'ongoing', 'completed', 'cancelled'],

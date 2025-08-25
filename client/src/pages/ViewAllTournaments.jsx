@@ -3,8 +3,12 @@ import useTournamnet from "../hooks/useTournamnet";
 import TournamentCard from "../components/TournamentCard";
 import { useNavigate } from "react-router";
 import { Loader2 } from "lucide-react";
+import useAuth from "../hooks/useAuth";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 const ViewAllTournaments = () => {
+  const { user } = useContext(AuthContext);
   const [allTournaments, setAllTournaments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,15 +49,16 @@ const ViewAllTournaments = () => {
         <div className="flex justify-between items-center">
           <h2 className=" text-white">All Tournaments</h2>
           <div className="flex gap-x-2">
-            
-            <button
+            {(user && user.role ==='root-admin') && <button
               onClick={() => navigate("/new-tournament")}
               className=" bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] text-slate-700 px-4 py-2 rounded-md text-sm"
             >
               New
-            </button>
+            </button>}
+           
           </div>
-        </div>
+        </div>  
+
 
         {allTournaments.length > 0 && (
           <div className="flex flex-col gap-y-4 w-full">
