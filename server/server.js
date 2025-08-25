@@ -15,7 +15,13 @@ import webpush from "web-push";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(cors());
+
+const corsOptions = {
+  origin: ['https://tournament-tracker-ten.vercel.app','http://localhost:5173'], // Your frontend URL
+  optionsSuccessStatus: 200 // For legacy browser support
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 
