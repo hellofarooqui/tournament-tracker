@@ -75,7 +75,7 @@ const Signup = () => {
           >
             <input
               placeholder="First Name"
-              className="w-full p-2 px-4 bg-gradient-to-r from-[#22427D] to-[#254B8C] backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
+              className="w-full p-2 px-4 bg-transparent backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
               onChange={(e) =>
                 setUserData({ ...userData, firstName: e.target.value })
               }
@@ -83,7 +83,7 @@ const Signup = () => {
             <input
               placeholder="Last Name"
               type="text"
-              className="w-full p-2 px-4 bg-gradient-to-r from-[#22427D] to-[#254B8C] backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
+              className="w-full p-2 px-4 bg-transparent backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
               onChange={(e) =>
                 setUserData({ ...userData, lastName: e.target.value })
               }
@@ -91,7 +91,7 @@ const Signup = () => {
 
             <input
               placeholder="Email"
-              className="w-full p-2 px-4 bg-gradient-to-r from-[#22427D] to-[#254B8C] backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
+              className="w-full p-2 px-4 bg-transparent backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
               onChange={(e) =>
                 setUserData({ ...userData, email: e.target.value })
               }
@@ -100,7 +100,7 @@ const Signup = () => {
               <input
                 placeholder="Password"
                 type={showPassword ? "text" : "password"}
-                className="w-full p-2 px-4 bg-gradient-to-r from-[#22427D] to-[#254B8C] backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40 pr-10"
+                className="w-full p-2 px-4 bg-transparent backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40 pr-10"
                 onChange={(e) =>
                   setUserData({ ...userData, password: e.target.value })
                 }
@@ -118,7 +118,7 @@ const Signup = () => {
               <input
                 placeholder="Confirm Password"
                 type={showConfirmPassword ? "text" : "password"}
-                className="w-full p-2 px-4 bg-gradient-to-r from-[#22427D] to-[#254B8C] backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40 pr-10"
+                className="w-full p-2 px-4 bg-transparent backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40 pr-10"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <span
@@ -132,18 +132,16 @@ const Signup = () => {
                 {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </span>
             </div>
-            <div className="w-full flex gap-x-4 text-xl  text-white mt-2">
+            <div className="w-full flex flex-col gap-y-4 text-xl  text-white mt-2">
               <button
                 type="submit"
                 className="flex-1 bg-gradient-to-r from-[#0AC2F8] to-[#3385D9] py-2 rounded-[10px]"
               >
                 {loading ? <Loader2 className="animate-spin" /> : "Signup"}
               </button>
-              <p
-                onClick={() => navigate("/login")}
-                className="text-center flex-1  border-2 border-[#0AC2F8] text-[#0AC2F8] py-2 rounded-[10px]"
-              >
-                Login
+              <p className="text-center text-[16px] font-thin text-slate-200/90">
+                Already have an account?{" "}
+                <span className="underline" onClick={() => navigate("/login")}>Login</span>
               </p>
             </div>
           </form>

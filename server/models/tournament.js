@@ -34,7 +34,7 @@ const tournamentSchema = new mongoose.Schema({
     }],
     status: {
         type: String,
-        enum: ['scheduled', 'ongoing', 'completed', 'cancelled'],
+        enum: ['scheduled', 'live', 'completed', 'cancelled'],
         default: 'scheduled',
     },
     pointsTable: {

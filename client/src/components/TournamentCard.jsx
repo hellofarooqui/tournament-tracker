@@ -4,6 +4,13 @@ import { useNavigate } from 'react-router';
 import CarromIcon from '../assets/carrom.png';
 import { readableDate } from '../utils/readableDate';
 
+const tournamentStatusColor = {
+  scheduled: "text-purple-400 bg-purple-200",
+  live: "text-emerald-400 bg-emerald-100",
+  completed: "text-blue-500 bg-blue-200",
+  cancelled: "text-red-500 bg-red-200",
+};
+
 const TournamentCard = ({tournament}) => {
     const navigate = useNavigate()
 
@@ -24,6 +31,7 @@ const TournamentCard = ({tournament}) => {
         <div>
          {tournament.status == "completed" && <ShieldCheck className='text-green-500'/>}
         </div>
+        <p className={`text-sm font-thin fixed top-2 right-2 ${tournamentStatusColor[tournament.status]} px-2 rounded-full`}>{tournament.status}</p>
       </div>
     </div>
   );

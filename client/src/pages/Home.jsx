@@ -37,7 +37,7 @@ const Home = () => {
           to="login"
           className=" bg-slate-100/20 border-2 border-slate-100/30 p-2 rounded-[20px] px-8 py-4 text-center"
         >
-          Login
+          Login / Signup
         </Link>}
       </div>
     </div>
