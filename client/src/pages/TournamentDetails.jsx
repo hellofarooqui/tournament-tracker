@@ -125,7 +125,7 @@ const TournamentDetails = () => {
           </p>
         </div>
 
-        {tournament.status == "ongoing" && (
+        {tournament.status == "live" && (
           <div className="w-full text-lg">
             <ul className="w-full flex gap-x-4">
               <li
@@ -161,7 +161,7 @@ const TournamentDetails = () => {
             </ul>
           </div>
         )}
-        {tournament.status == "ongoing" ||
+        {tournament.status == "live" ||
         tournament.status == "completed" ||
         tournament.status == "cancelled" ? (
           <div>
