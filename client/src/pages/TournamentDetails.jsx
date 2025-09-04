@@ -105,9 +105,9 @@ const TournamentDetails = () => {
   return (
     <div className="w-full h-screen flex  py-16">
       <div className="w-full max-w-sm mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6">
-        <div className="w-full bg-slate-200/20 border-2 border-slate-200/40 rounded-[15px]  p-4">
+        <div className="w-full bg-slate-200/20 border-2 border-slate-200/40 rounded-[5px]  p-4">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl text-slate-200 font-bold">
+            <h2 className="text-xl text-slate-200 font-bold">
               {tournament.name}{" "}
             </h2>
             {user && user.role === "root-admin" && (
@@ -170,17 +170,26 @@ const TournamentDetails = () => {
             {activeTab == "teams" && <Teams />}
           </div>
         ) : (
-          <div className="py-6 flex  gap-y-4 flex-col items-start">
-            <div className="flex gap-x-2 items-center">
-              <div className="text-center text-slate-200 bg-yellow-200/20 py-2 px-4 rounded-lg border-yellow-200/40 border-2">
+          <div className="mt-4 flex  gap-y-4 flex-col items-start">
+            <div className="flex gap-x-2 items-center text-lg">
+              <div className="text-center text-slate-200 bg-yellow-200/20 py-2 px-4 rounded-[5px] border-yellow-200/40 border-2">
                 Upcoming
               </div>
-              <button
-                onClick={handleEnroll}
-                className="bg-emerald-200 text-emerald-950 py-2 px-4 rounded-lg"
-              >
-                {enrolled ? "Enrolled" : "Enroll"}
-              </button>
+
+              {enrolled ? (
+                <button className="bg-cyan-300 text-cyan-950 py-2 px-4 rounded-[5px]">
+                  {" "}
+                  Enrolled
+                </button>
+              ) : (
+                <button
+                  onClick={handleEnroll}
+                  className="bg-red-400 text-white px-4 py-2 rounded-[5px]"
+                >
+                  {" "}
+                  Enroll
+                </button>
+              )}
             </div>
 
             <EnrolledUsers players={tournament.enrolledUser} />
