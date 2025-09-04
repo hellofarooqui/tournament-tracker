@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import { Outlet } from "react-router";
+import BottomBar from "../components/BottomBar";
 
 const RootLayout = () => {
   return (
@@ -9,6 +10,7 @@ const RootLayout = () => {
       <div className="w-full h-full overflow-y-scroll scrollbar-thin">
         <Outlet />
       </div>
+      <BottomBar/>
     </div>
   );
 };

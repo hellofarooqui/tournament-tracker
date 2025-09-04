@@ -17,6 +17,7 @@ import StandardRules from "./pages/StandardRules";
 import Questions from "./pages/Questions";
 import { urlBase64ToUint8Array } from "./utils/urlBase64ToUint8Array.js";
 import Profile from "./pages/Profile.jsx";
+import TournamentChat from "./components/TournamentChat.jsx";
 
 const server = import.meta.env.VITE_SERVER_URL;
 
@@ -54,11 +55,12 @@ function App() {
             <Route path="/all-tournaments" element={<ViewAllTournaments />} />
             <Route path="/new-tournament" element={<NewTournament />} />
             <Route path="/tournament/:id" element={<TournamentDetails />} />
-             <Route path="/tournament/:id/rules" element={<TournamentRules />} />
+            <Route path="/tournament/:id/rules" element={<TournamentRules />} />
             <Route path="/team/:id" element={<TeamDetails />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
-            <Route path="standard-rules" element={<StandardRules/>} />
+            <Route path="chat" element={<TournamentChat />} />
+            <Route path="standard-rules" element={<StandardRules />} />
             <Route path="questions" element={<Questions />} />
           </Route>
           <Route path="/login" element={<Login />} />
