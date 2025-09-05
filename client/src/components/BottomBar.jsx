@@ -6,9 +6,7 @@ const BottomBar = () => {
   const location = useLocation();
   return (
     <div
-      className={`${
-        location.pathname == "/" ? "hidden" : ""
-      } fixed bottom-0 w-full h-16  bg-gradient-to-r from-[#0AC2F8] to-[#3385D9] flex items-center justify-center`}
+      className={` fixed bottom-0 w-full h-16  bg-gradient-to-r from-[#0AC2F8] to-[#3385D9] flex items-center justify-center`}
     >
       <ul className="w-full flex justify-around">
         <Link to="/">

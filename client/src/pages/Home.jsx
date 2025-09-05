@@ -4,41 +4,29 @@ import CarromLogo from "./../assets/carrom.png";
 import GradientLogo from "../components/GradientLogo";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Loader2, User } from "lucide-react";
 
 const Home = () => {
 
-  const { user } = useContext(AuthContext)
+  const { user, authLoading } = useContext(AuthContext)
+
+  if(authLoading){
+    return (<Loader2 className="animate-spin" />)
+  }
 
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center font-dynapuff px-8">
-      <div className="flex flex-col items-center gap-y-4 mb-8">
+    <div className="w-screen h-screen flex flex-col items-start justify-start font-dynapuff ">
+      <div className="w-full flex flex-col items-start gap-y-4 ">
         {/* <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" /> */}
-        <GradientLogo/>
-        <h1 className="mt-6 text-4xl text-center text-slate-200 leading-0.5 ">
-          Carrom 
-        </h1>
-        <p className="text-sm text-slate-400">Championship Tracker</p>
-      </div>
-      <div className="w-full max-w-sm flex flex-col gap-y-4 text-lg font-semibold  text-white">
-        
-        <Link
-          to="all-tournaments"
-          className=" bg-gradient-to-r from-[#0AC2F8] to-[#3385D9] p-2 rounded-[20px] px-8 py-4 text-center"
-        >
-          View Tournaments
-        </Link>
-        {user && <Link
-          to="/profile"
-          className="bg-gradient-to-bl to-[#7689df] from-[#9a62d2]  p-2 rounded-[20px] px-8 py-4 text-center"
-        >
-          Profile
-        </Link>}
-        {user ? <h2 className="text-center mt-4">Welcome, {user.username}!</h2> :<Link
-          to="login"
-          className=" bg-slate-100/20 border-2 border-slate-100/30 p-2 rounded-[20px] px-8 py-4 text-center"
-        >
-          Login / Signup
-        </Link>}
+        {user && <div className="w-full p-6 bg-white flex items-center justify-between">
+          <p className="text-cyan-700 text-2xl font-bold">Hi {user.firstName} </p>
+          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] flex items-center justify-center">
+            <User className="text-white" size={20}/>
+          </div>
+        </div>}
+        <div>
+          <MyTournaments/>
+        </div>
       </div>
     </div>
   );

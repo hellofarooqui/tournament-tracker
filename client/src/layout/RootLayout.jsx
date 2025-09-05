@@ -7,10 +7,11 @@ const RootLayout = () => {
   return (
     <div className="max-w-screen max-h-screen">
       <Navbar />
-      <div className="w-full h-full overflow-y-scroll scrollbar-thin">
+      {/* <div className="w-full h-full overflow-y-scroll scrollbar-thin"> */}
+      <div className="w-full h-full overflow-hidden">
         <Outlet />
       </div>
-      <BottomBar/>
+      <BottomBar />
     </div>
   );
 };
