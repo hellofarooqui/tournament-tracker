@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../context/AuthContext";
 import EnrolledUsers from "../components/EnrolledUsers";
 import { readableDate } from "../utils/readableDate";
+import TrophyIcon from "../assets/icons/trophy.png";
 
 const TournamentDetails = () => {
   const { user, token } = useContext(AuthContext);
@@ -103,7 +104,7 @@ const TournamentDetails = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="w-full h-screen flex  py-16">
+    <div className="w-full h-screen flex  py-16 overflow-y-scroll">
       <div className="w-full max-w-sm mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6">
         <div className="w-full bg-slate-200/20 border-2 border-slate-200/40 rounded-[5px]  p-4">
           <div className="flex justify-between items-center">
@@ -123,6 +124,7 @@ const TournamentDetails = () => {
           <p className="text-xs font-thin italic text-slate-200/80 mt-2">
             Start: {readableDate(tournament.startDate)}
           </p>
+          {tournament.winner && <p className="text-base bg-slate-200/30 px-4 py-1 rounded-lg mt-4"><img src={TrophyIcon} className="inline w-6 h-6 mr-2" />Champions: {tournament.winner?.name}</p>}
         </div>
 
         {tournament.status == "live" && (

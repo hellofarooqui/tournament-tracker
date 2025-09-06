@@ -5,16 +5,13 @@ import { Loader2 } from "lucide-react";
 import TournamentTeamCard from "./TournamentTeamCard";
 import { AuthContext } from "../context/AuthContext";
 
-const defaultNewTeam = {
-  name: "",
-};
 
 const Teams = () => {
-  const {token} = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
   const params = useParams();
   const navigate = useNavigate();
   const [teams, setTeams] = React.useState([]);
-  const [newTeam, setNewTeam] = React.useState(defaultNewTeam);
+
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
 
@@ -34,26 +31,6 @@ const Teams = () => {
       console.error("Error fetching teams:", error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const handleAddTeam = async (e) => {
-    e.preventDefault();
-    
-    if (!newTeam.name.trim()) {
-      alert("Please enter a team name");
-      return;
-    }
-    try {
-        console.log("Creating team with data:", newTeam);
-      const createdTeam = await createTeam(tournamentId, newTeam);
-      if (createdTeam) {
-        console.log("Team created successfully:", createdTeam);
-        setTeams((prevTeams) => [...prevTeams, createdTeam]);
-        setShowAddTeamModal(false);
-      }
-    } catch (error) {
-      console.error("Error creating team:", error);
     }
   };
 
@@ -87,46 +64,25 @@ const Teams = () => {
       <div className="w-full flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 py-2">
         <div className="flex justify-between items-center pb-2">
           <h2 className="text-2xl text-white">Teams</h2>
-          {token && <button
-            onClick={() => setShowAddTeamModal(true)}
-            className="bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] shadow-pink-300/30 shadow-md text-slate-700 px-6 py-2 rounded-full text-sm"
-          >
-            Add
-          </button>}
+          {token && (
+            <button
+              onClick={() => navigate(`newTeam`)}
+              className="bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] shadow-pink-300/30 shadow-md text-slate-700 px-6 py-2 rounded-full text-sm"
+            >
+              Add
+            </button>
+          )}
         </div>
-        {teams.length < 1 ? <p>No Teams Found</p> : <div className="flex flex-col gap-y-4">{teams.map(team => <TournamentTeamCard key={team._id} team={team} />)}</div>}
-      </div>
-      {showAddTeamModal && (
-        <div className="absolute top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center">
-          <div className="bg-purple-02 p-6 rounded-lg text-light-brown-03">
-            <h3 className="text-xl font-semibold mb-4">Add New Team</h3>
-            <form onSubmit={handleAddTeam} className="flex flex-col gap-y-4">
-              <input
-                onChange={(e) =>
-                  setNewTeam({ ...newTeam, name: e.target.value })
-                }
-                type="text"
-                placeholder="Team Name"
-                className="p-2 border-3 border-yellow-300/40 rounded-[10px] focus:outline-none focus:border-yellow-300/70"
-              />
-
-              <button
-                type="submit"
-                className="bg-yellow-01 text-purple-01 p-2 rounded-[10px] mt-6"
-              >
-                Add Team
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowAddTeamModal(false)}
-                className="bg-red-500 text-white p-2 rounded-[10px]"
-              >
-                Cancel
-              </button>
-            </form>
+        {teams.length < 1 ? (
+          <p>No Teams Found</p>
+        ) : (
+          <div className="flex flex-col gap-y-4">
+            {teams.map((team) => (
+              <TournamentTeamCard key={team._id} team={team} />
+            ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

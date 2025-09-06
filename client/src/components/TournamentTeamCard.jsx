@@ -17,7 +17,7 @@ const TournamentTeamCard = ({team}) => {
           <div>
             {team.members.map((member, index) => (
               <p key={index} className="text-sm text-gray-300">
-                {index+1} {". "}{member.name}
+                {index+1} {". "}{member.firstName} {member.lastName}
               </p>
             ))} 
           </div>

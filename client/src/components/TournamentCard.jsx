@@ -28,9 +28,9 @@ const TournamentCard = ({tournament}) => {
           </div>
         </div>
 
-        <div>
+        {/* <div>
          {tournament.status == "completed" && <ShieldCheck className='text-green-500'/>}
-        </div>
+        </div> */}
         <p className={`text-sm font-thin fixed top-2 right-2 ${tournamentStatusColor[tournament.status]} px-2 rounded-full`}>{tournament.status}</p>
       </div>
     </div>
