@@ -19,7 +19,7 @@ const Navbar = () => {
           <CircleChevronLeft  className=" text-amber-300 " onClick={() => navigate(-1)} size={20} />
           <Link to="/">
             <h1 className="text-3xl font-semibold  bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] bg-clip-text text-transparent">
-              Carrom
+              Tournario
             </h1>
           </Link>
         </div>

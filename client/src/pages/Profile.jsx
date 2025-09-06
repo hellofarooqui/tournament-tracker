@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { Loader2 } from "lucide-react";
+import { Loader2, LogOut } from "lucide-react";
 import ProfileGamesStats from "../components/ProfileGamesStats";
 import ProfileAchievements from "../components/ProfileAchievements";
 
 const Profile = () => {
-  const { user, authLoading } = useContext(AuthContext);
+  const { user, authLoading,logout } = useContext(AuthContext);
 
   if (authLoading) {
     return (
@@ -18,7 +18,7 @@ const Profile = () => {
     <div className="w-full h-screen flex py-16 font-dynapuff">
       {user && (<div className="w-full  mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 ">
         
-          <div className="w-full flex flex-col gap-y-2 items-center bg-[linear-gradient(135deg,rgba(255,107,107,0.2),rgba(238,90,36,0.1))] p-8">
+          <div className="w-full relative  flex flex-col gap-y-2 items-center bg-[linear-gradient(135deg,rgba(255,107,107,0.2),rgba(238,90,36,0.1))] p-8">
             <div className="w-28 h-28 bg-gradient-to-br from-[#667eea]  to-[#764ba2] rounded-full mx-auto flex items-center justify-center mb-4">
               <h2 className="text-5xl font-bold">
                 {user.firstName[0] + user.lastName[0]}
@@ -48,7 +48,9 @@ const Profile = () => {
                 <p className="text-sm font-thin">Rank</p>
               </div>
             </div>
-          
+
+            <button className="absolute right-4 top-4 p-2 rounded-lg bg-slate-200/20" onClick={()=>logout()}><LogOut size={16} /></button>
+
           </div>
             <ProfileGamesStats/>
             <ProfileAchievements/>

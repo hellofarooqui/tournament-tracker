@@ -43,6 +43,10 @@ export const getTournamentById = async (req, res) => {
       return res.status(404).json({ message: "Tournament not found" });
     }
 
+    if(tournament?.status === "completed"){
+      await tournament.populate({path: 'winner', select: 'name'});
+    }
+
     if(tournament?.status === "scheduled"){
       await tournament.populate('enrolledUser');
     }
@@ -89,7 +93,7 @@ export const getTournamentTeams = async (req, res) => {
       path: "teams",
       populate: {
         path: "members",
-        select: "name",
+        select: "firstName lastName",
       },
     });
 
@@ -111,6 +115,7 @@ export const getTournamentTeams = async (req, res) => {
 
 export const addTournamentTeam = async (req, res) => {
   try {
+    console.log("Req Body:", req.body);
     console.log("Adding team to tournament with ID:", req.params.id);
     const tournament = await Tournament.findById(req.params.id);
     if (!tournament) {
@@ -187,5 +192,27 @@ export const enrollIntoTournament = async (req, res) => {
   } catch (error) {
     console.error("Error enrolling into tournament:", error);
     res.status(500).json({ message: "Error enrolling into tournament", error });
+  }
+};
+
+export const getTournamentPlayers = async (req, res) => {
+  try {
+    console.log("Fetching players for tournament with ID:", req.params.id);
+    const tournament = await Tournament.findById(req.params.id).populate({
+      path: "enrolledUser",
+      select: "firstName lastName"
+    });
+
+    if (!tournament) {
+      return res.status(404).json({ message: "Tournament not found" });
+    }
+
+    res.status(200).json(tournament.enrolledUser);
+  } catch (error) {
+    console.error("Error fetching tournament players:", error);
+    res.status(500).json({
+      message: "Error fetching tournament players",
+      error: error.message,
+    });
   }
 };

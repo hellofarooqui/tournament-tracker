@@ -81,12 +81,25 @@ const useTournamnet = () => {
         }
     }
 
+    const getTournamentPlayers = async (tournamentId) => {
+        try {
+            const response = await axios.get(`${server}/api/tournaments/${tournamentId}/players`);
+            if(response.status === 200) {
+                console.log("Players fetched successfully:", response.data);
+                return response.data; // Return the fetched players
+            }
+        } catch (error) {
+            console.error("Error fetching tournament players:", error);
+        }
+    }
+
   return {
     getAllTournaments,
     createTournament,
     getTournamentById,
     deleteTournament,
-    enrollIntoTournament
+    enrollIntoTournament,
+    getTournamentPlayers
   };
 }
 

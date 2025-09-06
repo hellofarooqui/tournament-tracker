@@ -19,6 +19,7 @@ const useTeams = () => {
 
     const createTeam = async (tournamentId, teamData) => {
         try {
+            console.log("Creating team with data:", teamData);
             const response = await axios.post(`${server}/api/tournaments/${tournamentId}/teams`, teamData);
             if(response.status === 201) {
                 console.log("Team created successfully:", response.data);

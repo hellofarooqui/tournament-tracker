@@ -42,6 +42,10 @@ const tournamentSchema = new mongoose.Schema({
         ref: 'PointsTable',
         //required: true,
     },
+    winner:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Team',
+    },
     createdAt: {
         type: Date,
         default: Date.now,
