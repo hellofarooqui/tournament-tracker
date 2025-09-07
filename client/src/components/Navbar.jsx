@@ -12,7 +12,7 @@ const Navbar = () => {
     <div
       className={`${
         location.pathname == "/" ? "hidden" : ""
-      } h-16 font-dynapuff text-dark-brown-01 w-screen absolute top-0 left-0 bg-slate-100/20 backdrop-blur-[10px] p-4 flex justify-between z-10`}
+      } h-16 font-dynapuff text-dark-brown-01 w-screen absolute top-0 left-0 p-4 flex justify-between z-10`}
     >
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center gap-x-1">

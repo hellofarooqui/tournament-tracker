@@ -49,7 +49,7 @@ const PointsTable = () => {
     }
 
   return (
-    <div className="mt-4 w-full rounded-[20px] bg-slate-100/10 backdrop-blur-lg shadow-lg text-light-brown-03 font-dynapuff overflow-x-auto">
+    <div className="mt-4 w-full rounded-[20px] bg-slate-100/10 backdrop-blur-lg border text-light-brown-03 font-dynapuff overflow-x-auto">
       <table className="w-full text-center border-collapse">
         <thead className=''>
           <tr className=" bg-gradient-to-r from-[#0AC2F8] to-[#3385D9]  text-slate-200 text-[16px] rounded-[20px] overflow-hidden">
@@ -78,7 +78,7 @@ const PointsTable = () => {
           </tr> */}
           {pointsTable && pointsTable.length > 0 ? (
             pointsTable.map((entry, index) => (
-              <tr key={index} className="hover:bg-slate-200/40 transition-colors text-[16px] border-b text-slate-200 border-slate-200/30 last:border-b-0">
+              <tr key={index} className="hover:bg-slate-200/40 transition-colors text-[16px] border-b text-neutral-500 border-slate-200/30 last:border-b-0">
                 <td className="pl-6 py-3 text-center ">
                   {abbrevation(entry.team.name)}
                 </td>
