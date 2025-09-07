@@ -8,15 +8,15 @@ const TournamentTeamCard = ({team}) => {
   return (
     <div
       onClick={() => setShowTeamData(true)}
-      className="p-4 bg-slate-200/20 backdrop-blur-2xl rounded-full border-2 border-slate-200/20 text-slate-200 cursor-pointer"
+      className="p-4 bg-white backdrop-blur-2xl rounded-[15px] border-2 border-neutral-100 shadow-md text-slate-200 cursor-pointer"
     >
       <div className="flex gap-x-4">
-        <div className="w-16 h-16 rounded-full bg-slate-200/40"></div>
+        <div className="w-16 h-16 rounded-full bg-neutral-200"></div>
         <div className='flex flex-col gap-y-2'>
-          <h2 className='text-white'>{team.name}</h2>
+          <h2 className='text-neutral-600'>{team.name}</h2>
           <div>
             {team.members.map((member, index) => (
-              <p key={index} className="text-sm text-gray-300">
+              <p key={index} className="text-sm text-neutral-500">
                 {index+1} {". "}{member.firstName} {member.lastName}
               </p>
             ))} 

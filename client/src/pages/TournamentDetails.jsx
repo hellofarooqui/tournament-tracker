@@ -104,58 +104,58 @@ const TournamentDetails = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="w-full h-screen flex  py-16 overflow-y-scroll">
-      <div className="w-full max-w-sm mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6">
-        <div className="w-full bg-slate-200/20 border-2 border-slate-200/40 rounded-[5px]  p-4">
+    <div className="w-screen h-screen fixed flex  py-16">
+      <div className="w-full h-full bg-neutral-50 rounded-t-[20px] mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6  overflow-y-scroll">
+        <div className="w-full bg-white border-2 border-neutral-200 rounded-[15px]  p-4">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl text-slate-200 font-bold">
+            <h2 className="text-xl text-neutral-700 font-bold">
               {tournament.name}{" "}
             </h2>
             {user && user.role === "root-admin" && (
               <button
                 onClick={handleDeleteTournament}
-                className="bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100 p-2 rounded-md text-sm"
+                className="bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100 p-2 rounded-[15px] text-sm"
               >
                 <Trash className="" size={18} />
               </button>
             )}
           </div>
 
-          <p className="text-xs font-thin italic text-slate-200/80 mt-2">
+          <p className="text-xs font-thin italic text-neutral-400 mt-2">
             Start: {readableDate(tournament.startDate)}
           </p>
-          {tournament.winner && <p className="text-base bg-slate-200/30 px-4 py-1 rounded-lg mt-4"><img src={TrophyIcon} className="inline w-6 h-6 mr-2" />Champions: {tournament.winner?.name}</p>}
+          {tournament.winner && <p className="text-base bg-emerald-100 text-neutral-600 px-4 py-1 rounded-lg mt-4"><img src={TrophyIcon} className="inline w-6 h-6 mr-2" />Champions: {tournament.winner?.name}</p>}
         </div>
 
-        {tournament.status == "live" && (
+        {tournament.status !== "scheduled" && (
           <div className="w-full text-lg">
             <ul className="w-full flex gap-x-4">
               <li
                 onClick={() => setActiveTab("games")}
-                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-full ${
+                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${
                   activeTab == "games"
                     ? "bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100"
-                    : "bg-slate-200/30 text-slate-100"
+                    : "bg-neutral-200 text-neutral-500"
                 } `}
               >
                 Games
               </li>
               <li
                 onClick={() => setActiveTab("points")}
-                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-full ${
+                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${
                   activeTab == "points"
                     ? "bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100"
-                    : "bg-slate-200/30 text-slate-100"
+                    : "bg-neutral-200 text-neutral-500"
                 } `}
               >
                 Points
               </li>
               <li
                 onClick={() => setActiveTab("teams")}
-                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-full ${
+                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${
                   activeTab == "teams"
                     ? "bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100"
-                    : "bg-slate-200/30 text-slate-100"
+                    : "bg-neutral-200 text-neutral-500"
                 } `}
               >
                 Teams

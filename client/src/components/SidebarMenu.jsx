@@ -15,7 +15,7 @@ const SidebarMenu = ({ showMenu, setShowMenu }) => {
     <div
       className={`w-screen h-screen flex flex-col justify-between fixed inset-0 font-dynapuff  ${
         showMenu ? "translate-x-0" : "-translate-x-[100%]"
-      } transition-all duration-150 ease-in-out z-50 bg-gradient-to-br from-[#667eea] to-[#764ba2] backdrop-blur-2xl `}
+      } transition-all duration-150 ease-in-out z-50 bg-neutral-900 `}
     >
       <ul className="w-full flex flex-col text-2xl text-slate-200/80 font-thin px-2 py-8 text-start">
         <Link to="all-tournaments">
@@ -39,8 +39,8 @@ const SidebarMenu = ({ showMenu, setShowMenu }) => {
           <li className="  p-2 py-3 border-b-2 border-slate-200/30">
            <Link to='/profile'>Profile</Link>
           </li>
-          <li className="  p-2 py-3 border-b-2 border-slate-200/30">
-           <button onClick={handleLogout}>Logout</button>
+          <li onClick={handleLogout} className="  p-2 py-3 border-b-2 border-slate-200/30">
+           Logout
           </li>
           </>
         ) : (

@@ -11,7 +11,7 @@ const GameListCard = ({ game }) => {
   return (
     <div
       onClick={() => setShowWinnerUpdateModal(true)}
-      className="bg-slate-200/20 backdrop-blur-2xl rounded-[20px] border-2 border-slate-200/20 overflow-hidden flex flex-col gap-y-1 p-6  hover:scale-105 transition-transform ease-in-out duration-200"
+      className="bg-white backdrop-blur-2xl rounded-[20px] border-2 border-neutral-200 overflow-hidden flex flex-col gap-y-1 p-6  hover:scale-105 transition-transform ease-in-out duration-200"
     >
       {game.winner && (
         <CircleCheck className="absolute top-2 right-2 text-green-500" />
@@ -35,10 +35,10 @@ const GameListCard = ({ game }) => {
                 <img src={EggIcon} className="w-8 h-8 object-cover" />
               ))}
           </div>
-          <p className="text-sm text-center">{game.teams[0].name}</p>
+          <p className="text-sm text-center text-neutral-600">{game.teams[0].name}</p>
         </div>
 
-        <h2 className="text-center">VS</h2>
+        <h2 className="text-center text-neutral-700">VS</h2>
 
         <div className="flex flex-col gap-y-2  justify-center items-center">
           <div className="rounded-[20px]  bg-gradient-to-br from-[#3385D9] via-[#1BA9EB] to-[#0AC2F8]  w-16 h-16 flex justify-center items-center">
@@ -52,10 +52,10 @@ const GameListCard = ({ game }) => {
                 <img src={EggIcon} className="w-8 h-8 object-cover" />
               ))}
           </div>
-          <p className="text-sm text-center">{game.teams[1].name}</p>
+          <p className="text-sm text-center text-neutral-600">{game.teams[1].name}</p>
         </div>
       </div>
-      <p className="text-[16px] text-center rounded-[10px] font-thin p-1 py-2 bg-slate-200/20 text-slate-200">
+      <p className="text-center rounded-[10px] p-1 py-2 bg-neutral-100 text-neutral-500 text-sm">
         Date: {readableDate(game.scheduledDate)}
       </p>
 
