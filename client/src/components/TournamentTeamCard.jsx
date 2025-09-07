@@ -8,11 +8,11 @@ const TournamentTeamCard = ({team}) => {
   return (
     <div
       onClick={() => setShowTeamData(true)}
-      className="p-4 bg-slate-200/20 backdrop-blur-2xl rounded-[20px] border-2 border-slate-200/20 text-slate-200 cursor-pointer"
+      className="p-4 bg-slate-200/20 backdrop-blur-2xl rounded-full border-2 border-slate-200/20 text-slate-200 cursor-pointer"
     >
       <div className="flex gap-x-4">
-        <div className="w-20 h-20 rounded-[20px] bg-slate-200/40"></div>
-        <div className='flex flex-col gap-y-2 justify-between'>
+        <div className="w-16 h-16 rounded-full bg-slate-200/40"></div>
+        <div className='flex flex-col gap-y-2'>
           <h2 className='text-white'>{team.name}</h2>
           <div>
             {team.members.map((member, index) => (
