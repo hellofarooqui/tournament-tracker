@@ -49,11 +49,11 @@ const {getGames} = useGame();
   return (
     <div className="mt-4 pb-6">
       <div className="flex justify-between items-center">
-        <h2>Games</h2>
+        <h2 className="text-neutral-700">Games</h2>
         {true && (
           <button
             onClick={() => setShowAddNewGameModal(true)}
-            className="text-sm bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] text-gray-700 px-2 py-2 rounded-md"
+            className="text-sm bg-neutral-200 text-neutral-700 px-2 py-2 rounded-md"
           >
             New Game
           </button>
@@ -62,7 +62,7 @@ const {getGames} = useGame();
       {games.length > 0 ? (
         <GamesList games={games} />
       ) : (
-        <p className="mt-4 bg-dark-brown-04 text-slate-200 text-sm p-4 rounded-[10px] font-thin">
+        <p className="mt-4 bg-neutral-200 text-neutral-500 text-sm p-4 rounded-[10px] font-thin">
           No games found
         </p>
       )}

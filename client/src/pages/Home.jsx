@@ -23,25 +23,27 @@ const Home = () => {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col items-start justify-start font-dynapuff overflow-y-scroll pb-20 ">
-      <div className="w-full flex flex-col items-start gap-y-4 ">
+    <div className="w-screen h-screen flex flex-col items-start justify-start font-dynapuff overflow-y-scroll ">
+      <div className="h-full w-full flex flex-col items-start ">
         {/* <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" /> */}
         {user && (
-          <div className="w-full p-6 bg-transparent flex items-center justify-between">
-            <p className="text-white text-3xl font-bold">
+          <div className="w-full h-20 bg-transparent flex items-center justify-between px-6">
+            <p className="text-white text-xl font-bold">
               Hi {user.firstName}{" "}
             </p>
-            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] flex items-center justify-center">
               <User className="text-white" size={20} />
             </div>
           </div>
         )}
-        <div className="w-full px-4">
-          <MyTournaments />
-        </div>
+        <div className="h-full w-full rounded-t-[20px] flex flex-col gap-y-8 bg-neutral-50 pt-4 px-6">
+          <div className="w-full ">
+            <MyTournaments />
+          </div>
 
-        <div className="w-full p-4">
-          <UpcomingTournaments />
+          <div className="w-full">
+            <UpcomingTournaments />
+          </div>
         </div>
       </div>
     </div>
