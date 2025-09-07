@@ -12,22 +12,22 @@ const Home = () => {
   const { user, authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!authLoading && !user) {
-      navigate("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!authLoading && !user) {
+  //     navigate("/login");
+  //   }
+  // }, []);
 
   if (authLoading) {
     return <Loader2 className="animate-spin" />;
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col items-start justify-start font-dynapuff overflow-y-scroll ">
+    <div className="w-screen h-screen flex flex-col items-start justify-start font-dynapuff overflow-y-scroll">
       <div className="h-full w-full flex flex-col items-start ">
         {/* <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" /> */}
         {user && (
-          <div className="w-full h-20 bg-transparent flex items-center justify-between px-6">
+          <div className="w-full h-16 bg-transparent flex items-center justify-between px-6">
             <p className="text-white text-xl font-bold">
               Hi {user.firstName}{" "}
             </p>
@@ -36,7 +36,7 @@ const Home = () => {
             </div>
           </div>
         )}
-        <div className="h-full w-full rounded-t-[20px] flex flex-col gap-y-8 bg-neutral-50 pt-4 px-6">
+        <div className="h-full w-full rounded-t-[20px] flex flex-col gap-y-8 bg-neutral-100 pt-4 px-6">
           <div className="w-full ">
             <MyTournaments />
           </div>

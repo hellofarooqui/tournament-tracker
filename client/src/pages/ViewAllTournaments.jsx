@@ -45,7 +45,7 @@ const ViewAllTournaments = () => {
 
   return (
     <div className="w-full h-screen flex py-16 font-dynapuff">
-      <div className="w-full h-full bg-neutral-50 rounded-t-[20px] flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 p-6">
+      <div className="w-full h-full bg-neutral-100 rounded-t-[20px] flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 p-6">
         <div className="flex justify-between items-center">
           <h2 className=" text-stone-700">All Tournaments</h2>
           <div className="flex gap-x-2">

@@ -17,7 +17,7 @@ const AuthProvider = ({children}) => {
       if (storedToken) {
         setToken(storedToken);
         fetchUserData(storedToken);
-        setAuthLoading(false);
+        //setAuthLoading(false);
       } else {
         setUser(null);
         setAuthLoading(false);
@@ -44,7 +44,7 @@ const AuthProvider = ({children}) => {
         
         }catch(error){
           console.error("Error fetching user data:", error.response.status);
-          if(error.response.status == 400){
+          if(error.response.status == 400 || error.response.status == 401){
             localStorage.removeItem('token');
             setUser(null);
           }

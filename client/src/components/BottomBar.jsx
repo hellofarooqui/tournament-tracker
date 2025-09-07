@@ -1,4 +1,4 @@
-import { Diamond, House, MessageSquareText, User } from "lucide-react";
+import { Diamond, House, MessageCircle, MessageSquareText, User } from "lucide-react";
 import React from "react";
 import { Link, useLocation } from "react-router";
 
@@ -30,7 +30,7 @@ const BottomBar = () => {
           <li className={`text-center font-semibold flex flex-col items-center transition-colors ${
             isActive('/chat') ? 'text-amber-400' : 'text-gray-400'
           }`}>
-            <MessageSquareText size={20} />
+            <MessageCircle size={20} />
             <p className="text-xs mt-1">Chat</p>
           </li>
         </Link>

@@ -56,7 +56,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const verifyToken = async (req, res) => {
+export const TokenVerification = async (req, res) => {
   try {
   } catch (error) {}
 };

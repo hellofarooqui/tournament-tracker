@@ -39,17 +39,17 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-start justify-center py-16 font-dynapuff">
-      <div className="w-[80%] flex flex-col gap-y-4 text-xl font-semibold ">
+    <div className="w-screen h-screen flex items-start justify-center py-16 font-dynapuff bg-stone-100">
+      <div className="w-[80%] flex flex-col gap-y-4 text-xl font-semibold  ">
         <div className="flex flex-col items-center gap-y-4 mb-16">
           <Link to="/">
             <h1 className="text-[58px] font-semibold  bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] bg-clip-text text-transparent">
-              Carrom
+              Tournario
             </h1>
           </Link>
         </div>
-        <h2 className="text-2xl text-white mb-2 leading-0.5">Login</h2>
-        <div>
+        <h2 className="text-2xl text-stone-700 mb-2 leading-0.5">Login</h2>
+        <div className="bg-white border-stone-200 rounded-[20px] shadow-sm border overflow-hidden mt-2">
           <form
             onSubmit={handleSubmit}
             onReset={handleReset}
@@ -57,7 +57,7 @@ const Login = () => {
           >
             <input
               placeholder="Email"
-              className="w-full p-2 px-4 bg-transparent backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
+              className="w-full p-2 px-4 bg-transparent backdrop-blur-2xl  text-stone-600 border-2 border-stone-200 rounded-[10px] focus:outline-none focus:border-slate-200/40"
               onChange={(e) =>
                 setUserData({ ...userData, email: e.target.value })
               }
@@ -66,7 +66,7 @@ const Login = () => {
               <input
                 placeholder="Password"
                 type={showPassword ? "text" : "password"}
-                className="w-full p-2 px-4 bg-transparent backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40 pr-10"
+                className="w-full p-2 px-4 bg-transparent backdrop-blur-2xl  text-stone-600 border-2 border-stone-200 rounded-[10px] focus:outline-none focus:border-slate-200/40 pr-10"
                 onChange={(e) =>
                   setUserData({ ...userData, password: e.target.value })
                 }
@@ -83,22 +83,22 @@ const Login = () => {
             <div className="w-full flex flex-col gap-y-4 text-xl  text-white mt-2">
               <button
                 type="submit"
-                className="flex-1 bg-gradient-to-r from-[#0AC2F8] to-[#3385D9] py-2 rounded-[10px]"
+                className="flex-1 bg-gradient-to-r from-[#0AC2F8] to-[#3385D9] py-2 rounded-[10px] mt-4 text-center"
               >
                 {loading ? <Loader2 className="animate-spin" /> : "Login"}
               </button>
-              <p className="text-center text-[16px] font-thin text-slate-200/90">
+              <p className="text-center text-[16px] font-thin text-stone-400">
                 Don't have an account?{" "}
                 <span className="underline" onClick={() => navigate("/register")}>Signup</span>
               </p>
             </div>
           </form>
         </div>
-        <Link to="/">
+        {/* <Link to="/">
           <p className="text-sm text-slate-200/70 font-thin italic text-center underline">
             Go Back to Home
           </p>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
