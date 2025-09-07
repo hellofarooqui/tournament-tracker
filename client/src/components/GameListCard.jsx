@@ -14,11 +14,11 @@ const GameListCard = ({ game }) => {
       className="bg-white backdrop-blur-2xl rounded-[20px] border-2 border-neutral-200 overflow-hidden flex flex-col gap-y-1 p-6  hover:scale-105 transition-transform ease-in-out duration-200"
     >
       {game.winner && (
-        <CircleCheck className="absolute top-2 right-2 text-green-500" />
+        <CircleCheck className="absolute top-2 right-2 text-green-500" size={16}/>
       )}
       {/* <h3 className="text-sm font-semibold">{game.teams[0].name} vs {game.teams[1].name}</h3> */}
       <div>
-        <h2 className="text-white text-[16px] text-center bg-slate-200/20 rounded-[10px] mb-2 leading-10">
+        <h2 className="text-neutral-600 text-[16px] text-center bg-stone-200 rounded-[10px] mb-2 leading-10">
           {game.name && game.name}
         </h2>
       </div>

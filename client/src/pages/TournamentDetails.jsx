@@ -105,7 +105,7 @@ const TournamentDetails = () => {
 
   return (
     <div className="w-screen h-screen fixed flex  py-16">
-      <div className="w-full h-full bg-neutral-50 rounded-t-[20px] mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6  overflow-y-scroll">
+      <div className="w-full h-full bg-neutral-100 rounded-t-[20px] mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6  overflow-y-scroll">
         <div className="w-full bg-white border-2 border-neutral-200 rounded-[15px]  p-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl text-neutral-700 font-bold">
