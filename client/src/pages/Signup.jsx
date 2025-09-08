@@ -61,8 +61,8 @@ const Signup = () => {
       <div className="w-[80%] flex flex-col gap-y-4 text-xl font-semibold ">
         <div className="flex flex-col items-center gap-y-4 mb-16">
           <Link to="/">
-            <h1 className="text-[58px] font-semibold  bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] bg-clip-text text-transparent">
-              Carrom
+            <h1 className="text-[58px] font-semibold text-stone-700">
+              Tournario
             </h1>
           </Link>
         </div>
@@ -135,9 +135,9 @@ const Signup = () => {
             <div className="w-full flex flex-col gap-y-4 text-xl  text-white mt-2">
               <button
                 type="submit"
-                className="flex-1 bg-gradient-to-r from-[#0AC2F8] to-[#3385D9] py-2 rounded-[10px]"
+                className="flex-1 bg-stone-700 py-2 rounded-[10px]"
               >
-                {loading ? <Loader2 className="animate-spin" /> : "Signup"}
+                {loading ? <Loader2 className="animate-spin text-white" /> : "Signup"}
               </button>
               <p className="text-center text-[16px] font-thin text-slate-200/90">
                 Already have an account?{" "}
