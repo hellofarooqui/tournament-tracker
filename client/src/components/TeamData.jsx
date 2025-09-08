@@ -69,18 +69,18 @@ const TeamData = ({ teamId, setShowTeamData }) => {
   }
 
   const modalContent =  (
-    <div className="fixed inset-0 z-50 bg-slate-200/20 backdrop-blur-lg flex items-start justify-center p-6">
+    <div className="fixed inset-0 z-50 bg-stone-900/60 flex items-start justify-center p-6">
       <CircleX onClick={(e)=>handleModalClose(e)} className="absolute top-2 z-20 bg-slate-200/20 text-center text-2xl text-white rounded-full" size={30}/>
-      <div className="max-w-sm w-full bg-slate-200/20 p-6 pb-10 rounded-[20px] border-2 border-slate-200/30 shadow-lgrelative">
+      <div className="max-w-sm w-full bg-white p-6 pb-10 mt-6 rounded-[20px] border-2 border-slate-200/30 shadow-lgrelative">
         
-          <h2 className=" text-2xl text-white font-bold ">
+          <h2 className=" text-2xl text-stone-700 font-bold ">
             {teamData.name}
           </h2>
 
           <div className="  rounded-md">
             
               <div className="flex justify-between items-center">
-                <h3 className=" text-white text-lg">Players</h3>
+                <h3 className=" text-stone-600 text-lg">Players</h3>
                 {teamData.members.length < 2 && <button
                   onClick={() => setShowAddPlayerForm(true)}
                   className="text-xs text-yellow-01 underline px-2 py-1 rounded-[10px] font-thin"
@@ -91,8 +91,8 @@ const TeamData = ({ teamId, setShowTeamData }) => {
             
             <ul className="mt-2 flex flex-col gap-y-2">
               {teamData.members.map((player,index) => (
-                <li key={player._id} className=" bg-white/10 border-2 border-slate-200/40 backdrop-blur-lg group p-2 rounded-md flex justify-between items-center">
-                  {index+1}{". "}{player.name} <Trash className="hidden group-hover:block opacity-15"/>
+                <li key={player._id} className=" bg-stone-100 border-2 border-slate-200/40 group p-2 rounded-md flex justify-between items-center">
+                  <p className="text-stone-600">{index+1}{". "}{player.firstName} {player.lastName}</p> <Trash className="hidden group-hover:block opacity-15"/>
                 </li>
               ))}
             </ul>

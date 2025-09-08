@@ -13,12 +13,12 @@ const MyTournaments = () => {
         <div className="w-full flex flex-col gap-y-1 text-sm bg-white p-4 rounded-[15px] border-1 border-slate-200 shadow-sm">
           <p className="text-lg font-bold text-stone-700">MINA Championship</p>
           <p className="text-stone-400 flex items-center"><img src={SnookerIcon} className="inline-block w-4 h-4 mr-1" /> Snookers</p>
-          <p className="text-emerald-400 bg-slate-100 p-1 px-2 rounded-full">Next Game: Strikers vs Panthers</p>
+          <p className="bg-gradient-to-br from-stone-200 to-stone-100 text-stone-700 p-1 px-2 rounded-full">Next Game: Strikers vs Panthers</p>
         </div>
         <div className="w-full flex flex-col gap-y-1 text-sm bg-white p-4 rounded-[15px] border-1 border-slate-200 shadow-sm">
           <p className="text-lg font-bold text-stone-700">MINA Championship</p>
           <p className="text-stone-400 flex items-center"><img src={SnookerIcon} className="inline-block w-4 h-4 mr-1" /> Snookers</p>
-          <p className="text-emerald-400 bg-slate-100 p-1 px-2 rounded-full">Next Game: Strikers vs Panthers</p>
+          <p className="bg-gradient-to-br from-stone-200 to-stone-100 text-stone-700 p-1 px-2 rounded-full">Next Game: Strikers vs Panthers</p>
         </div>
       </div>
     </div>

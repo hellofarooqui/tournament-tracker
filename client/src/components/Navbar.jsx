@@ -16,9 +16,9 @@ const Navbar = () => {
     >
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center gap-x-1">
-          <CircleChevronLeft  className=" text-amber-300 " onClick={() => navigate(-1)} size={20} />
+          <CircleChevronLeft  className=" text-stone-100 " onClick={() => navigate(-1)} size={20} />
           <Link to="/">
-            <h1 className="text-3xl font-semibold  bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] bg-clip-text text-transparent">
+            <h1 className="text-3xl font-semibold  bg-gradient-to-r from-stone-200 via-stone-100 to-stone-50 bg-clip-text text-transparent">
               Tournario
             </h1>
           </Link>
@@ -27,7 +27,7 @@ const Navbar = () => {
         <div className="relative">
           <button
             onClick={() => setShowMenu(!showMenu)}
-            className=" bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] bg-clip-text text-transparent text-2xl bg-slate-200/80  py-1 px-2 rounded-md"
+            className=" bg-gradient-to-r  from-stone-200 via-stone-100 to-stone-50 bg-clip-text text-transparent text-2xl bg-slate-200/80  py-1 px-2 rounded-md"
           >
             {showMenu ? "✖" : "☰"}
             {showMenu && (<SidebarMenu showMenu={showMenu} setShowMenu={setShowMenu} />

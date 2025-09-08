@@ -24,7 +24,7 @@ const UpcomingTournaments = () => {
             </p>
           </div>
 
-          <button className="bg-green-400 rounded-full p-1 px-4 text-white self-center">Join</button>
+          <button className="bg-gradient-to-br from-stone-800 via-stroke-neutral-700 to-stone-600 rounded-full p-1 px-4 text-white self-center">Join</button>
         </div>
          <div className="w-full flex justify-between text-sm bg-white shadow-sm p-4 rounded-[15px] border-1 border-stone-200">
           <div className="flex flex-col gap-y-2">
@@ -37,7 +37,7 @@ const UpcomingTournaments = () => {
             </p>
           </div>
 
-          <button className="bg-green-400 rounded-full p-1 px-4 text-white self-center">Join</button>
+          <button className="bg-gradient-to-br from-stone-800 via-stroke-neutral-700 to-stone-600 rounded-full p-1 px-4 text-white self-center">Join</button>
         </div>
       </div>
     </div>

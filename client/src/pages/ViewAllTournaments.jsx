@@ -51,7 +51,7 @@ const ViewAllTournaments = () => {
           <div className="flex gap-x-2">
             {(user && user.role ==='root-admin') && <button
               onClick={() => navigate("/new-tournament")}
-              className=" bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] text-slate-700 px-4 py-2 rounded-md text-sm"
+              className=" bg-gradient-to-r from-stone-800 via-stone-700 to-stone-600 text-white px-4 py-2 rounded-md text-sm"
             >
               New
             </button>}

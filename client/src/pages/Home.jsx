@@ -31,7 +31,7 @@ const Home = () => {
             <p className="text-white text-xl font-bold">
               Hi {user.firstName}{" "}
             </p>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-stone-500 via-stone-400 to-stone-300 flex items-center justify-center">
               <User className="text-white" size={20} />
             </div>
           </div>

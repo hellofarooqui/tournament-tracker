@@ -114,7 +114,7 @@ const TournamentDetails = () => {
             {user && user.role === "root-admin" && (
               <button
                 onClick={handleDeleteTournament}
-                className="bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100 p-2 rounded-[15px] text-sm"
+                className="bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100 p-2 rounded-[15px] text-sm"
               >
                 <Trash className="" size={18} />
               </button>
@@ -134,7 +134,7 @@ const TournamentDetails = () => {
                 onClick={() => setActiveTab("games")}
                 className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${
                   activeTab == "games"
-                    ? "bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100"
+                    ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
                     : "bg-neutral-200 text-neutral-500"
                 } `}
               >
@@ -144,7 +144,7 @@ const TournamentDetails = () => {
                 onClick={() => setActiveTab("points")}
                 className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${
                   activeTab == "points"
-                    ? "bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100"
+                    ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
                     : "bg-neutral-200 text-neutral-500"
                 } `}
               >
@@ -154,7 +154,7 @@ const TournamentDetails = () => {
                 onClick={() => setActiveTab("teams")}
                 className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${
                   activeTab == "teams"
-                    ? "bg-gradient-to-r from-[#FD6861] to-[#F05C2E] text-slate-100"
+                    ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
                     : "bg-neutral-200 text-neutral-500"
                 } `}
               >
