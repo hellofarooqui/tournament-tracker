@@ -19,8 +19,8 @@ const RootLayout = () => {
   if (authLoading) {
     return (
       <div className="w-screen h-screen flex flex-col items-center justify-center font-dynapuff pt-16">
-        <div className="w-full h-full flex flex-col items-center justify-center gap-y-4 mb-8 bg-white rounded-t-[20px]">
-          <Loader2 className="animate-spin" />;
+        <div className="w-full h-full flex flex-col items-center justify-center gap-y-4 mb-8 bg-transparent rounded-t-[20px]">
+          <Loader2 className="animate-spin" />
         </div>
       </div>
     );
