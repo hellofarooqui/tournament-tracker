@@ -22,7 +22,7 @@ export const loginUser = async (req, res) => {
     }
 
     const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
+      expiresIn: "30d",
     });
 
     res.status(200).json({ message: "Login successful", token });
@@ -42,7 +42,7 @@ export const registerUser = async (req, res) => {
 
     const encryptedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
-        username: createUsername(firstName),
+      username: createUsername(firstName),
       firstName,
       lastName,
       email,
@@ -61,19 +61,18 @@ export const TokenVerification = async (req, res) => {
   } catch (error) {}
 };
 
-export const getUserData = async (req,res) => {
-    const token = req.token;
-    try{
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const userId = decoded.id;
-        const user = await User.findById(userId).select('-password');
-        if(!user){
-            return res.status(400).json({message: "User not found"});
-        }
-        return res.status(200).json(user);
+export const getUserData = async (req, res) => {
+  const token = req.token;
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
     }
-    catch(error){
-        console.error("Error fetching user data:", error);
-        return res.status(500).json({message: "Error fetching user data"});
-    }
-}
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return res.status(500).json({ message: "Error fetching user data" });
+  }
+};
