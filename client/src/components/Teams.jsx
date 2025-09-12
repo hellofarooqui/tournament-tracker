@@ -76,7 +76,7 @@ const Teams = () => {
         {teams.length < 1 ? (
           <p>No Teams Found</p>
         ) : (
-          <div className="flex flex-col gap-y-4">
+          <div className="flex flex-col gap-y-4 pb-6">
             {teams.map((team) => (
               <TournamentTeamCard key={team._id} team={team} />
             ))}

@@ -124,7 +124,12 @@ const TournamentDetails = () => {
           <p className="text-xs font-thin italic text-neutral-400 mt-2">
             Start: {readableDate(tournament.startDate)}
           </p>
-          {tournament.winner && <p className="text-base bg-emerald-100 text-neutral-600 px-4 py-1 rounded-lg mt-4"><img src={TrophyIcon} className="inline w-6 h-6 mr-2" />Champions: {tournament.winner?.name}</p>}
+          {tournament.winner && (
+            <p className="text-base bg-emerald-100 text-neutral-600 px-4 py-1 rounded-lg mt-4">
+              <img src={TrophyIcon} className="inline w-6 h-6 mr-2" />
+              Champions: {tournament.winner?.name}
+            </p>
+          )}
         </div>
 
         {tournament.status !== "scheduled" && (
@@ -167,7 +172,12 @@ const TournamentDetails = () => {
         tournament.status == "completed" ||
         tournament.status == "cancelled" ? (
           <div>
-            {activeTab == "games" && <Games tournamentId={tournament._id} />}
+            {activeTab == "games" && (
+              <Games
+                tournamentId={tournament._id}
+                tournamentAdmin={tournament.tournamentAdmin}
+              />
+            )}
             {activeTab == "points" && <PointsTable />}
             {activeTab == "teams" && <Teams />}
           </div>

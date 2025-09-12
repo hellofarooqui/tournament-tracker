@@ -3,18 +3,17 @@ import NewGameModal from "./NewGameModal";
 import useGame from "../hooks/useGame";
 import GamesList from "./GamesList";
 import { AuthContext } from "../context/AuthContext";
-import { Loader2 } from "lucide-react";
+import { Loader2, Plus } from "lucide-react";
 
-const Games = ({tournamentId}) => {
+const Games = ({ tournamentId, tournamentAdmin }) => {
   const [showAddNewGameModal, setShowAddNewGameModal] = useState(false);
-  const [games,setGames] = useState([]);
-  const [loading,setLoading] = useState(false);
-  const [error,setError] = useState(null);
+  const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const {token} = useContext(AuthContext)
+  const { user, token } = useContext(AuthContext);
 
-
-const {getGames} = useGame();
+  const { getGames } = useGame();
 
   const fetchGames = async (tournamentId) => {
     try {
@@ -24,41 +23,42 @@ const {getGames} = useGame();
       console.error("Error fetching games:", error);
       setError(error);
     } finally {
-      setLoading(false);  
+      setLoading(false);
       //console.log("Games fetched successfully:", games);
     }
   };
 
-  useEffect(()=>{
-    setLoading(true)
-    fetchGames(tournamentId)
-  },[])
+  useEffect(() => {
+    setLoading(true);
+    fetchGames(tournamentId);
+  }, []);
 
-    if (loading) {
-      return (
-        <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
-          <div className="flex flex-col gap-y-4 text-xl font-semibold text-slate-200">
-            <Loader2 className="animate-spin" size={40} />
-          </div>
+  if (loading) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
+        <div className="flex flex-col gap-y-4 text-xl font-semibold text-slate-200">
+          <Loader2 className="animate-spin" size={40} />
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-  if(error) return <div>Error fetching games: {error.message}</div>;
+  if (error) return <div>Error fetching games: {error.message}</div>;
 
   return (
-    <div className="mt-4 pb-6">
+    <div className="pb-6">
       <div className="flex justify-between items-center">
         <h2 className="text-neutral-700">Games</h2>
-        {true && (
-          <button
-            onClick={() => setShowAddNewGameModal(true)}
-            className="text-sm bg-neutral-200 text-neutral-700 px-2 py-2 rounded-md"
-          >
-            New Game
-          </button>
-        )}
       </div>
+      {(tournamentAdmin == user._id || user.role == "root-admin") && (
+        <button
+          onClick={() => setShowAddNewGameModal(true)}
+          className="fixed bottom-20 right-6 z-20 text-sm bg-neutral-700 text-neutral-100 px-2 py-2 rounded-full"
+        >
+          <Plus size={28} />
+        </button>
+      )}
+
       {games.length > 0 ? (
         <GamesList games={games} />
       ) : (

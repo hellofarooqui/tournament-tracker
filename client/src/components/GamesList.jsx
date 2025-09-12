@@ -3,9 +3,11 @@ import GameListCard from "./GameListCard"
 
 const GamesList = ({games}) => {
   return (
-    <div className="flex flex-col gap-y-6 mt-4 pb-20">
+    <div className="flex flex-col mt-2 pb-20">
         {games.map((game) => (
+          <div className="py-6 border-b border-dashed border-neutral-300 last:border-0" key={game._id}>
           <GameListCard  key={game._id} game={game} />
+          </div>
         ))}
     </div>
   )
