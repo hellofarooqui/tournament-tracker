@@ -9,7 +9,10 @@ import {
   addTournamentTeam,
   getPointsTable,
   enrollIntoTournament,
-  getTournamentPlayers
+  getTournamentPlayers,
+  getTournamentGroups,
+  addTournamentGroup,
+  getTournamentGroupDetails,
 } from "../controllers/tournamentController.js";
 import { createTournamentGame,getTournamentGames } from '../controllers/gameController.js';
 import { getToken } from '../middleware/getToken.js';
@@ -30,6 +33,10 @@ router.post('/:tournamentId/enroll', verifyToken, enrollIntoTournament);
 
 router.get('/:id/teams', getTournamentTeams);
 router.post('/:id/teams', addTournamentTeam)
+
+router.get("/:id/groups", getTournamentGroups);
+router.post("/:id/groups", addTournamentGroup);
+router.get("/:id/groups/:groupId", getTournamentGroupDetails);
 
 router.get('/:id/players', getTournamentPlayers);
 

@@ -1,3 +1,4 @@
+import Group from "../models/group.js";
 import PointsTable from "../models/pointsTable.js";
 import Team from "../models/team.js";
 import Tournament from "../models/tournament.js";
@@ -43,12 +44,12 @@ export const getTournamentById = async (req, res) => {
       return res.status(404).json({ message: "Tournament not found" });
     }
 
-    if(tournament?.status === "completed"){
-      await tournament.populate({path: 'winner', select: 'name'});
+    if (tournament?.status === "completed") {
+      await tournament.populate({ path: "winner", select: "name" });
     }
 
-    if(tournament?.status === "scheduled"){
-      await tournament.populate('enrolledUser');
+    if (tournament?.status === "scheduled") {
+      await tournament.populate("enrolledUser");
     }
     res.status(200).json(tournament);
   } catch (error) {
@@ -153,12 +154,12 @@ export const getPointsTable = async (req, res) => {
     //   return res.status(404).json({ message: "Points table not found", tournament:tournament });
     // }
     const tournament = await Tournament.findById(req.params.id);
-    const pointsTable = await PointsTable.findById(
-      tournament.pointsTable
-    ).populate("entries.team", "name");
+    const pointsTable = await PointsTable.find({
+      tournament: req.params.id,
+    }).populate("entries.team", "name");
 
-    pointsTable.entries.sort((a, b) => b.points - a.points);
-    
+    //pointsTable.entries.sort((a, b) => b.points - a.points);
+
     res.status(200).json(pointsTable);
   } catch (error) {
     console.error("Error fetching points table:", error);
@@ -200,7 +201,7 @@ export const getTournamentPlayers = async (req, res) => {
     console.log("Fetching players for tournament with ID:", req.params.id);
     const tournament = await Tournament.findById(req.params.id).populate({
       path: "enrolledUser",
-      select: "firstName lastName"
+      select: "firstName lastName",
     });
 
     if (!tournament) {
@@ -212,6 +213,69 @@ export const getTournamentPlayers = async (req, res) => {
     console.error("Error fetching tournament players:", error);
     res.status(500).json({
       message: "Error fetching tournament players",
+      error: error.message,
+    });
+  }
+};
+
+export const getTournamentGroups = async (req, res) => {
+  try {
+    console.log("Fetching groups for tournament with ID:", req.params.id);
+    const tournament = await Tournament.findById(req.params.id).populate(
+      "groups groups.teams"
+    );
+    if (!tournament) {
+      return res.status(404).json({ message: "Tournament not found" });
+    }
+
+    res.status(200).json(tournament.groups || []);
+  } catch (error) {
+    console.error("Error fetching tournament groups:", error);
+    res.status(500).json({
+      message: "Error fetching tournament groups",
+      error: error.message,
+    });
+  }
+};
+
+export const addTournamentGroup = async (req, res) => {
+  try {
+    console.log("Adding group to tournament with ID:", req.params.id);
+    const tournament = await Tournament.findById(req.params.id);
+    if (!tournament) {
+      return res.status(404).json({ message: "Tournament not found" });
+    }
+    const group = req.body; // Assuming group data is sent in the request body
+    const newGroup = new Group(group);
+    const groupCreated = await newGroup.save();
+    tournament.groups.push(groupCreated._id);
+    await tournament.save();
+    res.status(201).json(group);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error adding group to tournament", error });
+  }
+};
+
+export const getTournamentGroupDetails = async (req, res) => {
+  try {
+    console.log(
+      "Fetching group details for group with ID:",
+      req.params.groupId
+    );
+    const group = await Group.findById(req.params.groupId).populate({
+      path: "teams",
+      populate: { path: "members", select: "firstName lastName" },
+    });
+    if (!group) {
+      return res.status(404).json({ message: "Group not found" });
+    }
+    res.status(200).json(group);
+  } catch (error) {
+    console.error("Error fetching group details:", error);
+    res.status(500).json({
+      message: "Error fetching group details",
       error: error.message,
     });
   }
