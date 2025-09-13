@@ -20,6 +20,7 @@ import Profile from "./pages/Profile.jsx";
 import TournamentChat from "./components/TournamentChat.jsx";
 import TournamentNewTeam from "./pages/TournamentNewTeam.jsx";
 import TournamentGroup from "./pages/TournamentGroup.jsx";
+import TournamentFormats from "./pages/TournamentFormats.jsx";
 
 const server = import.meta.env.VITE_SERVER_URL;
 
@@ -76,6 +77,7 @@ function App() {
             <Route path="chat" element={<TournamentChat />} />
             <Route path="standard-rules" element={<StandardRules />} />
             <Route path="questions" element={<Questions />} />
+            <Route path="tournament-formats" element={<TournamentFormats />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />

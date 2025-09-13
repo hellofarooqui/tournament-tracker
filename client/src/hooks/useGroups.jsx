@@ -46,7 +46,19 @@ const useGroups = () => {
     }
   }
 
-  return { getTournamentGroups, createGroup, getGroupData };
+  const addGroupMembers = async (groupId, newMembers) => {
+    try {
+        const response = await axios.post(`${server}/api/groups/${groupId}/members`, newMembers);
+        if (response.status === 201) {
+            console.log("Members added successfully:", response.data);
+            return response.data; // Return the added members data
+        }
+    } catch (error) {
+        console.error("Error adding members to group:", error);
+    }
+  }
+
+  return { getTournamentGroups, createGroup, getGroupData, addGroupMembers };
 };
 
 export default useGroups;

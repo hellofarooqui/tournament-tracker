@@ -114,7 +114,7 @@ const Teams = () => {
             </button>
           )}
         </div>
-        {groups.length > 0 ? (
+        {groups && groups.length > 0 ? (
           <div className="flex flex-col gap-y-4">
             {groups.map((group) => (
               <div

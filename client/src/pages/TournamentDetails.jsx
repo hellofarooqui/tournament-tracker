@@ -35,6 +35,7 @@ const TournamentDetails = () => {
       const data = await getTournamentById(tournamentId);
       if (data) {
         setTournament(data);
+        console.log("Fetched tournament details:", data);
       } else {
         console.error("Tournament not found");
       }
@@ -81,12 +82,14 @@ const TournamentDetails = () => {
 
   useEffect(() => {
     if (tournament && user) {
-      if (tournament.enrolledUser.find((u) => u._id === user._id)) {
-        setEnrolled(true);
-      } else {
-        setEnrolled(false);
-      }
+      // if (tournament.enrolledUser.find((u) => u.user._id === user._id)) {
+      //   setEnrolled(true);
+      // } else {
+      //   setEnrolled(false);
+      // }
+      setEnrolled(tournament.enrolledUser.some((entry) => entry.user._id === user._id));
     }
+    
   }, [tournament]);
 
   useEffect(() => {
@@ -120,8 +123,11 @@ const TournamentDetails = () => {
               </button>
             )}
           </div>
+          <div className="flex gap-x-2 items-center text-sm mt-2">
+            <p className="text-stone-500">{tournament.type} - {tournament.format.name}</p>
+          </div>
 
-          <p className="text-xs font-thin italic text-neutral-400 mt-2">
+          <p className="text-xs font-thin text-stone-500 mt-2">
             Start: {readableDate(tournament.startDate)}
           </p>
           {tournament.winner && (
@@ -137,31 +143,28 @@ const TournamentDetails = () => {
             <ul className="w-full flex gap-x-4">
               <li
                 onClick={() => setActiveTab("games")}
-                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${
-                  activeTab == "games"
+                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${activeTab == "games"
                     ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
                     : "bg-neutral-200 text-neutral-500"
-                } `}
+                  } `}
               >
                 Games
               </li>
               <li
                 onClick={() => setActiveTab("points")}
-                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${
-                  activeTab == "points"
+                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${activeTab == "points"
                     ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
                     : "bg-neutral-200 text-neutral-500"
-                } `}
+                  } `}
               >
                 Points
               </li>
               <li
                 onClick={() => setActiveTab("teams")}
-                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${
-                  activeTab == "teams"
+                className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${activeTab == "teams"
                     ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
                     : "bg-neutral-200 text-neutral-500"
-                } `}
+                  } `}
               >
                 Teams
               </li>
@@ -169,8 +172,8 @@ const TournamentDetails = () => {
           </div>
         )}
         {tournament.status == "live" ||
-        tournament.status == "completed" ||
-        tournament.status == "cancelled" ? (
+          tournament.status == "completed" ||
+          tournament.status == "cancelled" ? (
           <div>
             {activeTab == "games" && (
               <Games
@@ -184,7 +187,7 @@ const TournamentDetails = () => {
         ) : (
           <div className="mt-4 flex  gap-y-4 flex-col items-start">
             <div className="flex gap-x-2 items-center text-lg">
-              <div className="text-center text-slate-200 bg-yellow-200/20 py-2 px-4 rounded-[5px] border-yellow-200/40 border-2">
+              <div className="text-center text-stone-500 bg-stone-200 py-2 px-4 rounded-[5px]  border-2 border-stone-300">
                 Upcoming
               </div>
 
