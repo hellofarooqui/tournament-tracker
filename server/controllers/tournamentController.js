@@ -2,6 +2,7 @@ import Group from "../models/group.js";
 import PointsTable from "../models/pointsTable.js";
 import Team from "../models/team.js";
 import Tournament from "../models/tournament.js";
+import TournamentFormat from "../models/TournamentFormat.js";
 import User from "../models/user.js";
 
 export const getAllTournaments = async (req, res) => {
@@ -16,19 +17,32 @@ export const getAllTournaments = async (req, res) => {
 
 export const createTournament = async (req, res) => {
   try {
-    console.log("Creating tournament with data:", req.body);
-    const tournament = await Tournament.create({ ...req.body });
+    console.log("Creating tournament with data:", req.body, req.user);
+    const tournament = await Tournament.create({ ...req.body, tournamentAdmin: req.user.id, });
 
     //await tournament.save();
 
+    //check tournament Format
+
+    const tournamentFormat = await TournamentFormat.findById(req.body.format);
+    if (!tournamentFormat) {
+      return res.status(400).json({ message: "Invalid tournament format" });
+    }
+    
+
+    //add points table if not league
+    if(tournamentFormat.name !== "League") {
+
     const pointsTable = await PointsTable.create({
-      name: req.body.name + "_Points",
+      name: req.body.name + " Points Table",
       tournament: tournament._id,
       entries: [],
     });
 
-    tournament.pointsTable = pointsTable._id;
+    tournament.pointsTable.push(pointsTable._id);
     await tournament.save();
+    }
+
 
     res.status(201).json(tournament);
   } catch (error) {
@@ -39,7 +53,7 @@ export const createTournament = async (req, res) => {
 
 export const getTournamentById = async (req, res) => {
   try {
-    const tournament = await Tournament.findById(req.params.id);
+    const tournament = await Tournament.findById(req.params.id).populate("format")
     if (!tournament) {
       return res.status(404).json({ message: "Tournament not found" });
     }
@@ -49,7 +63,7 @@ export const getTournamentById = async (req, res) => {
     }
 
     if (tournament?.status === "scheduled") {
-      await tournament.populate("enrolledUser");
+      await tournament.populate({path: "enrolledUser.user", select: "firstName lastName"});
     }
     res.status(200).json(tournament);
   } catch (error) {
@@ -118,17 +132,29 @@ export const addTournamentTeam = async (req, res) => {
   try {
     console.log("Req Body:", req.body);
     console.log("Adding team to tournament with ID:", req.params.id);
+
+    //find tournament
     const tournament = await Tournament.findById(req.params.id);
     if (!tournament) {
       return res.status(404).json({ message: "Tournament not found" });
     }
+
     //const team = req.body; // Assuming team data is sent in the request body
-    const team = new Team(req.body);
-    const teamCreated = await team.save();
+    //const team = new Team(req.body);
+    const teamCreated = await Team.create(req.body)
     tournament.teams.push(teamCreated._id);
     await tournament.save();
 
-    let pointsTable = await PointsTable.findById(tournament.pointsTable);
+
+    //check if the tournament has points table
+    if (!tournament.pointsTable || tournament.pointsTable.length === 0) {
+      return res
+        .status(400)
+        .json({ message: "Tournament does not have a points table" });
+    }
+
+    //add team to points table if exists
+    let pointsTable = await PointsTable.findById(tournament.pointsTable[0]);
     pointsTable.entries.push({
       team: teamCreated._id,
       points: 0,
@@ -180,12 +206,35 @@ export const enrollIntoTournament = async (req, res) => {
     }
 
     // Check if user is already enrolled
-    if (tournament.enrolledUser.includes(user._id)) {
+    // if (tournament.enrolledUser.includes(user._id)) {
+    //   return res.status(400).json({ message: "User is already enrolled" });
+    // }
+
+    const existingEnrollment = tournament.enrolledUser.some(enrollment => enrollment.user.toString() === user._id.toString());
+
+    if (existingEnrollment) {
       return res.status(400).json({ message: "User is already enrolled" });
     }
 
-    tournament.enrolledUser.push(user._id);
+    // tournament.enrolledUser.push(user._id);
+    // user.tournaments.push(tournament._id);
+    // await tournament.save();
+    // await user.save();
+
+    // Create an enrollment object for the user with the associated tournament
+    const enrollment = {
+      user: user._id,  // The user being enrolled
+      assigned: false,  // Default assigned status (you can modify this if needed)
+      assignedGroup: null,  // You can assign a group if needed, otherwise null
+    };
+
+    // Add the enrollment object to the tournament's enrolledUser array
+    tournament.enrolledUser.push(enrollment);
+
+    // Add the tournament's ID to the user's tournaments array (assuming 'tournaments' exists in the User schema)
     user.tournaments.push(tournament._id);
+
+    // Save both the tournament and user documents
     await tournament.save();
     await user.save();
 
@@ -236,6 +285,27 @@ export const getTournamentGroups = async (req, res) => {
       error: error.message,
     });
   }
+  // try{
+  //   const {id, groupId} = req.params;
+  //   console.log("Fetching group details for group with ID:", groupId);
+  //   const group = await Group.findById(groupId).populate({
+  //     path: "teams",
+  //     select: "name",
+  //   });
+
+  //   if (!group) {
+  //     return res.status(404).json({ message: "Group not found" });
+  //   }
+
+  //   res.status(200).json(group);  
+  // } catch (error) {
+  //   console.error("Error fetching group details:", error);
+  //   res.status(500).json({
+  //     message: "Error fetching group details",
+  //     error: error.message,
+  //   }); 
+
+  // }
 };
 
 export const addTournamentGroup = async (req, res) => {
@@ -245,11 +315,27 @@ export const addTournamentGroup = async (req, res) => {
     if (!tournament) {
       return res.status(404).json({ message: "Tournament not found" });
     }
-    const group = req.body; // Assuming group data is sent in the request body
-    const newGroup = new Group(group);
-    const groupCreated = await newGroup.save();
+
+    //creating group points table
+    // const group = req.body; // Assuming group data is sent in the request body
+    // const newGroup = new Group(group);
+    const groupCreated = await Group.create(req.body);
+
+    //adding newly created group to tournament
     tournament.groups.push(groupCreated._id);
     await tournament.save();
+
+    //creating points table for the group
+    const pointsTable = await PointsTable.create({
+      name: req.body.name + "_Points",
+      tournament: req.body.tournament,
+      group: groupCreated._id,
+      entries: [],
+    });
+
+    tournament.pointsTable.push(pointsTable._id);
+    await tournament.save();
+
     res.status(201).json(group);
   } catch (error) {
     res
@@ -280,3 +366,21 @@ export const getTournamentGroupDetails = async (req, res) => {
     });
   }
 };
+
+export const getAllFormats = async (req, res) => {
+  // try {
+  //   console.log("Fetching all tournament formats");
+  //   const formats = await GameFormat.find({});
+  //   res.status(200).json(formats);
+  // } catch (error) {
+  //   res.status(500).json({ message: "Error fetching tournament formats", error });
+  // }
+  res.status(200).json([
+      {name:"Knockout",description:""},
+      {name:"League",description:""},
+      {name:"Round-Robin",description:""},
+      {name:"Double Round Robin",description:""},
+      {name:"Double Elimination",description:""},
+      {name:"swiss",description:""}
+    ])
+}

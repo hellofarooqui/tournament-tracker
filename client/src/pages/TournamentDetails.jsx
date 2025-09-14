@@ -14,6 +14,7 @@ import TrophyIcon from "../assets/icons/trophy.png";
 const TournamentDetails = () => {
   const { user, token } = useContext(AuthContext);
   const [enrolled, setEnrolled] = useState(false);
+  const [enrollmentLoading, setEnrollmentLoading] = useState(false);
   const { getTournamentById, deleteTournament, enrollIntoTournament } =
     useTournamnet();
   const params = useParams();
@@ -70,6 +71,7 @@ const TournamentDetails = () => {
     }
 
     try {
+      setEnrollmentLoading(true);
       const response = await enrollIntoTournament(tournamentId);
       if (response) {
         console.log("Successfully enrolled into tournament:", response);
@@ -77,6 +79,10 @@ const TournamentDetails = () => {
       }
     } catch (error) {
       console.error("Error enrolling into tournament:", error);
+    }
+    finally {
+      setEnrollmentLoading(false);
+      fetchTournamentDetails(); // Refresh tournament details to update enrolled users
     }
   };
 
@@ -201,8 +207,8 @@ const TournamentDetails = () => {
                   onClick={handleEnroll}
                   className="bg-red-400 text-white px-4 py-2 rounded-[5px]"
                 >
-                  {" "}
-                  Enroll
+                  {enrollmentLoading ? <Loader2 className="animate-spin text-stone-100" size={16} /> :"Enroll"}
+                  
                 </button>
               )}
             </div>

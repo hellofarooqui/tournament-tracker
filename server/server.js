@@ -9,6 +9,9 @@ import tournamentRouter from './routers/tournamentRouter.js';
 import teamRouter from './routers/teamRouter.js';
 import gameRouter from './routers/gameRouter.js';
 import authRouter from './routers/authRouter.js';
+import groupRouter from './routers/groupRouter.js';
+import settingsRouter from './routers/settingsRouter.js';
+
 
 import webpush from "web-push";
 
@@ -17,7 +20,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: ['https://tournament-tracker-ten.vercel.app','http://localhost:5173','http://localhost:8081'], // Your frontend URL
+  origin: ['https://tournament-tracker-ten.vercel.app','http://localhost:5173', 'http://192.168.1.86:5173','http://localhost:8081'], // Your frontend URL
   optionsSuccessStatus: 200 // For legacy browser support
 };
 
@@ -39,6 +42,8 @@ app.use('/api/tournaments', tournamentRouter);
 app.use('/api/teams', teamRouter);
 app.use('/api/games', gameRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/groups', groupRouter);
+app.use('/api/settings', settingsRouter);
 
 app.use('api/subscribe', (req, res) => (req, res) => {
   const subscription = req.body;
