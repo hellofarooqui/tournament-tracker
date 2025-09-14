@@ -17,12 +17,13 @@ const TournamentGroup = () => {
 
     const [showTeamsList, setShowTeamsList] = React.useState(false);
     const [tournamentTeams, setTournamentTeams] = React.useState([]);
+    const [unassignedTeams, setUnassignedTeams] = React.useState([]);
     const [updatedMembers, setUpdatedMembers] = React.useState([]);
 
     const [remainingTeams, setRemainingTeams] = React.useState([]);
 
     const { getGroupData, addGroupMembers } = useGroups();
-    const { getTournamentTeams } = useTeams();
+    const { getTournamentTeams,getTournamentUnassignedTeams } = useTeams();
 
     //  const fetchGroupData = async () => {
     //         setLoading(true);
@@ -66,10 +67,11 @@ const TournamentGroup = () => {
             setLoading(true);
             try {
                 const [teams, group] = await Promise.all([
-                    getTournamentTeams(tournamentId),
+                    getTournamentUnassignedTeams(tournamentId),
                     getGroupData(tournamentId, groupId)
                 ]);
-                setTournamentTeams(teams);
+                console.log("Teams", teams)
+                setUnassignedTeams(teams);
                 setGroupData(group);
 
                 // Find teams not in the group
@@ -186,18 +188,18 @@ const TournamentGroup = () => {
                 {showTeamsList && (
                     <div className="bg-white p-4 rounded-[20px] shadow-md">
                         <ul>
-                            {remainingTeams.map(team => (
+                            {unassignedTeams.map(team => (
                                 <li key={team._id} className="mb-4">
                                     <label className="flex items-center">
                                         <input
                                             type="checkbox"
-                                            onChange={handleCheckBoxChange(team._id)}
+                                            onChange={handleCheckBoxChange(team.team._id)}
                                         />
                                         <span className="text-stone-600" style={{
                                             marginLeft: '10px',
                                             
                                         }}>
-                                            {team.name}
+                                            {team.team.name}
                                         </span>
                                     </label>
                                 </li>

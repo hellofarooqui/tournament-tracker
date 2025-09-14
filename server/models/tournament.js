@@ -130,7 +130,7 @@ const tournamentSchema = new mongoose.Schema(
     endDate: {
       type: Date,
       validate: {
-        validator: function(value) {
+        validator: function (value) {
           return value > this.startDate;
         },
         message: "End date must be after the start date.",
@@ -153,9 +153,20 @@ const tournamentSchema = new mongoose.Schema(
     ],
     teams: [
       {
+      team: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Team",
       },
+      assigned: {
+        type: Boolean,
+        default: false,
+      },
+      assignedGroup: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Group",
+        default: null,
+      }
+    }
     ],
     groups: [
       {
@@ -165,23 +176,10 @@ const tournamentSchema = new mongoose.Schema(
     ],
     enrolledUser: [
       {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-          unique: true,
-        },
-        assigned: {
-          type: Boolean,
-          default: false,
-        },
-        assignedGroup: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Group",
-          required: function() {
-            return this.assigned === true;
-          },
-        },
-      },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        unique: true,
+      }
     ],
     status: {
       type: String,
