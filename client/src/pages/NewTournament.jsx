@@ -1,20 +1,46 @@
-import {  useState } from "react";
+import { useState } from "react";
 import useTournamnet from "../hooks/useTournamnet";
-import { LoaderCircle } from "lucide-react";
+import { Loader2, LoaderCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import useSettings from "../hooks/useSettings";
 
 const defaultTournament = {
   name: "",
   description: "",
   startDate: "",
   endDate: "",
+  type: "",
+  format: "",
 };
 
 const NewTournament = () => {
+  const [tournamentFormats, setTournamentFormats] = useState([]);
   const [tournament, setTournament] = useState(defaultTournament);
   const [loading, setLoading] = useState(false);
   const { createTournament } = useTournamnet();
+  const {getTournamentFormats} = useSettings();
+
   const navigate = useNavigate();
+
+  const fetchTournamentFormats = async () => {
+    try {
+      console.log("Fetching tournament formats");
+      const formats = await getTournamentFormats();
+      if (formats) {
+        console.log("Fetched tournament formats:", formats);
+        setTournamentFormats(formats);
+        setLoading(false);
+      }
+
+    }
+    catch (error) {
+      console.error("Error fetching tournament formats:", error);
+    }
+    finally {
+
+    }
+  }
 
   const handleReset = () => {
     setTournament(defaultTournament);
@@ -27,11 +53,11 @@ const NewTournament = () => {
     setLoading(true);
     try {
       const created = await createTournament(tournament);
-      if(created) {
+      if (created) {
         console.log("Tournament created successfully:", created);
         navigate(-1)
       }
-     
+
     } catch (error) {
       console.error("Error creating tournament:", error);
     } finally {
@@ -39,6 +65,20 @@ const NewTournament = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchTournamentFormats();
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
+        <Loader2 className="animate-spin text-yellow-01" />
+      </div>
+    )
+  }
+
+
   return (
     <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
       <div className="flex flex-col gap-y-4 text-xl font-semibold text-yellow-01">
@@ -49,7 +89,8 @@ const NewTournament = () => {
             onReset={handleReset}
             className="flex flex-col gap-y-4 items-center justify-center text-[16px]"
           >
-            <div className="flex gap-x-2 items-center w-full">
+            <div className="flex flex-col gap-x-2 items-start w-full">
+              <label className="text-amber-300">Name</label>
               <input
                 placeholder="Give a name"
                 className="p-2 px-4 bg-slate-200/20 backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
@@ -58,12 +99,41 @@ const NewTournament = () => {
                 }
               />
             </div>
+            <div className="flex flex-col gap-x-2 items-start w-full">
+              <label className="text-amber-300">Type</label>
+              <select
+
+                className="p-2 px-4 bg-slate-200/20 backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
+                onChange={(e) =>
+                  setTournament({ ...tournament, type: e.target.value })
+                }
+              >
+                <option>Select Type</option>
+                <option value="Single">Single</option>
+                <option value="Team">Team</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-x-2 items-start w-full">
+              <label className="text-amber-300">Format</label>
+              <select
+
+                className="p-2 px-4 bg-slate-200/20 backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
+                onChange={(e) =>
+                  setTournament({ ...tournament, format: e.target.value })
+                }
+              >
+                <option>Select Format</option>
+                {tournamentFormats.map((format,index) => (
+                  <option key={format._id} value={format._id}>{format.name}</option>
+                ))}
+              </select>
+            </div>
 
             <div className="flex flex-col gap-x-2 items-start w-full">
               <label className="text-amber-300">Start</label>
               <input
                 type="date"
-                placeholder="Give a name"
+
                 className="w-full p-2 px-4 bg-slate-200/20 backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
                 onChange={(e) =>
                   setTournament({ ...tournament, startDate: e.target.value })
@@ -75,7 +145,7 @@ const NewTournament = () => {
               <label className="text-amber-300">End</label>
               <input
                 type="date"
-                placeholder="Give a name"
+
                 className="w-full  p-2 px-4 bg-slate-200/20 backdrop-blur-2xl  text-white border-2 border-slate-200/20 rounded-[10px] focus:outline-none focus:border-slate-200/40"
                 onChange={(e) =>
                   setTournament({ ...tournament, endDate: e.target.value })

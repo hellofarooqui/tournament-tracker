@@ -51,6 +51,10 @@ const pointsTableSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    group:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Group',
+    },
     tournament: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tournament',

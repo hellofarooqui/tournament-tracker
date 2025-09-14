@@ -38,7 +38,11 @@ const useTournamnet = () => {
         console.log("Server URL:", server);
         try {
             console.log("Creating tournament with data:", tournamentData);
-            const response = await axios.post(`${server}/api/tournaments`, tournamentData);
+            const response = await axios.post(`${server}/api/tournaments`, tournamentData,{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             console.log("Tournament created successfully:", response.data);
             if(response.status === 201) {
                return response.data;
@@ -93,13 +97,26 @@ const useTournamnet = () => {
         }
     }
 
+    const getTournamentFormats = async () => {
+        try {
+            const response = await axios.get(`${server}/api/tournaments/tournament-formats`);
+            if(response.status === 200) {
+                //console.log("Tournament formats fetched successfully:", response.data);
+                return response.data; // Return the fetched formats
+            }
+        } catch (error) {
+            console.error("Error fetching tournament formats:", error);
+        }
+    }
+
   return {
     getAllTournaments,
     createTournament,
     getTournamentById,
     deleteTournament,
     enrollIntoTournament,
-    getTournamentPlayers
+    getTournamentPlayers,
+    getTournamentFormats
   };
 }
 
