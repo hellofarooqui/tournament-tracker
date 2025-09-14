@@ -10,12 +10,13 @@ import { AuthContext } from "../context/AuthContext";
 import EnrolledUsers from "../components/EnrolledUsers";
 import { readableDate } from "../utils/readableDate";
 import TrophyIcon from "../assets/icons/trophy.png";
+import Coming from '../assets/icons/coming.gif'
 
 const TournamentDetails = () => {
   const { user, token } = useContext(AuthContext);
   const [enrolled, setEnrolled] = useState(false);
   const [enrollmentLoading, setEnrollmentLoading] = useState(false);
-  const { getTournamentById, deleteTournament, enrollIntoTournament } =
+  const { getTournamentById, deleteTournament, enrollIntoTournament,goLiveTournament } =
     useTournamnet();
   const params = useParams();
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const TournamentDetails = () => {
   const [tournament, setTournament] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [goingLive, setGoingLive] = useState(false);
 
   const [showGames, setShowGames] = useState(true);
   const [showTeams, setShowTeams] = useState(false);
@@ -86,6 +88,24 @@ const TournamentDetails = () => {
     }
   };
 
+  const handleGoLive = async () => {
+    try{
+      setGoingLive(true);
+      const updated = await goLiveTournament(tournamentId);
+      if(updated){
+        toast.success("Tournament is now live");
+      }
+
+    }
+    catch(error){
+      console.error("Error going live:", error);
+    }
+    finally{
+      fetchTournamentDetails();
+      setGoingLive(false);
+    }
+  }
+
   useEffect(() => {
     if (tournament && user) {
       // if (tournament.enrolledUser.find((u) => u.user._id === user._id)) {
@@ -93,9 +113,9 @@ const TournamentDetails = () => {
       // } else {
       //   setEnrolled(false);
       // }
-      setEnrolled(tournament.enrolledUser.some((entry) => entry.user._id === user._id));
+      setEnrolled(tournament.enrolledUser.some((entry) => entry._id === user._id));
     }
-    
+
   }, [tournament]);
 
   useEffect(() => {
@@ -133,9 +153,13 @@ const TournamentDetails = () => {
             <p className="text-stone-500">{tournament.type} - {tournament.format.name}</p>
           </div>
 
-          <p className="text-xs font-thin text-stone-500 mt-2">
-            Start: {readableDate(tournament.startDate)}
-          </p>
+          <div className="flex gap-x-4 items-center justify-between">
+            <p className="text-xs font-thin text-stone-500 mt-2">
+              Start: {readableDate(tournament.startDate)}
+            </p>
+            {(tournament.tournamentAdmin === user._id && tournament.status !== "live") && <button onClick={handleGoLive} className="text-sm bg-red-500 text-white px-4 py-1 rounded-2xl">{goingLive ? <Loader2 className="text-white animate-spin" size={12} /> :"Go Live"}</button>}
+          </div>
+
           {tournament.winner && (
             <p className="text-base bg-emerald-100 text-neutral-600 px-4 py-1 rounded-lg mt-4">
               <img src={TrophyIcon} className="inline w-6 h-6 mr-2" />
@@ -150,8 +174,8 @@ const TournamentDetails = () => {
               <li
                 onClick={() => setActiveTab("games")}
                 className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${activeTab == "games"
-                    ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
-                    : "bg-neutral-200 text-neutral-500"
+                  ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
+                  : "bg-neutral-200 text-neutral-500"
                   } `}
               >
                 Games
@@ -159,8 +183,8 @@ const TournamentDetails = () => {
               <li
                 onClick={() => setActiveTab("points")}
                 className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${activeTab == "points"
-                    ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
-                    : "bg-neutral-200 text-neutral-500"
+                  ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
+                  : "bg-neutral-200 text-neutral-500"
                   } `}
               >
                 Points
@@ -168,8 +192,8 @@ const TournamentDetails = () => {
               <li
                 onClick={() => setActiveTab("teams")}
                 className={`text-center cursor-pointer  px-4 py-2 flex-1 rounded-[15px] ${activeTab == "teams"
-                    ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
-                    : "bg-neutral-200 text-neutral-500"
+                  ? "bg-gradient-to-r from-stone-800 to-stone-700 text-slate-100"
+                  : "bg-neutral-200 text-neutral-500"
                   } `}
               >
                 Teams
@@ -192,23 +216,24 @@ const TournamentDetails = () => {
           </div>
         ) : (
           <div className="mt-4 flex  gap-y-4 flex-col items-start">
-            <div className="flex gap-x-2 items-center text-lg">
-              <div className="text-center text-stone-500 bg-stone-200 py-2 px-4 rounded-[5px]  border-2 border-stone-300">
+            <div className=" w-full flex  items-center justify-between ">
+              <div className="text-center text-stone-500 bg-stone-200 py-2 px-4 rounded-full  border-2 border-stone-300">
                 Upcoming
               </div>
+              
 
               {enrolled ? (
-                <button className="bg-cyan-300 text-cyan-950 py-2 px-4 rounded-[5px]">
+                <button className="bg-cyan-300 text-cyan-950 py-2 px-4 rounded-full">
                   {" "}
                   Enrolled
                 </button>
               ) : (
                 <button
                   onClick={handleEnroll}
-                  className="bg-red-400 text-white px-4 py-2 rounded-[5px]"
+                  className="bg-red-400 text-white px-4 py-2 rounded-full"
                 >
-                  {enrollmentLoading ? <Loader2 className="animate-spin text-stone-100" size={16} /> :"Enroll"}
-                  
+                  {enrollmentLoading ? <Loader2 className="animate-spin text-stone-100" size={16} /> : "Enroll"}
+
                 </button>
               )}
             </div>

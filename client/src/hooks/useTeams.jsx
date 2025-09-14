@@ -17,6 +17,18 @@ const useTeams = () => {
         }
     }
 
+    const getTournamentUnassignedTeams = async (tournamentId) => {
+        try {
+            const response = await axios.get(`${server}/api/tournaments/${tournamentId}/teams?filter=unassigned`);
+            if(response.status === 200) {
+                //console.log("Teams fetched successfully:", response.data);
+                return response.data; // Return the fetched teams
+            }
+        } catch (error) {
+            console.error("Error fetching tournament teams:", error);
+        }
+    }
+
     const createTeam = async (tournamentId, teamData) => {
         try {
             console.log("Creating team with data:", teamData);
@@ -57,7 +69,7 @@ const useTeams = () => {
         }
     }
 
-  return {getTournamentTeams, createTeam, getTeamData, addPlayerToTeam}
+  return {getTournamentTeams, createTeam, getTeamData, addPlayerToTeam,getTournamentUnassignedTeams}
 }
 
 export default useTeams

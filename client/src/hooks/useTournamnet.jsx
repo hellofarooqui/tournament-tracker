@@ -109,14 +109,44 @@ const useTournamnet = () => {
         }
     }
 
+    const goLiveTournament = async (tournamentId) => {
+        try {
+            const response = await axios.put(`${server}/api/tournaments/${tournamentId}/go-live`, {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (response.status === 200) {
+                console.log("Tournament is now live:", response.data);
+                return response.data;
+            }
+        } catch (error) {
+            console.error("Error setting tournament to live:", error);
+        }
+    }
+
+    const getTournamentFormat = async (tournamentId) => {
+        try {
+            const response = await axios.get(`${server}/api/tournaments/${tournamentId}/tournament-format`);
+            if(response.status === 200) {
+                //console.log("Tournament types fetched successfully:", response.data);
+                return response.data; // Return the fetched tournament types
+            }
+        } catch (error) {
+            console.error("Error fetching tournament types:", error);
+        }
+    }
+
   return {
     getAllTournaments,
     createTournament,
     getTournamentById,
+    getTournamentFormat,
     deleteTournament,
     enrollIntoTournament,
     getTournamentPlayers,
-    getTournamentFormats
+    getTournamentFormats,
+    goLiveTournament
   };
 }
 

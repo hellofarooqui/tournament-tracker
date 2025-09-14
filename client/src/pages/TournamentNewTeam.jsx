@@ -26,14 +26,14 @@ const TournamentNewTeam = () => {
   const handlePlayerSelect = (event) => {
     const selectedPlayer = members.find(
       (player) =>
-        `${player.firstName} ${player.lastName}` === event.target.value
+        `${player.user.firstName} ${player.user.lastName}` === event.target.value
     );
     if (selectedPlayer) {
       // Do something with the selected player
       console.log("Selected player:", selectedPlayer);
       setNewTeam({
         ...newTeam,
-        members: [...newTeam.members, selectedPlayer._id],
+        members: [...newTeam.members, selectedPlayer.user._id],
       });
     }
   };
@@ -54,6 +54,8 @@ const TournamentNewTeam = () => {
   useEffect(() => {
     getPlayers();
   }, []);
+
+  
   const handleAddTeam = async (e) => {
     e.preventDefault();
 
@@ -106,8 +108,8 @@ const TournamentNewTeam = () => {
                 <datalist id="players-list">
                   {members.map((player) => (
                     <option
-                      key={player._id}
-                      value={`${player.firstName} ${player.lastName}`}
+                      key={player.user._id}
+                      value={`${player.user.firstName} ${player.user.lastName}`}
                     />
                   ))}
                 </datalist>
@@ -123,7 +125,7 @@ const TournamentNewTeam = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setShowAddTeamModal(false)}
+                onClick={() => navigate(-1)}
                 className="flex-1 border-2 border-[#FFA9CC] text-[#FFA9CC] p-2 rounded-[10px]"
               >
                 Cancel

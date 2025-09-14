@@ -42,14 +42,22 @@ const PointsTable = () => {
     }
     if(error) {
         return (
-            <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
+            <div className="w-full flex items-center justify-center py-16 font-dynapuff">
                 <div className="text-red-500">Error fetching points table: {error.message}</div>
             </div>
         );
     }
 
+    if(pointsTables.length === 0) {
+        return (
+            <div className="w-full flex items-center justify-center py-16 font-dynapuff">
+                <div className="text-gray-500">No points table available.</div>
+            </div>
+        );
+    }
+
   return (
-    <div className="mt-4 w-full rounded-[20px] bg-slate-100/10 backdrop-blur-lg border text-light-brown-03 font-dynapuff overflow-x-auto">
+    <div className="mt-4 w-full rounded-[5px] bg-white  text-light-brown-03 font-dynapuff overflow-x-auto">
       <div className='flex flex-col gap-y-4 p-4'>
         {pointsTables.map((pointsTable) => (
           <div key={pointsTable._id} className='w-full'>

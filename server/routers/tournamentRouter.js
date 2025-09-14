@@ -13,7 +13,9 @@ import {
   getTournamentGroups,
   addTournamentGroup,
   getTournamentGroupDetails,
-  getAllFormats
+  getAllFormats,
+  goLiveTournament,
+  getTournamentFormat
 } from "../controllers/tournamentController.js";
 import { createTournamentGame,getTournamentGames } from '../controllers/gameController.js';
 import { getToken } from '../middleware/getToken.js';
@@ -45,7 +47,10 @@ router.get("/", getAllTournaments);
 router.post('/', verifyToken, createTournament);
 router.get('/tournament-formats', getAllFormats);
 router.get('/:id', getTournamentById);
+router.get('/:id/tournament-format', getTournamentFormat);
 router.put('/:id', updateTournament);
 router.delete('/:id', deleteTournament);
+router.put('/:id/go-live', verifyToken, goLiveTournament);
+
 
 export default router

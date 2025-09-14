@@ -6,6 +6,7 @@ import TournamentTeamCard from "./TournamentTeamCard";
 import { AuthContext } from "../context/AuthContext";
 import { useState } from "react";
 import useGroups from "../hooks/useGroups";
+import useTournamnet from "../hooks/useTournamnet";
 
 const Teams = () => {
   const { token } = useContext(AuthContext);
@@ -13,6 +14,7 @@ const Teams = () => {
   const navigate = useNavigate();
   const [teams, setTeams] = useState([]);
   const [groups, setGroups] = useState([]);
+  const [tournamentFormat, setTournamentFormat] = useState(null);
 
   const [newGroup, setNewGroup] = useState({ name: "" });
 
@@ -29,6 +31,7 @@ const Teams = () => {
 
   const { getTournamentTeams, createTeam } = useTeams();
   const { createGroup, getTournamentGroups } = useGroups();
+  const { getTournamentFormat } = useTournamnet()
   const tournamentId = params.id;
 
   const fetchTeams = async () => {
@@ -49,7 +52,7 @@ const Teams = () => {
     try {
       const groupsFetched = await getTournamentGroups(tournamentId);
       if (groups) {
-        //console.log("Groups fetched successfully:", groupsFetched);
+        console.log("Groups fetched successfully:", groupsFetched);
         setGroups(groupsFetched);
       }
     } catch (error) {
@@ -58,6 +61,22 @@ const Teams = () => {
       setGrouploading(false);
     }
   };
+
+  const fetchTournamentFormat = async () => {
+    try {
+      const format = await getTournamentFormat(tournamentId);
+      if (format) {
+        //console.log("Tournament format fetched successfully:", format);
+        setTournamentFormat(format);
+      }
+    } catch (error) {
+      console.error("Error fetching tournament format:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTournamentFormat();
+  }, [tournamentId]);
 
   const handleAddGroup = async (e) => {
     e.preventDefault();
@@ -103,46 +122,48 @@ const Teams = () => {
   return (
     <div className="w-full h-screen font-dynapuff">
       <div className="mb-6">
-        <div className="flex justify-between items-center pb-2">
-          <h2 className="text-2xl text-stone-700">Groups</h2>
-          {token && (
-            <button
-              onClick={() => setShowAddGroupModal(prev => !prev)}
-              className="bg-stone-200  text-stone-500 px-6 py-2 rounded-full text-sm"
-            >
-              Add
-            </button>
-          )}
-        </div>
-        {groups && groups.length > 0 ? (
-          <div className="flex flex-col gap-y-4">
-            {groups.map((group) => (
-              <div
-                key={group._id}
-                className=" bg-white border border-stone-200 rounded-[15px]"
+        {(tournamentFormat && tournamentFormat.name == "League") && (<div>
+          <div className="flex justify-between items-center pb-2">
+            <h2 className="text-2xl text-stone-700">Groups</h2>
+            {token && (
+              <button
+                onClick={() => setShowAddGroupModal(prev => !prev)}
+                className="bg-stone-200  text-stone-500 px-6 py-2 rounded-full text-sm"
               >
-                <div className="flex justify-between items-center px-4 py-1 rounded-[10px] bg-stone-800">
-                <p className="text-lg font-semibold text-stone-200 mb-2">
-                  {group.name}
-                </p>
-                <Pencil onClick={()=>navigate(`group/${group._id}`)} size={16}/>
-                </div>
-                {group.teams.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {group.teams.map((team) => (
-                      <span
-                        key={team._id}
-                        className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm"
-                      >
-                        {team.name}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+                Add
+              </button>
+            )}
           </div>
-        ) : <p className="text-sm font-thin italic text-stone-700">No Groups Found</p>}
+          {groups && groups.length > 0 ? (
+            <div className="flex flex-col gap-y-4">
+              {groups.map((group) => (
+                <div
+                  key={group._id}
+                  className=" bg-white border border-stone-200 rounded-[15px]"
+                >
+                  <div className="flex justify-between items-center px-4 py-1 rounded-[10px] bg-stone-800">
+                    <p className="text-lg font-semibold text-stone-200 mb-2">
+                      {group.name}
+                    </p>
+                    <Pencil onClick={() => navigate(`group/${group._id}`)} size={16} />
+                  </div>
+                  {group.teams.length > 0 && (
+                    <div className="mt-2 flex flex-col gap-2 p-2">
+                      {group.teams.map((team) => (
+                        <span
+                          key={team._id}
+                          className="bg-stone-100 text-stone-600 px-3 py-1 rounded-md text-base"
+                        >
+                          {team.name}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : <p className="text-sm font-thin italic text-stone-700">No Groups Found</p>}
+        </div>)}
         {showAddGroupModal && (
           <div className="w-screen h-screen fixed top-0 left-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center px-6">
             <div className="bg-white rounded-[20px] p-6 w-[400px]">
@@ -194,8 +215,8 @@ const Teams = () => {
           <p>No Teams Found</p>
         ) : (
           <div className="flex flex-col gap-y-4 pb-6">
-            {teams.map((team) => (
-              <TournamentTeamCard key={team._id} team={team} />
+            {teams.map((entry) => (
+              <TournamentTeamCard key={entry._id} team={entry.team} />
             ))}
           </div>
         )}

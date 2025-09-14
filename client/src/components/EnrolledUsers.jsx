@@ -11,8 +11,8 @@ const EnrolledUsers = ({ players }) => {
             key={player._id}
             className="flex items-center bg-white shadow-sm text-stone-600 gap-x-2 rounded-lg px-4 py-2"
           >
-            <span className="p-2  bg-gradient-to-br from-[#667eea]  to-[#764ba2] rounded-lg">
-              <User className="text-white" size={18}/>
+            <span className="p-2  bg-gradient-to-br from-stone-300 via-stone-200 to-stone-100 rounded-lg">
+              <User className="text-stone-700" size={18}/>
             </span>
             {player.user.firstName} {player.user.lastName}
           </li>
