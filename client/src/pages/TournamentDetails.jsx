@@ -134,7 +134,7 @@ const TournamentDetails = () => {
 
   return (
     <div className="w-screen h-screen fixed flex  py-16">
-      <div className="w-full h-full bg-neutral-100 rounded-t-[20px] mx-auto flex flex-col gap-y-4 text-xl font-semibold text-slate-200 p-6  overflow-y-scroll">
+      <div className="w-full h-full bg-neutral-100 rounded-t-[20px] mx-auto flex flex-col gap-y-2 text-xl font-semibold text-slate-200 px-6 pt-6  overflow-y-scroll">
         <div className="w-full bg-white border-2 border-neutral-200 rounded-[15px]  p-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl text-neutral-700 font-bold">
@@ -215,15 +215,15 @@ const TournamentDetails = () => {
             {activeTab == "teams" && <Teams />}
           </div>
         ) : (
-          <div className="mt-4 flex  gap-y-4 flex-col items-start">
-            <div className=" w-full flex  items-center justify-between ">
-              <div className="text-center text-stone-500 bg-stone-200 py-2 px-4 rounded-full  border-2 border-stone-300">
-                Upcoming
+          <div className="mt-4 flex gap-y-4 flex-col items-start">
+            <div className=" w-full flex  items-center gap-x-2 ">
+              <div className="text-center text-base text-stone-500 bg-stone-200 py-1 px-4 rounded-full  border-2 border-stone-300">
+                Scheduled
               </div>
               
 
               {enrolled ? (
-                <button className="bg-cyan-300 text-cyan-950 py-2 px-4 rounded-full">
+                <button className="bg-cyan-300 text-cyan-700 border-cyan-700 border overflow-hidden py-1 text-base px-4 rounded-full">
                   {" "}
                   Enrolled
                 </button>
