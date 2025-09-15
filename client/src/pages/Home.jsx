@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthContext";
 import { Loader2, User } from "lucide-react";
 import MyTournaments from "../components/MyTournaments";
 import UpcomingTournaments from "../components/UpcomingTournaments";
+import TemporayPage from "./TemporayPage";
 
 const Home = () => {
   const { user, authLoading } = useContext(AuthContext);
@@ -37,6 +38,8 @@ const Home = () => {
           </div>
         )}
         <div className="h-full w-full rounded-t-[20px] flex flex-col gap-y-8 bg-neutral-100 pt-4 px-6">
+          <span onClick={()=>navigate("/temp-page")} className="w-full flex justify-between items-center animate-pulse bg-blue-600 text-white p-1 rounded-lg px-2 cursor-pointer">
+            <p>Committe Election</p><p className="text-lg ">{">>>"}</p></span>
           <div className="w-full ">
             <MyTournaments />
           </div>

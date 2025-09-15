@@ -259,10 +259,7 @@ export const getTournamentPlayers = async (req, res) => {
     console.log("Fetching players for tournament with ID:", req.params.id);
     const tournament = await Tournament.findById(req.params.id).populate({
       path: "enrolledUser",
-      populate: [
-        { path: "user", select: "firstName lastName" },
-        { path: "assignedGroup", select: "name" }, // adjust fields as needed
-      ],
+      select: "firstName lastName"
     });
 
     if (!tournament) {

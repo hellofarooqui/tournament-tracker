@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { Toaster } from "react-hot-toast";
 import { registerSW } from "virtual:pwa-register";
 import AuthProvider from './context/AuthContext.jsx';
+import VoteProvider from './context/VoteContext.jsx';
 
 
 registerSW({ immediate: true });
@@ -15,9 +16,9 @@ registerSW({ immediate: true });
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-     
+
         <App />
-     
+
     </AuthProvider>
     <Toaster />
   </StrictMode>
