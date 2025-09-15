@@ -64,7 +64,7 @@ export const getTournamentById = async (req, res) => {
     }
 
     if (tournament?.status === "scheduled") {
-      await tournament.populate({ path: "enrolledUser.user", select: "firstName lastName" });
+      await tournament.populate({ path: "enrolledUser", select: "firstName lastName" });
     }
     res.status(200).json(tournament);
   } catch (error) {
@@ -231,14 +231,14 @@ export const enrollIntoTournament = async (req, res) => {
     // await user.save();
 
     // Create an enrollment object for the user with the associated tournament
-    const enrollment = {
-      user: user._id,  // The user being enrolled
-      assigned: false,  // Default assigned status (you can modify this if needed)
-      assignedGroup: null,  // You can assign a group if needed, otherwise null
-    };
+    // const enrollment = {
+    //   user: user._id,  // The user being enrolled
+    //   assigned: false,  // Default assigned status (you can modify this if needed)
+    //   assignedGroup: null,  // You can assign a group if needed, otherwise null
+    // };
 
     // Add the enrollment object to the tournament's enrolledUser array
-    tournament.enrolledUser.push(enrollment);
+    tournament.enrolledUser.push(req.user.id);
 
     // Add the tournament's ID to the user's tournaments array (assuming 'tournaments' exists in the User schema)
     user.tournaments.push(tournament._id);
