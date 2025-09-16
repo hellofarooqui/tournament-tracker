@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
-import { Loader2, Eye, EyeOff } from "lucide-react"; // <-- import icons
+import { Loader2, Eye, EyeOff, Facebook, LucideFacebook, Twitch, Twitter } from "lucide-react"; // <-- import icons
 
 const Login = () => {
   const navigate = useNavigate();
@@ -39,17 +39,18 @@ const Login = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex items-start justify-center py-16 font-dynapuff bg-stone-100">
-      <div className="w-[80%] flex flex-col gap-y-4 text-xl font-semibold  ">
+    <div className="w-screen h-screen flex items-start justify-center py-16 font-dynapuff bg-light-bg-gray">
+      <div className="w-[85%] flex flex-col gap-y-4 text-xl font-semibold  ">
         <div className="flex flex-col items-center gap-y-4 mb-16">
           <Link to="/">
-            <h1 className="text-[58px] font-semibold text-stone-700">
+            <h1 className="text-[58px] font-semibold text-light-text-dark">
               Tournario
             </h1>
           </Link>
         </div>
-        <h2 className="text-2xl text-stone-700 mb-2 leading-0.5">Login</h2>
-        <div className="bg-white border-stone-200 rounded-[20px] shadow-sm border overflow-hidden mt-2">
+        <h2 className="text-3xl font-thin text-light-text-dull-01 mb-2 leading-0.5">Login</h2>
+        <p className="text-light-text-dull-02 font-thin text-sm">Welcome back!</p>
+        <div className="bg-white rounded-[20px]  overflow-hidden mt-2">
           <form
             onSubmit={handleSubmit}
             onReset={handleReset}
@@ -80,17 +81,38 @@ const Login = () => {
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </span>
             </div>
-            <div className="w-full flex flex-col gap-y-4 text-xl  text-white mt-2">
+            <div className="w-full flex flex-col gap-y-4 mt-2">
               <button
                 type="submit"
-                className="flex-1 bg-stone-700 text-white py-2 rounded-[10px] mt-4 text-center"
+                className="flex-1 bg-light-main-blue text-white py-2 rounded-[10px] mt-4 text-center"
               >
                 {loading ? <Loader2 className="animate-spin text-white" /> : "Login"}
               </button>
-              <p className="text-center text-[16px] font-thin text-stone-400">
-                Don't have an account?{" "}
-                <span className="underline" onClick={() => navigate("/register")}>Signup</span>
-              </p>
+              <div className="flex w-full justify-center items-center">
+                <p className="text-light-text-dull-02 font-semibold underline text-sm">Forgot Password?</p>
+              </div>
+
+              <div className="flex flex-col">
+                <p className="block text-center font-thin text-light-text-dull-02">or</p>
+
+                <button
+                  
+                  className="flex items-center bg-light-bg-gray text-light-text-dull-01 font-thin py-2 px-4 rounded-[10px] mt-4 text-center"
+                >
+                 <LucideFacebook className="bg-light-text-dull-01 p-1 rounded-full text-white" size={24}/> <span className="flex-1">Login with Facebook</span>
+                </button>
+                <button
+                  
+                  className="flex items-center bg-light-bg-gray text-light-text-dull-01 font-thin py-2 px-4 rounded-[10px] mt-4 text-center"
+                >
+                 <Twitter className="bg-light-text-dull-01 p-1 rounded-full text-white" size={24}/> <span className="flex-1">Login with Twitter</span>
+                </button>
+                <p className="text-center text-[16px] font-thin text-stone-400 mt-6">
+                  Don't have an account?{" "}
+                  <button className="text-light-main-blue" onClick={() => navigate("/register")}>Signup</button>
+                </p>
+              </div>
+
             </div>
           </form>
         </div>
