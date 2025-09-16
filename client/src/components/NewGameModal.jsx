@@ -21,6 +21,7 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
   const fetchTournamentTeams = async (tournamentId) => {
     try {
       const teams = await getTournamentTeams(tournamentId);
+      console.log("Teams",teams)
       setTournamentTeams(teams);
     } catch (error) {
       console.error("Error fetching tournament teams:", error);
@@ -52,10 +53,10 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
     fetchTournamentTeams(tournamentId);
   }, []);
   return (
-    <div className="absolute top-0  left-0 w-full h-full bg-gray-900/80 flex justify-center items-center">
-      <div className="p-4 bg-purple-01 rounded-lg">
-        <div className="border-3 border-yellow-01 rounded-lg p-4">
-          <h2 className="text-xl font-bold mb-2">New Game</h2>
+    <div className="absolute top-0  left-0 w-full h-full bg-light-bg-gray flex justify-center items-center">
+      <div className="p-4 bg-white rounded-lg">
+        <div className=" border-yellow-01 rounded-lg p-4">
+          <h2 className="text-2xl font-bold mb-4 text-light-text-dull-01">New Game</h2>
           <form onSubmit={handleSubmit} className="flex flex-col gap-y-4">
             {/* <input
               list="teams"
@@ -87,12 +88,13 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
               ))}
             </datalist> */}
             <input
+              className="text-lg mb-2 p-2 rounded-md border-b-2  border-light-text-dull-01/30 text-light-text-dull-02"
               type="text"
               placeholder="Game Name"
               onChange={(e) => setNewGame({ ...newGame, name: e.target.value })}
             />
             <select
-              className="text-lg mb-2 p-2 rounded-md bg-purple-02"
+              className="text-lg mb-2 p-2 rounded-md border-b-2  border-light-text-dull-01/30 text-light-text-dull-02"
               onChange={(e) =>
                 setNewGame({
                   ...newGame,
@@ -101,14 +103,14 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
               }
             >
               <option value="">Select First Team</option>
-              {tournamentTeams.map((team) => (
-                <option key={team._id} value={team._id}>
-                  {team.name}
+              {tournamentTeams.map((entry) => (
+                 <option key={entry.team._id} value={entry.team._id}>
+                  {entry.team.name}
                 </option>
               ))}
             </select>
             <select
-              className="text-lg mb-2 p-2 rounded-md bg-purple-02"
+              className="text-lg mb-2 p-2 rounded-md border-b-2  border-light-text-dull-01/30 text-light-text-dull-02"
               onChange={(e) =>
                 setNewGame({
                   ...newGame,
@@ -117,29 +119,29 @@ const NewGameModal = ({ tournamentId, setShowAddNewGameModal }) => {
               }
             >
               <option value="">Select Second Team</option>
-              {tournamentTeams.map((team) => (
-                <option key={team._id} value={team._id}>
-                  {team.name}
+              {tournamentTeams.map((entry) => (
+                <option key={entry.team._id} value={entry.team._id}>
+                  {entry.team.name}
                 </option>
               ))}
             </select>
             <input
               type="date"
-              className="text-lg mb-2 p-2 rounded-md bg-purple-02"
+              className="text-lg mb-2 p-2 rounded-md border-b-2  border-light-text-dull-01/30 text-light-text-dull-02"
               onChange={(e) =>
                 setNewGame({ ...newGame, scheduledDate: e.target.value })
               }
             />
             <button
               type="submit"
-              className="bg-yellow-01 text-purple-02 px-4 py-2 rounded-md"
+              className="bg-light-text-dull-02 text-white px-4 py-2 rounded-md"
             >
               Create Game
             </button>
             <button
               type="button"
               onClick={handleCancel}
-              className="border-3 border-yellow-01 text-yellow-01 px-4 py-2 rounded-md"
+              className="border-3 border-light-text-dull-02/30 text-light-text-dull-01 px-4 py-2 rounded-md"
             >
               Cancel
             </button>

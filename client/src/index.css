@@ -19,22 +19,20 @@ background:
   /* radial-gradient(ellipse at top right, rgba(96, 165, 250, 0.3) 0%, transparent 50%),
   radial-gradient(ellipse at bottom left, rgba(59, 130, 246, 0.4) 0%, transparent 50%),
   linear-gradient(135deg, #1e40af 0%, #3560a5 40%, #4d96f0 100%); */
-  #0F120F
+  #e7eaf4
 }
 
 @theme {
-  --color-purple-01: #2d0a47;
-  --color-purple-02: #3c0c70;
+ 
+  --color-light-bg-gray: #e7eaf4;
+  --color-light-main-blue:#0061ff;
+  --color-light-text-dark: #222539;
+  --color-light-text-dull-01:#5b6068;
+  --color-light-text-dull-02:#a5a7ab;
 
-  --color-dark-brown-01: #311f13;
-  --color-dark-brown-02: #3a2317;
-  --color-dark-brown-03: #503626;
-  --color-dark-brown-04: #774b31;
-  --color-light-brown-01: #b07154;
-  --color-light-brown-02: #a87e62;
-  --color-light-brown-03: #f4decb;
 
-  --color-yellow-01: #fac92a;
+
+  --color-yellow-01: #f3f5f9;
   --font-lucky: Luckiest Guy, "sans-serif";
   --font-dynapuff: Gabarito, "sans-serif";
 }

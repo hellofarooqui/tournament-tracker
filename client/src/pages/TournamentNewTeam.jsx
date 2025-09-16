@@ -26,14 +26,14 @@ const TournamentNewTeam = () => {
   const handlePlayerSelect = (event) => {
     const selectedPlayer = members.find(
       (player) =>
-        `${player.user.firstName} ${player.user.lastName}` === event.target.value
+        `${player.firstName} ${player.lastName}` === event.target.value
     );
     if (selectedPlayer) {
       // Do something with the selected player
       console.log("Selected player:", selectedPlayer);
       setNewTeam({
         ...newTeam,
-        members: [...newTeam.members, selectedPlayer.user._id],
+        members: [...newTeam.members, selectedPlayer._id],
       });
     }
   };
@@ -42,6 +42,7 @@ const TournamentNewTeam = () => {
     try {
       const availableMembers = await getTournamentPlayers(tournamentId);
       if (availableMembers) {
+        console.log("Avilable Members", availableMembers)
         setMembers(availableMembers);
       }
     } catch (error) {
@@ -108,8 +109,8 @@ const TournamentNewTeam = () => {
                 <datalist id="players-list">
                   {members.map((player) => (
                     <option
-                      key={player.user._id}
-                      value={`${player.user.firstName} ${player.user.lastName}`}
+                      key={player._id}
+                      value={`${player.firstName} ${player.lastName}`}
                     />
                   ))}
                 </datalist>
