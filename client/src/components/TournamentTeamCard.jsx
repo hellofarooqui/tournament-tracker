@@ -6,7 +6,7 @@ import abbrevation from '../utils/abbrevations'
 const TournamentTeamCard = ({team}) => {
   const navigate = useNavigate()
   const [showTeamData,setShowTeamData] = useState(false)
-  //console.log("Tournament Team Card team",team)
+  console.log("Tournament Team Card team",team)
   return (
     <div
       onClick={() => setShowTeamData(true)}

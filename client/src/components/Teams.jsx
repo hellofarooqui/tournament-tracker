@@ -37,8 +37,8 @@ const Teams = () => {
   const fetchTeams = async () => {
     try {
       const teamsFetched = await getTournamentTeams(tournamentId);
-      if (teams) {
-        //console.log("Teams fetched successfully:", teamsFetched);
+      if (teamsFetched) {
+        console.log("Teams fetched successfully:", teamsFetched);
         setTeams(teamsFetched);
       }
     } catch (error) {

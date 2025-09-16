@@ -61,7 +61,7 @@ const Signup = () => {
       <div className="w-[80%] flex flex-col gap-y-4 text-xl font-semibold ">
         <div className="flex flex-col items-center gap-y-4 mb-8">
           <Link to="/">
-            <h1 className="text-[58px] font-semibold text-stone-700">
+            <h1 className="text-[58px] font-semibold text-light-text-dark">
               Tournario
             </h1>
           </Link>
