@@ -24,26 +24,35 @@ import { verifyToken } from '../middleware/verifyToken.js';
 const router = express.Router();
 
 
-
+// tournament games
 router.post('/:tournamentId/games', createTournamentGame);
 router.get('/:tournamentId/games', getTournamentGames);
 
 router.post('/:tournamentId/enroll', verifyToken, enrollIntoTournament);
 
+
+//tournament teams
 router.get('/:id/teams', getTournamentTeams);
 router.post('/:id/teams', addTournamentTeam)
 
+
+//tournament groups
 router.get("/:id/groups", getTournamentGroups);
 router.post("/:id/groups", addTournamentGroup);
 router.get("/:id/groups/:groupId", getTournamentGroupDetails);
 
+
+//tournament players
 router.get('/:id/players', getTournamentPlayers);
 
+
+//tournament points table
 router.get("/:id/points-table", getPointsTable);
 
+
+
+//tournaments
 router.get("/", getAllTournaments);
-
-
 router.post('/', verifyToken, createTournament);
 router.get('/tournament-formats', getAllFormats);
 router.get('/:id', getTournamentById);
