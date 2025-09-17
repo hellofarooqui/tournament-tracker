@@ -20,8 +20,8 @@ const RootLayout = () => {
     return (
       <div className="w-screen h-screen flex flex-col items-center justify-center font-dynapuff pt-16">
         <div className="w-full h-full flex flex-col items-center justify-center gap-y-4 mb-8 bg-transparent rounded-t-[20px]">
-	<h1 className="font-bold text-2xl text-white">Tournario</h1>          
-	<Loader2 className="animate-spin text-white" />
+	<h1 className="font-bold text-2xl text-light-text-dark">Tournario</h1>          
+	<Loader2 className="animate-spin text-light-text-dark" />
         </div>
       </div>
     );

@@ -26,7 +26,7 @@ const Home = () => {
   // }, []);
 
   if (authLoading) {
-    return <Loader2 className="animate-spin" />;
+    return <Loader2 className="animate-spin text-light-text-dark" />;
   }
 
   return (

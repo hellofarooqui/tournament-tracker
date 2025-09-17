@@ -37,7 +37,7 @@ const ViewAllTournaments = () => {
     return (
       <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
         <div className="flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03">
-          <Loader2 className="animate-spin" size={40} />
+          <Loader2 className="animate-spin text-light-text-dark" size={40} />
         </div>
       </div>
     );
