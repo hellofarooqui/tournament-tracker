@@ -39,9 +39,9 @@ const Login = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex items-start justify-center py-16 font-dynapuff bg-light-bg-gray">
+    <div className="w-screen h-screen flex items-center justify-center font-dynapuff bg-light-bg-gray">
       <div className="w-[85%] flex flex-col gap-y-4 text-xl font-semibold  ">
-        <div className="flex flex-col items-center gap-y-4 mb-16">
+        <div className="flex flex-col items-center gap-y-4 mb-4">
           <Link to="/">
             <h1 className="text-[58px] font-semibold text-light-text-dark">
               Tournario
@@ -73,12 +73,12 @@ const Login = () => {
                 }
               />
               <span
-                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer "
                 onClick={() => setShowPassword((prev) => !prev)}
                 tabIndex={0}
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showPassword ? <EyeOff size={20} className="text-slate-600"/> : <Eye size={20} className="text-slate-400" />}
               </span>
             </div>
             <div className="w-full flex flex-col gap-y-4 mt-2">
