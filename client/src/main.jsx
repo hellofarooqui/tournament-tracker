@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { registerSW } from "virtual:pwa-register";
 import AuthProvider from './context/AuthContext.jsx';
 import VoteProvider from './context/VoteContext.jsx';
+import NavbarProvider from './context/NavbarContext.jsx';
 
 
 registerSW({ immediate: true });
@@ -15,11 +16,13 @@ registerSW({ immediate: true });
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
+    <NavbarProvider>
+      <AuthProvider>
 
         <App />
 
-    </AuthProvider>
-    <Toaster />
+      </AuthProvider>
+      <Toaster />
+    </NavbarProvider>
   </StrictMode>
 );

@@ -8,11 +8,11 @@ const BottomBar = () => {
   const isActive = (path) => location.pathname === path;
   
   return (
-    <div className="fixed bottom-0 w-full h-16 bg-white flex items-center justify-center border-t border-neutral-200">
+    <div className="z-20 fixed bottom-0 w-full h-16 bg-white flex items-center justify-center border-t border-light-text-dull-02/50 shadow-sm">
       <ul className="w-full flex justify-around">
         <Link to="/">
           <li className={`text-center font-semibold flex flex-col items-center transition-colors  ${
-            isActive('/') ? 'text-stone-800 underline' : 'text-gray-400'
+            isActive('/') ? 'text-light-main-blue ' : 'text-light-text-dull-01'
           }`}>
             <House size={20} />
             <p className="text-xs mt-1">Home</p>
@@ -20,7 +20,7 @@ const BottomBar = () => {
         </Link>
         <Link to="/all-tournaments">
           <li className={`text-center font-semibold flex flex-col items-center transition-colors  ${
-            isActive('/all-tournaments') ? 'text-stone-800 underline' : 'text-gray-400'
+            isActive('/all-tournaments') ? 'text-light-main-blue ' : 'text-light-text-dull-01'
           }`}>
             <Diamond size={20} />
             <p className="text-xs mt-1">Tournaments</p>
@@ -28,7 +28,7 @@ const BottomBar = () => {
         </Link>
         <Link to="/chat">
           <li className={`text-center font-semibold flex flex-col items-center transition-colors  ${
-            isActive('/chat') ? 'text-stone-800 underline' : 'text-gray-400'
+            isActive('/chat') ? 'text-light-main-blue ' : 'text-light-text-dull-01'
           }`}>
             <MessageCircle size={20} />
             <p className="text-xs mt-1">Chat</p>
@@ -36,7 +36,7 @@ const BottomBar = () => {
         </Link>
         <Link to="/profile">
           <li className={`text-center font-semibold flex flex-col items-center transition-colors  ${
-           isActive('/profile') ? 'text-stone-800 underline' : 'text-gray-400'
+           isActive('/profile') ? 'text-light-main-blue ' : 'text-light-text-dull-01'
           }`}>
             <User size={20} />
             <p className="text-xs mt-1">Profile</p>

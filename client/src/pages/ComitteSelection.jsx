@@ -188,7 +188,7 @@ const CommitteeSelection = () => {
     }
 
     return (
-        <div className='flex flex-col gap-y-4'>
+        <div className='flex flex-col gap-y-4 b'>
             <h2 className='text-stone-700 text-2xl font-bold'>Committee Election Poll</h2>
             
             {error && (

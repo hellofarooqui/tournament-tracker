@@ -2,6 +2,7 @@ import { ShieldCheck } from 'lucide-react';
 import React from 'react'
 import { useNavigate } from 'react-router';
 import CarromIcon from '../assets/carrom.png';
+import CarromBanner from '../assets/images/carrom-banner.jpeg'
 import { readableDate } from '../utils/readableDate';
 
 const tournamentStatusColor = {
@@ -11,27 +12,28 @@ const tournamentStatusColor = {
   cancelled: "text-red-500 bg-red-200",
 };
 
-const TournamentCard = ({tournament}) => {
-    const navigate = useNavigate()
+const TournamentCard = ({ tournament }) => {
+  const navigate = useNavigate()
 
-    const handleTournamentClick = ()=>{
-        navigate(`/tournament/${tournament._id}`)
-    }
+  const handleTournamentClick = () => {
+    navigate(`/tournament/${tournament._id}`)
+  }
   return (
-    <div onClick={handleTournamentClick} className="w-full group  bg-white border-2 backdrop-blur-sm border-neutral-200 p-4 rounded-lg cursor-pointer hover:scale-105 transition-transform ease-in-out duration-200">
+    <div onClick={handleTournamentClick} className="w-full group  bg-white rounded-[4px] cursor-pointer hover:scale-105 transition-transform ease-in-out duration-200 overflow-hidden shadow-md">
       <div className="flex justify-between items-center relative ">
-        <div className='flex gap-x-4 '>
-          <img src={CarromIcon} alt="Carrom" className="w-12 h-12" />
-          <div className='flex flex-col justify-between'>
-          <h2 className='text-lg opacity-90 text-neutral-700 group-hover:text-dark-bg-dark-brown-04'>{tournament.name}</h2>
-          <p className='text-xs font-thin text-neutral-400'>{readableDate(tournament.startDate)} {" - "} {readableDate(tournament.endDate)}</p>
+        <div className='flex'>
+          <img src={CarromBanner} alt="Carrom" className="w-20 hf-full object-cover" />
+          <div className='flex flex-col items-start gap-2 py-2 pl-2'>
+            <h2 className='text-[16px] opacity-90 text-neutral-700 group-hover:text-dark-bg-dark-brown-04'>{tournament.name}</h2>
+            <p className='text-xs font-thin text-neutral-400'>{readableDate(tournament.startDate)} {" - "} {readableDate(tournament.endDate)}</p>
+            <p className={`text-xs font-thin ${tournamentStatusColor[tournament.status]} px-2 rounded-full`}>{tournament.status}</p>
           </div>
         </div>
 
         {/* <div>
          {tournament.status == "completed" && <ShieldCheck className='text-green-500'/>}
         </div> */}
-        <p className={`text-sm font-thin fixed top-2 right-2 ${tournamentStatusColor[tournament.status]} px-2 rounded-full`}>{tournament.status}</p>
+
       </div>
     </div>
   );

@@ -101,7 +101,7 @@ const Teams = () => {
 
   if (teamsLoading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
+      <div className="w-full flex items-center justify-center py-16 font-dynapuff">
         <div className="flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03">
           <Loader2 className="animate-spin" size={40} />
         </div>
@@ -111,7 +111,7 @@ const Teams = () => {
 
   if (teamsError) {
     return (
-      <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
+      <div className="w-full flex items-center justify-center py-16 font-dynapuff">
         <div className="flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03">
           Error
         </div>
@@ -120,7 +120,7 @@ const Teams = () => {
   }
 
   return (
-    <div className="w-full h-screen font-dynapuff">
+    <div className="w-full font-dynapuff">
       <div className="mb-6">
         {(tournamentFormat && tournamentFormat.name == "League") && (<div>
           <div className="flex justify-between items-center pb-2">
@@ -141,18 +141,18 @@ const Teams = () => {
                   key={group._id}
                   className=" bg-white border border-stone-200 rounded-[15px]"
                 >
-                  <div className="flex justify-between items-center px-4 py-1 rounded-[10px] bg-stone-800">
-                    <p className="text-lg font-semibold text-stone-200 mb-2">
+                  <div className="flex justify-between items-center px-4 py-1 rounded-t-[10px] bg-light-main-blue">
+                    <p className="text-lg font-semibold text-white mb-2">
                       {group.name}
                     </p>
-                    <Pencil onClick={() => navigate(`group/${group._id}`)} size={16} />
+                    <Pencil className="text-white" onClick={() => navigate(`group/${group._id}`)} size={16} />
                   </div>
                   {group.teams.length > 0 && (
                     <div className="mt-2 flex flex-col gap-2 p-2">
                       {group.teams.map((team) => (
                         <span
                           key={team._id}
-                          className="bg-stone-100 text-stone-600 px-3 py-1 rounded-md text-base"
+                          className=" text-stone-600 px-3 py-1 rounded-md text-base"
                         >
                           {team.name}
                         </span>
@@ -191,7 +191,7 @@ const Teams = () => {
                     type="submit"
                     className="bg-yellow-500 text-white px-4 py-2 rounded-full text-sm"
                   >
-                    Add
+                    {addLoading ? <Loader2 className="animate-spin" size={16} /> : "Add"}
                   </button>
                 </div>
               </form>
@@ -205,7 +205,7 @@ const Teams = () => {
           {token && (
             <button
               onClick={() => navigate(`newTeam`)}
-              className="bg-stone-200  text-stone-500 px-6 py-2 rounded-full text-sm"
+              className="bg-light-main-blue  text-white px-6 py-2 rounded-full text-sm"
             >
               Add
             </button>

@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from "react-router";
 import BottomBar from "../components/BottomBar";
 import { AuthContext } from "../context/AuthContext";
 import { Loader2 } from "lucide-react";
+import LoadingScreen from "../components/LoadingScreen";
 
 const RootLayout = () => {
   const { user, authLoading } = useContext(AuthContext);
@@ -18,12 +19,7 @@ const RootLayout = () => {
 
   if (authLoading) {
     return (
-      <div className="w-screen h-screen flex flex-col items-center justify-center font-dynapuff pt-16">
-        <div className="w-full h-full flex flex-col items-center justify-center gap-y-4 mb-8 bg-transparent rounded-t-[20px]">
-	<h1 className="font-bold text-2xl text-light-text-dark">Tournario</h1>          
-	<Loader2 className="animate-spin text-light-text-dark" />
-        </div>
-      </div>
+      <LoadingScreen/>
     );
   }
 

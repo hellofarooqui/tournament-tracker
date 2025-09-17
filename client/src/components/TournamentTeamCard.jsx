@@ -13,16 +13,16 @@ const TournamentTeamCard = ({team}) => {
       className=" bg-white rounded-[15px]  shadow-md text-slate-200 cursor-pointer overflow-hidden"
     >
       <div className="flex gap-x-4">
-        <div className=" bg-gradient-to-br from-stone-800 to-stone-700 flex justify-center items-center p-4">
-          <div className='w-12 h-12 rounded-full bg-white  text-stone-500 flex justify-center items-center'>
-            {abbrevation(team.name)}
+        <div className="bg-light-main-blue/40 flex justify-center items-center p-2 px-4">
+          <div className='w-8 h-8 rounded-full bg-white  text-stone-500 flex justify-center items-center'>
+            <p className='text-base text-light-main-blue/40'>{abbrevation(team.name)}</p>
           </div>
         </div>
         <div className='flex flex-col gap-y-2 p-2'>
-          <h2 className='text-stone-500'>{team.name}</h2>
+          <h2 className='text-light-main-blue/70 text-base'>{team.name}</h2>
           <div>
             {team.members.map((member, index) => (
-              <p key={index} className="text-sm text-stone-500">
+              <p key={index} className="text-xs font-thin text-stone-500">
                 {index+1} {". "}{member.firstName} {member.lastName}
               </p>
             ))} 

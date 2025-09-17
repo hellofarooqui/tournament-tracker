@@ -14,8 +14,10 @@ import Cricket01 from './../assets/images/cricket-1.jpg'
 
 import TournamentCard from "../components/Home/TournamentCard";
 import Categories from "../components/Home/Categories";
+import { NavbarContext } from "../context/NavbarContext";
 
 const Home = () => {
+  const {navbar, setNavbar} = useContext(NavbarContext)
   const { user, authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -25,12 +27,19 @@ const Home = () => {
   //   }
   // }, []);
 
+  useEffect(()=>{
+    setNavbar({...navbar, pageTitle:"Tournario", bg_color:"#0061ff",bg_transparent:false})
+    return ()=>{
+      setNavbar({...navbar, pageTitle:"", bg_color:""})
+    }
+  },[])
+
   if (authLoading) {
     return <Loader2 className="animate-spin text-light-text-dark" />;
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col gap-y-4 items-start justify-start font-dynapuff overflow-y-scroll p-6 pt-6">
+    <div className="w-screen h-screen flex flex-col gap-y-4 items-start justify-start font-dynapuff overflow-y-scroll p-6 pt-20">
       {/* <div className="h-full w-full flex flex-col items-start ">
         <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" />
         {user && (
@@ -55,11 +64,11 @@ const Home = () => {
           </div>
         </div>
       </div> */}
-      <div className="w-full flex items-center">
+      {/* <div className="w-full flex items-center">
         <Menu className="border-2 rounded-md p-1 border-light-main-blue/30 text-light-main-blue" size={30} />
         <h2 className="flex-1 text-center text-xl font-semibold text-light-text-dull-01">Discover</h2>
         <Flame className="text-light-text-dull-02" size={32} />
-      </div>
+      </div> */}
 
       {/*search bar section*/}
       <div className="w-full ">
@@ -79,16 +88,16 @@ const Home = () => {
 
       {/* Tournaments */}
       <div className="w-full flex flex-col gap-y-4 mt-2">
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center text-sm">
           <p className="text-light-text-dull-01 font-semibold">Tournaments</p>
-          <select className="bg-light-text-dull-02/20 px-2 py-1 rounded-md">
+          <select className="bg-light-text-dull-02/20 text-light-text-dull-01 px-2 py-1 rounded-md">
             <option>Popular</option>
             <option>Archived</option>
             <option>Upcoming</option>
           </select>
         </div>
 
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-y-2">
           <TournamentCard image={CarromTournament} title={"MQH-CHAMP-01 Tournament"} />
           <TournamentCard image={Cricket01} title={"Avrioc Cricket Tournament"} />
           <TournamentCard image={CarromTournament} title={"MQH-CHAMP-02 Tournament"} />

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import usePolls from "../hooks/usePolls";
 import { BadgeCheck, Loader2 } from "lucide-react";
+import titleCase from "../utils/titleCase";
+import { NavbarContext } from "../context/NavbarContext";
 
 const PollResults = () => {
+  const { navbar, setNavbar } = useContext(NavbarContext)
   const [pollResults, setPollResults] = useState(null);
   const { getPollResults } = usePolls();
   const [loading, setLoading] = useState(true);
@@ -29,6 +32,10 @@ const PollResults = () => {
     fetchElectionResults();
   }, []);
 
+  useEffect(() => {
+    setNavbar({ ...navbar, pageTitle: pollResults?.title })
+  }, [pollResults])
+
   if (loading) {
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -39,31 +46,27 @@ const PollResults = () => {
   }
 
   return (
-    <div className="w-full">
-      <h2 className="text-2xl text-stone-700 font-semibold">
-        {pollResults.title} Poll Results
+    <div className="w-full font-dynapuff">
+      <h2 className="text-[20px] text-stone-700 font-semibold ">
+        {pollResults.title} <br /><span className="text-[16px] font-thin text-light-text-dull-01">Poll Results</span>
       </h2>
 
-      <div className="w-full flex  p-2 px-6 bg-stone-600 rounded-t-[10px] mt-4">
-        <p className="flex-1 text-stone-100 ">Member</p>
-        <p className="text-center text-stone-100 w-20">Votes</p>
+      <div className="w-full grid grid-cols-[auto_60px]  p-2 px-4 bg-light-main-blue rounded-t-[10px] mt-4 text-[16px]">
+        <p className=" text-stone-100 ">Member</p>
+        <p className="text-center text-stone-100">Votes</p>
       </div>
-      <div className="w-full p-4 px-6 bg-white flex flex-col gap-y-2">
+      <div className="w-full bg-white flex flex-col shadow-md text-[16px]">
         {pollResults.nominations
           .sort((a, b) => b.votes - a.votes)
-          .map((nomine) => (
+          .map((nomine, index) => (
             <div
               key={nomine.user._id}
-              className={`flex text-stone-500 py-1 px-2 rounded-[5px] text-lg ${
-                pollResults.voters.some((voter) => voter._id == nomine.user._id)
-                  ? "bg-emerald-50 text-stone-600"
-                  : ""
-              }`}
+              className={`grid grid-cols-[auto_60px]  text-stone-500 py-2 px-4   border-b last:border-0 border-light-text-dull-01/30 ${index < 3 ? "bg-blue-100 font-semibold" : "font-thin"}  `}
             >
-              <p className="flex-1">
-                {nomine.user.firstName} {nomine.user.lastName}
+              <p className="">
+                {titleCase(nomine.user.firstName)} {titleCase(nomine.user.lastName)}
               </p>
-              <p className="w-20 text-center">{nomine.votes}</p>
+              <p className="text-center">{nomine.votes}</p>
             </div>
           ))}
       </div>

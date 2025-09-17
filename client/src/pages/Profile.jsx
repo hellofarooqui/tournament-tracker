@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Loader2, LogOut } from "lucide-react";
 import ProfileGamesStats from "../components/ProfileGamesStats";
 import ProfileAchievements from "../components/ProfileAchievements";
+import { NavbarContext } from "../context/NavbarContext";
 
 const Profile = () => {
   const { user, authLoading, logout } = useContext(AuthContext);
@@ -14,6 +15,15 @@ const Profile = () => {
       </div>
     );
   }
+
+  const {navbar,setNavbar} = useContext(NavbarContext)
+      useEffect(()=>{
+        setNavbar({...navbar, pageTitle:"Profile", bg_color:"#0061ff",bg_transparent:false})
+        return ()=>{
+          setNavbar({...navbar, pageTitle:"", bg_color:""})
+        }
+      },[])
+
   return (
     <div className="w-full h-screen flex py-16 font-dynapuff">
       {user && (
