@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
-import CarromLogo from "./../assets/carrom.png";
-import Billard from "./../assets/icons/billiard-ball.png"
-import Chess from "./../assets/icons/chess.png"
-import Cricket from "./../assets/icons/cricket.png"
+
 import GradientLogo from "../components/GradientLogo";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
@@ -16,6 +13,7 @@ import CarromTournament from './../assets/images/carrom-tournament.png'
 import Cricket01 from './../assets/images/cricket-1.jpg'
 
 import TournamentCard from "../components/Home/TournamentCard";
+import Categories from "../components/Home/Categories";
 
 const Home = () => {
   const { user, authLoading } = useContext(AuthContext);
@@ -32,7 +30,7 @@ const Home = () => {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col gap-y-6 items-start justify-start font-dynapuff overflow-y-scroll p-6 pt-12">
+    <div className="w-screen h-screen flex flex-col gap-y-4 items-start justify-start font-dynapuff overflow-y-scroll p-6 pt-6">
       {/* <div className="h-full w-full flex flex-col items-start ">
         <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" />
         {user && (
@@ -73,40 +71,10 @@ const Home = () => {
 
       <span onClick={() => navigate("/temp-page")} className="w-full flex justify-between items-center animate-pulse bg-blue-600 text-white p-1 rounded-lg px-2 cursor-pointer">
         <p>Committe Election</p><p className="text-lg ">{">>>"}</p></span>
+      
+      
       {/* categories section */}
-      <div className="w-full flex flex-col gap-y-2">
-        <div className="w-full flex justify-between">
-          <p className="text-light-text-dull-01 font-semibold">Categories</p>
-          <button className="text-light-main-blue/70">See all</button>
-        </div>
-        <div className="flex gap-x-2 items-center mt-2">
-          <div className="flex-1 flex flex-col items-center gap-y-2">
-            <div className="w-16 h-16 object-contain rounded-[20px] overflow-hidden border-2 border-light-text-dull-02">
-              <img src={CarromLogo} className="  object-contain" />
-            </div>
-            <p>Carrom</p>
-          </div>
-          <div className="flex-1 flex flex-col items-center gap-y-2">
-            <div className="w-16 h-16 object-contain rounded-[20px] overflow-hidden border-2 border-light-text-dull-02">
-              <img src={Billard} className="  object-contain" />
-            </div>
-            <p>Billiards</p>
-          </div>
-          <div className="flex-1 flex flex-col items-center gap-y-2">
-            <div className="w-16 h-16 object-contain rounded-[20px] overflow-hidden border-2 border-light-text-dull-02">
-              <img src={Chess} className="  object-contain" />
-            </div>
-            <p>Chess</p>
-          </div>
-          <div className="flex-1 flex flex-col items-center gap-y-2">
-            <div className="w-16 h-16 object-contain rounded-[20px] overflow-hidden border-2 border-light-text-dull-02">
-              <img src={Cricket} className="  object-contain" />
-            </div>
-            <p>Cricket</p>
-          </div>
-
-        </div>
-      </div>
+      <Categories/>
 
 
       {/* Tournaments */}

@@ -21,7 +21,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: ['https://tournament-tracker-ten.vercel.app','http://localhost:5173', 'http://192.168.1.86:5173','http://localhost:8081'], // Your frontend URL
+  origin: ['https://tournament-tracker-ten.vercel.app','http://localhost:5173', 'http://192.168.1.148:5173','http://localhost:8081'], // Your frontend URL
   optionsSuccessStatus: 200 // For legacy browser support
 };
 
