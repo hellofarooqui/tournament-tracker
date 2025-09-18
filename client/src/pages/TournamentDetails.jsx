@@ -253,9 +253,9 @@ const TournamentDetails = () => {
           )}
           
           {/* Tab Content */}
-          {tournament.status === "live" ||
+          {(tournament.status === "live" ||
           tournament.status === "completed" ||
-          tournament.status === "cancelled" ? (
+          tournament.status === "cancelled" ) ? (
             <div>
               {activeTab === "about" && (
                 <div className="p-4">

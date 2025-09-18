@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`h-16 font-dynapuff text-dark-brown-01 w-screen absolute top-0 left-0 p-4 px-4 flex justify-between z-10`}
+      className={`h-16 font-dynapuff text-dark-brown-01 w-screen absolute top-0 left-0 p-4 px-4 flex justify-between z-30`}
       style={{ backgroundColor: navbar.bg_transparent ? "transparent" : (navbar.bg_color ? navbar.bg_color : "#0061ff") }}
     >
       <div className="w-full flex justify-between items-center">

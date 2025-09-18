@@ -35,11 +35,11 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
 
   if (loading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
-        <div className="flex flex-col gap-y-4 text-xl font-semibold text-slate-200">
-          <Loader2 className="animate-spin" size={40} />
+      
+        <div className="flex w-full p-4">
+          <Loader2 className="text-light-main-blue animate-spin" size={40} />
         </div>
-      </div>
+      
     );
   }
 

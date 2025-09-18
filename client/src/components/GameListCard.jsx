@@ -11,7 +11,7 @@ const GameListCard = ({ game }) => {
   return (
     <div
       onClick={() => setShowWinnerUpdateModal(true)}
-      className="bg-white backdrop-blur-2xl rounded-[10px] border-2 border-neutral-200 overflow-hidden flex flex-col gap-y-1  hover:scale-105 transition-transform ease-in-out duration-200 pb-2 shadow-sm cursor-pointer"
+      className="bg-white rounded-[10px] border-2 border-neutral-200 overflow-hidden flex flex-col gap-y-1  hover:scale-105 transition-transform ease-in-out duration-200 pb-2 shadow-sm cursor-pointer"
     >
       {/* {game.winner && (
         <CircleCheck
@@ -20,15 +20,15 @@ const GameListCard = ({ game }) => {
         />
       )} */}
       {/* <h3 className="text-sm font-semibold">{game.teams[0].name} vs {game.teams[1].name}</h3> */}
-      <div className="flex justify-between text-sm text-stone-700 bg-stone-200 px-4">
+      <div className="flex justify-between text-sm text-white bg-light-main-blue/60 px-4">
         <p className=" py-1">{game.name && game.name}</p>
         <p className=" py-1 ">
          {readableDate(game.scheduledDate)}
         </p>
       </div>
-      <div className="grid grid-cols-[40%_auto_40%] w-full items-center">
+      <div className="grid grid-cols-[45%_auto_45%] w-full items-center">
         <div className="flex flex-col gap-y-2 justify-center items-center mt-2">
-          <div className="rounded-[5px] bg-stone-600 w-10 h-10 flex justify-center items-center">
+          <div className="rounded-[5px] bg-light-main-blue/30 w-10 h-10 flex justify-center items-center">
             {game.winner &&
               (game.winner._id === game.teams[0]._id ? (
                 <img
@@ -39,7 +39,7 @@ const GameListCard = ({ game }) => {
                 <img src={EggIcon} className="w-6 h-6 object-cover" />
               ))}
           </div>
-          <p className="text-sm text-center text-neutral-600">
+          <p className="text-sm text-center text-neutral-600 line-clamp-1">
             {game.teams[0].name}
           </p>
         </div>
@@ -47,7 +47,7 @@ const GameListCard = ({ game }) => {
         <h2 className="text-center text-neutral-700">VS</h2>
 
         <div className="flex flex-col gap-y-2  justify-center items-center mt-2">
-          <div className="rounded-[5px] bg-stone-700  w-10 h-10 flex justify-center items-center">
+          <div className="rounded-[5px] bg-light-main-blue/30  w-10 h-10 flex justify-center items-center">
             {game.winner &&
               (game.winner._id === game.teams[1]._id ? (
                 <img
@@ -58,7 +58,7 @@ const GameListCard = ({ game }) => {
                 <img src={EggIcon} className="w-6 h-6 object-cover" />
               ))}
           </div>
-          <p className="text-sm text-center text-neutral-600">
+          <p className="text-sm text-center text-neutral-600 line-clamp-1">
             {game.teams[1].name}
           </p>
         </div>
