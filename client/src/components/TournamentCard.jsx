@@ -19,12 +19,13 @@ const TournamentCard = ({ tournament }) => {
     navigate(`/tournament/${tournament._id}`)
   }
   return (
-    <div onClick={handleTournamentClick} className="w-full group  bg-white rounded-[4px] cursor-pointer hover:scale-105 transition-transform ease-in-out duration-200 overflow-hidden shadow-md">
+    <div onClick={handleTournamentClick} className="w-full group  bg-white rounded-[10px] cursor-pointer hover:scale-105 transition-transform ease-in-out duration-200 overflow-hidden shadow-md">
       <div className="flex justify-between items-center relative ">
-        <div className='flex'>
-          <img src={CarromBanner} alt="Carrom" className="w-20 hf-full object-cover" />
+        <div className='flex p-[4px]'>
+          <img src={CarromBanner} alt="Carrom" className="w-20 hf-full object-cover rounded-[6px]" />
           <div className='flex flex-col items-start gap-2 py-2 pl-2'>
             <h2 className='text-[16px] opacity-90 text-neutral-700 group-hover:text-dark-bg-dark-brown-04'>{tournament.name}</h2>
+
             <p className='text-xs font-thin text-neutral-400'>{readableDate(tournament.startDate)} {" - "} {readableDate(tournament.endDate)}</p>
             <p className={`text-xs font-thin ${tournamentStatusColor[tournament.status]} px-2 rounded-full`}>{tournament.status}</p>
           </div>
