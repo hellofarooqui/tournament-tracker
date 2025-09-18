@@ -5,7 +5,7 @@ const GamesList = ({games}) => {
   return (
     <div className="flex flex-col mt-2 pb-20">
         {games.map((game) => (
-          <div className="py-2" key={game._id}>
+          <div className="py-4 border-b border-light-text-dull-02/50 border-dashed" key={game._id}>
           <GameListCard  key={game._id} game={game} />
           </div>
         ))}

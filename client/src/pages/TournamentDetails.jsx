@@ -167,8 +167,11 @@ const TournamentDetails = () => {
         
         {/* Tournament Info Card */}
         <div className="bg-white rounded-[16px] w-full flex flex-col gap-y-1 items-start justify-end p-4 mb-4">
-          <h2 className="text-lg text-light-text-dull-01 font-bold text-center w-full">
+          <h2 className="text-lg text-light-text-dull-01 font-bold text-center w-full leading-6">
             {tournament.name}{" "}
+          </h2>
+          <h2 className="text-xs text-light-text-dull-02 font-thin text-center w-full">
+            {tournament.enrolledUser.length}{" Players "}
           </h2>
           <div className="flex flex-col gap-y-2 items-start text-sm text-light-text-dull-01/70">
             <p className="text-xs font-thin flex items-center gap-x-2">

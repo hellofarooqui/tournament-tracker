@@ -11,7 +11,7 @@ const GameListCard = ({ game }) => {
   return (
     <div
       onClick={() => setShowWinnerUpdateModal(true)}
-      className="bg-white rounded-[10px] border-2 border-neutral-200 overflow-hidden flex flex-col gap-y-1  hover:scale-105 transition-transform ease-in-out duration-200 pb-2 shadow-sm cursor-pointer"
+      className="bg-white rounded-[10px] overflow-hidden flex flex-col gap-y-1  hover:scale-105 transition-transform ease-in-out duration-200 pb-2 shadow-md cursor-pointer"
     >
       {/* {game.winner && (
         <CircleCheck
@@ -39,7 +39,7 @@ const GameListCard = ({ game }) => {
                 <img src={EggIcon} className="w-6 h-6 object-cover" />
               ))}
           </div>
-          <p className="text-sm text-center text-neutral-600 line-clamp-1">
+          <p className="text-xs text-center text-light-text-dull-01 line-clamp-1">
             {game.teams[0].name}
           </p>
         </div>
@@ -58,7 +58,7 @@ const GameListCard = ({ game }) => {
                 <img src={EggIcon} className="w-6 h-6 object-cover" />
               ))}
           </div>
-          <p className="text-sm text-center text-neutral-600 line-clamp-1">
+          <p className="text-xs text-center text-light-text-dull-01 line-clamp-1">
             {game.teams[1].name}
           </p>
         </div>
