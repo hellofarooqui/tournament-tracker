@@ -11,27 +11,17 @@ const players = [
 
 const TournamentCard = ({ title, image }) => {
   return (
-    <div className="p-1 bg-white rounded-[20px]">
+    <div className="p-1 bg-dark-gray rounded-[20px]">
       <img className="w-full h-30 object-cover rounded-[16px]" src={image} />
       <div className="flex flex-col px-4 py-2">
-        <p className="font-semibold text-light-text-dull-01">{title}</p>
-        <p className="text-xs text-light-text-dull-02">Jun 27 - Jun 29</p>
+        <p className="font-semibold text-dark-white">{title}</p>
+        <p className="text-xs text-dark-white/50">Jun 27 - Jun 29</p>
         <div className="w-full flex items-center justify-between">
           <div className='flex gap-x-1'>
-            <div className='flex'>
-              {players.map((player, index) => (
-                <span
-                  key={player.id || index}
-                  className={`text-[6px] p-1 bg-blue-300 border border-white rounded-full ${index > 0 ? '-ml-2' : ''
-                    }`}
-                >
-                  {abbrevation(player.name)}
-                </span>
-              ))}
-            </div>
-            <p className="text-xs text-light-text-dull-02">+ Participants</p>
+            
+            <p className="text-xs text-light-text-dull-02">{players.length} Participants</p>
           </div>
-          <button className="bg-light-text-dull-02/30 px-6 py-1 text-sm rounded-[5px]">Join</button>
+          <button className="bg-dark-blue/20 px-6 py-1 text-sm text-dark-blue rounded-[5px]">Join</button>
         </div>
       </div>
     </div>

@@ -3,8 +3,8 @@ import React from 'react'
 
 const LoadingScreen = () => {
     return (
-        <div className="w-full h-screen flex flex-col items-center justify-center bg-light-bg-gray text-light-text-dull-01">
-            <h1 className="font-bold text-2xl text-light-text-dark">Tournario</h1>
+        <div className="fixed top-0 left-0 w-screen h-screen flex flex-col items-center justify-center bg-dark-black text-dark-white/60">
+            <h1 className="font-bold text-2xl text-dark-white/80">Tournario</h1>
             <Loader2 className="animate-spin" />
 
         </div>

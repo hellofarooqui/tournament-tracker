@@ -58,10 +58,10 @@ const PointsTable = () => {
 
   return (
     <div className="w-full font-dynapuff pb-6">
-      <div className='flex flex-col gap-y-4 '>
+      <div className="flex flex-col gap-y-4 ">
         {pointsTables.map((pointsTable) => (
-          <div key={pointsTable._id} className='w-full'>
-            <table className="w-full text-center border-collapse">
+          <div key={pointsTable._id} className="w-full">
+            {/* <table className="w-full text-center border-collapse">
               <thead className="">
                 <tr className=" bg-light-main-blue  text-slate-200 text-sm rounded-[20px]">
                   <th className="px-2 py-3 text-center">
@@ -115,7 +115,62 @@ const PointsTable = () => {
                   </tr>
                 )}
               </tbody>
-            </table>
+            </table> */}
+            <div className="grid grid-cols-[auto_30px_30px_30px_30px_30px] gap-x-2 border-b border-dark-white/10">
+              <div className="font-semibold text-sm text-dark-white/50 p-2">
+                Team
+              </div>
+              <div className="font-semibold text-sm text-dark-white/50 p-2 text-center">
+                P
+              </div>
+              <div className="font-semibold text-sm text-dark-white/50 p-2 text-center">
+                W
+              </div>
+              <div className="font-semibold text-sm text-dark-white/50 p-2 text-center">
+                L
+              </div>
+              <div className="font-semibold text-sm text-dark-white/50 p-2 text-center">
+                D
+              </div>
+              <div className="font-semibold text-sm text-dark-white/50 p-2 text-center">
+                S
+              </div>
+            </div>
+            {pointsTable && pointsTable.entries.length > 0 ? (
+              pointsTable.entries.map((entry, index) => (
+                <div className="grid grid-cols-[auto_30px_30px_30px_30px_30px] items-center gap-x-2 border-b border-dark-white/10">
+                  <div className="p-3 flex items-center gap-x-2">
+                    <div className="rounded-full bg-gray-700 w-8 h-8 flex justify-center items-center">
+                      <span className="text-xs text-dark-white/90">
+                        {abbrevation(entry.team.name)}
+                      </span>
+                    </div>
+                    <span className="text-sm text-dark-white/90">
+                      {entry.team.name.split(" ")[1]}
+                    </span>
+                  </div>
+                  <div className="p-3 text-center text-sm text-dark-white/90">
+                    {entry.gamesPlayed}
+                  </div>
+                  <div className="p-3 text-center text-sm text-dark-green">
+                    {entry.wins}
+                  </div>
+                  <div className="p-3 text-center text-sm text-red-400">
+                    {entry.losses}
+                  </div>
+                  <div className="p-3 text-center text-sm text-dark-white/90">
+                    {entry.draws}
+                  </div>
+                  <div className="p-3 text-center text-sm font-bold text-dark-blue">
+                    {entry.points}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-6 p-4 text-center text-sm text-dark-white/90">
+                No points table entries found.
+              </div>
+            )}
           </div>
         ))}
       </div>

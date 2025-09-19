@@ -55,7 +55,7 @@ const ViewAllTournaments = () => {
   }
 
   return (
-    <div className="w-full h-screen flex py-16 font-dynapuff">
+    <div className="w-full h-screen flex font-dynapuff">
       <div className="w-full h-full rounded-t-[20px] flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 p-6">
         
 

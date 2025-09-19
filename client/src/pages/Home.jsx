@@ -15,6 +15,7 @@ import Cricket01 from './../assets/images/cricket-1.jpg'
 import TournamentCard from "../components/Home/TournamentCard";
 import Categories from "../components/Home/Categories";
 import { NavbarContext } from "../context/NavbarContext";
+import LoadingScreen from "../components/LoadingScreen";
 
 const Home = () => {
   const {navbar, setNavbar} = useContext(NavbarContext)
@@ -35,11 +36,11 @@ const Home = () => {
   },[])
 
   if (authLoading) {
-    return <Loader2 className="animate-spin text-light-text-dark" />;
+    return (<LoadingScreen/>)
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col gap-y-4 items-start justify-start font-dynapuff overflow-y-scroll p-6 pt-20">
+    <div className="w-screen h-screen flex flex-col gap-y-4 items-start justify-start font-dynapuff overflow-y-scroll p-6 pb-20 ">
       {/* <div className="h-full w-full flex flex-col items-start ">
         <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" />
         {user && (
@@ -72,14 +73,14 @@ const Home = () => {
 
       {/*search bar section*/}
       <div className="w-full ">
-        <form className="w-full rounded-[10px] bg-light-text-dull-01/10 flex items-center p-2 px-4">
+        <form className="w-full rounded-[10px] bg-dark-gray flex items-center p-2 px-4">
           <input className="w-full text-light-text-dull-01 focus:outline-none" placeholder="search" />
-          <button className="text-light-text-dull-02 hover:text-light-text-dull-01 cursor-pointer"><Search className="" /></button>
+          <button className="text-light-text-dull-02 hover:text-light-text-dull-01 cursor-pointer"><Search className="text-dark-white/30" /></button>
         </form>
       </div>
 
-      <span onClick={() => navigate("/temp-page")} className="w-full flex justify-between items-center animate-pulse bg-blue-600 text-white p-1 rounded-lg px-2 cursor-pointer">
-        <p>Committe Election</p><p className="text-lg ">{">>>"}</p></span>
+      {/* <span onClick={() => navigate("/temp-page")} className="w-full flex justify-between items-center animate-pulse bg-blue-600 text-white p-1 rounded-lg px-2 cursor-pointer">
+        <p>Committe Election</p><p className="text-lg ">{">>>"}</p></span> */}
       
       
       {/* categories section */}
@@ -89,15 +90,15 @@ const Home = () => {
       {/* Tournaments */}
       <div className="w-full flex flex-col gap-y-4 mt-2">
         <div className="w-full flex justify-between items-center text-sm">
-          <p className="text-light-text-dull-01 font-semibold">Tournaments</p>
-          <select className="bg-light-text-dull-02/20 text-light-text-dull-01 px-2 py-1 rounded-md">
+          <p className="text-dark-white text-lg font-semibold">Tournaments</p>
+          <select className="bg-dark-gray text-white/50 px-2 py-1 rounded-md">
             <option>Popular</option>
             <option>Archived</option>
             <option>Upcoming</option>
           </select>
         </div>
 
-        <div className="flex flex-col gap-y-2">
+        <div className="flex flex-col gap-y-3">
           <TournamentCard image={CarromTournament} title={"MQH-CHAMP-01 Tournament"} />
           <TournamentCard image={Cricket01} title={"Avrioc Cricket Tournament"} />
           <TournamentCard image={CarromTournament} title={"MQH-CHAMP-02 Tournament"} />

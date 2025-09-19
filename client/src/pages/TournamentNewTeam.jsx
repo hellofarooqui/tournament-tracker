@@ -79,20 +79,20 @@ const TournamentNewTeam = () => {
     <div className="w-full h-screen flex py-16 font-dynapuff">
       <div className="w-full max-w-sm mx-auto flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 p-4">
         <div>
-          <h3 className="text-xl font-semibold mb-4">Add New Team</h3>
+          <h3 className="text-xl font-semibold mb-4 text-dark-white">Add New Team</h3>
           <form onSubmit={handleAddTeam} className="flex flex-col gap-y-4">
             <input
               onChange={(e) => setNewTeam({ ...newTeam, name: e.target.value })}
               type="text"
               placeholder="Team Name"
-              className="p-2 border border-slate-300/40 rounded-[10px] focus:outline-none focus:border-yellow-300/70"
+              className="p-2 border border-dark-white/20 rounded-[10px] focus:outline-none focus:border-dark-white/70 text-dark-white/90"
             />
 
             {!addPlayersToggle && (
               <button
                 onClick={() => setAddPlayesToggle(true)}
                 type="button"
-                className="self-start bg-slate-200/40 p-2 px-4 rounded-[10px] text-white font-thin text-sm"
+                className="self-start bg-dark-gray p-2 px-4 rounded-[10px] text-dark-white/50 font-thin text-sm"
               >
                 Add Players
               </button>
@@ -117,17 +117,17 @@ const TournamentNewTeam = () => {
               </div>
             )}
 
-            <div className="w-full flex items-center gap-x-2">
+            <div className="w-full flex flex-col  gap-y-4 text-base">
               <button
                 type="submit"
-                className="flex-1 bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] p-2 rounded-[10px] text-white font-medium"
+                className="flex-1 bg-dark-blue p-2 rounded-md text-dark-white "
               >
                 Add Team
               </button>
               <button
                 type="button"
                 onClick={() => navigate(-1)}
-                className="flex-1 border-2 border-[#FFA9CC] text-[#FFA9CC] p-2 rounded-[10px]"
+                className="flex-1 bg-dark-gray text-dark-white/70 p-2 rounded-md"
               >
                 Cancel
               </button>
