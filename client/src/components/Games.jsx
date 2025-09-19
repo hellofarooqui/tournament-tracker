@@ -4,12 +4,15 @@ import useGame from "../hooks/useGame";
 import GamesList from "./GamesList";
 import { AuthContext } from "../context/AuthContext";
 import { Loader2, Plus } from "lucide-react";
+import { useNavigate } from "react-router";
+import LoadingScreen from "./LoadingScreen";
 
 const Games = ({ tournamentId, tournamentAdmin }) => {
   const [showAddNewGameModal, setShowAddNewGameModal] = useState(false);
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate()
 
   const { user, token } = useContext(AuthContext);
 
@@ -35,10 +38,7 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
 
   if (loading) {
     return (
-      
-        <div className="flex w-full p-4">
-          <Loader2 className="text-light-main-blue animate-spin" size={40} />
-        </div>
+      <LoadingScreen/>
       
     );
   }
@@ -48,11 +48,11 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
   return (
     <div className="pb-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-neutral-700">Games</h2>
+        <h2 className="text-dark-white text-lg">Games</h2>
       </div>
       {(tournamentAdmin == user._id || user.role == "root-admin") && (
         <button
-          onClick={() => setShowAddNewGameModal(true)}
+          onClick={() => navigate("newGame")}
           className="fixed bottom-20 right-6 z-20 text-sm bg-neutral-700 text-neutral-100 px-2 py-2 rounded-full"
         >
           <Plus size={28} />

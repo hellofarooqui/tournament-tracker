@@ -191,11 +191,19 @@ export const getPointsTable = async (req, res) => {
     const tournament = await Tournament.findById(req.params.id);
     const pointsTable = await PointsTable.find({
       tournament: req.params.id,
-    }).populate("entries.team", "name");
+    }).populate({
+      path:"entries",
+      populate: { path: "team", select: "name" }
+    })
+    .sort({ 'entries.points': -1 });
+    if (!pointsTable || pointsTable.length === 0) {
+      return res.status(404).json({ message: "Points table not found", tournament:tournament });
+    }
+      //populate("entries.team", "name");
 
-    //pointsTable.entries.sort((a, b) => b.points - a.points);
+      //pointsTable.entries.sort((a, b) => b.points - a.points);
 
-    res.status(200).json(pointsTable);
+      res.status(200).json(pointsTable);
   } catch (error) {
     console.error("Error fetching points table:", error);
     res.status(500).json({ message: "Error fetching points table", error });

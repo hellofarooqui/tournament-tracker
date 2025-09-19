@@ -19,7 +19,7 @@ background:
   /* radial-gradient(ellipse at top right, rgba(96, 165, 250, 0.3) 0%, transparent 50%),
   radial-gradient(ellipse at bottom left, rgba(59, 130, 246, 0.4) 0%, transparent 50%),
   linear-gradient(135deg, #1e40af 0%, #3560a5 40%, #4d96f0 100%); */
-  #e7eaf4
+  #111721
 }
 
 @theme {
@@ -29,6 +29,14 @@ background:
   --color-light-text-dark: #222539;
   --color-light-text-dull-01:#5b6068;
   --color-light-text-dull-02:#a5a7ab;
+
+  --color-dark-black: #111721;
+  --color-dark-gray: #1e293b;
+  --color-dark-blue: #1661da;
+  --color-dark-white:#fdfdfd;
+  --color-dark-green: #1c964d;
+
+  
 
 
 

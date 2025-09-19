@@ -1,15 +1,15 @@
-import { readableDate } from "../utils/readableDate"
-import GameListCard from "./GameListCard"
+import { readableDate } from "../utils/readableDate";
+import GameListCard from "./GameListCard";
 
-const GamesList = ({games}) => {
+const GamesList = ({ games }) => {
   return (
-    <div className="flex flex-col mt-2 pb-20">
-        {games.map((game) => (
-          <div className="py-4 border-b border-light-text-dull-02/50 border-dashed" key={game._id}>
-          <GameListCard  key={game._id} game={game} />
-          </div>
-        ))}
+    <div className="flex flex-col gap-y-4 pb-20">
+      {games.map((game) => (
+        
+          <GameListCard key={game._id} game={game} />
+       
+      ))}
     </div>
-  )
-}
-export default GamesList
+  );
+};
+export default GamesList;

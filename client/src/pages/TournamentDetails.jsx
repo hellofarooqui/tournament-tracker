@@ -23,18 +23,23 @@ import { readableDate } from "../utils/readableDate";
 
 //static assets
 import TrophyIcon from "../assets/icons/trophy.png";
-import CarromBanner from "../assets/images/carrom-banner.jpeg"
+import CarromBanner from "../assets/images/carrom-banner.jpeg";
 import About from "../components/Tournament/About";
 import Rules from "../components/Rules";
+import Groups from "../components/Tournament/Groups";
 
 const TournamentDetails = () => {
   const { user, token } = useContext(AuthContext);
-  const { navbar, setNavbar } = useContext(NavbarContext)
+  const { navbar, setNavbar } = useContext(NavbarContext);
 
   const [enrolled, setEnrolled] = useState(false);
   const [enrollmentLoading, setEnrollmentLoading] = useState(false);
-  const { getTournamentById, deleteTournament, enrollIntoTournament, goLiveTournament } =
-    useTournamnet();
+  const {
+    getTournamentById,
+    deleteTournament,
+    enrollIntoTournament,
+    goLiveTournament,
+  } = useTournamnet();
   const params = useParams();
   const navigate = useNavigate();
   const tournamentId = params.id;
@@ -55,7 +60,7 @@ const TournamentDetails = () => {
       const data = await getTournamentById(tournamentId);
       if (data) {
         setTournament(data);
-        console.log("Fetched tournament details:", data);
+        //console.log("Fetched tournament details:", data);
       } else {
         console.error("Tournament not found");
       }
@@ -98,8 +103,7 @@ const TournamentDetails = () => {
       }
     } catch (error) {
       console.error("Error enrolling into tournament:", error);
-    }
-    finally {
+    } finally {
       setEnrollmentLoading(false);
       fetchTournamentDetails(); // Refresh tournament details to update enrolled users
     }
@@ -112,16 +116,13 @@ const TournamentDetails = () => {
       if (updated) {
         toast.success("Tournament is now live");
       }
-
-    }
-    catch (error) {
+    } catch (error) {
       console.error("Error going live:", error);
-    }
-    finally {
+    } finally {
       fetchTournamentDetails();
       setGoingLive(false);
     }
-  }
+  };
 
   useEffect(() => {
     if (tournament && user) {
@@ -130,9 +131,10 @@ const TournamentDetails = () => {
       // } else {
       //   setEnrolled(false);
       // }
-      setEnrolled(tournament.enrolledUser.some((entry) => entry._id === user._id));
+      setEnrolled(
+        tournament.enrolledUser.some((entry) => entry._id === user._id)
+      );
     }
-
   }, [tournament]);
 
   useEffect(() => {
@@ -141,112 +143,115 @@ const TournamentDetails = () => {
 
   //setting navbar
   useEffect(() => {
-    setNavbar({ ...navbar, pageTitle: "", bg_transparent: true, showProfileIcon: false })
+    setNavbar({
+      ...navbar,
+      pageTitle: "Tournament Details",
+      bg_transparent: true,
+      showProfileIcon: false,
+    });
     return () => {
-      setNavbar({ ...navbar, pageTitle: "", bg_color: "" })
-    }
-  }, [])
+      setNavbar({ ...navbar, pageTitle: "", bg_color: "" });
+    };
+  }, []);
 
-  if (loading)
-    return (
-      <LoadingScreen />
-    );
+  if (loading) return <LoadingScreen />;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="min-h-screen w-full font-dynapuff relative">
-      
-      {/* Fixed Banner Background - Half screen only */}
-      <div className="fixed top-0 left-0 w-full h-1/2 z-0">
-        <img src={CarromBanner} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent from-25% via-transparent via-50% to-[rgba(231,234,244,1)] to-100%"></div>
+    <div className="min-h-screen min-w-screen w-screen font-dynapuff relative">
+      <div className="w-full flex items-start gap-x-4 p-4">
+        <div>
+          <img
+            src={CarromBanner}
+            className="w-24 h-24 object-cover rounded-[10px]"
+          />
+        </div>
+        <div className="flex flex-col gap-y-1">
+          <h2 className="flex-1 text-xl text-white font-bold">
+            {tournament.name}
+          </h2>
+          <p className="text-dark-green">{tournament.status}</p>
+          <div className="flex  gap-x-4 items-start text-sm text-dark-white/50">
+            <p className="text-xs font-thin flex items-center gap-x-1">
+              <CircleGauge className="inline" size={12} />
+              {tournament.type}
+            </p>
+            <p className="text-xs font-thin flex items-center gap-x-1">
+              <Trophy className="inline" size={12} />
+              {tournament.format.name}
+            </p>
+          </div>
+          <p className="text-dark-white/50 text-sm font-thin ">
+            {readableDate(tournament.startDate)}
+          </p>
+        </div>
       </div>
 
       {/* Scrollable Content Container */}
-      <div className="relative z-10 pt-48 px-4 pb-20 min-h-screen">
-        
+      <div className="relative z-10 pb-20 min-h-screen">
         {/* Tournament Info Card */}
-        <div className="bg-white rounded-[16px] w-full flex flex-col gap-y-1 items-start justify-end p-4 mb-4">
-          <h2 className="text-lg text-light-text-dull-01 font-bold text-center w-full leading-6">
-            {tournament.name}{" "}
-          </h2>
-          <h2 className="text-xs text-light-text-dull-02 font-thin text-center w-full">
-            {tournament.enrolledUser.length}{" Players "}
-          </h2>
-          <div className="flex flex-col gap-y-2 items-start text-sm text-light-text-dull-01/70">
-            <p className="text-xs font-thin flex items-center gap-x-2">
-              <CircleGauge className="inline" size={16} />{tournament.type}
-            </p>
-            <p className="text-xs font-thin flex items-center gap-x-2">
-              <Trophy className="inline" size={16} />{tournament.format.name}
-            </p>
-            <p className="text-xs font-thin flex items-center gap-x-2">
-              <Calendar1 className="inline" size={16} />{readableDate(tournament.startDate)}
-            </p>
-          </div>
-          <div className="flex gap-x-4 items-center justify-between">
-            {(tournament.tournamentAdmin === user._id && tournament.status !== "live") && (
-              <button 
-                onClick={handleGoLive} 
-                className="text-sm bg-red-500 text-white px-4 py-1 rounded-2xl"
-              >
-                {goingLive ? <Loader2 className="text-white animate-spin" size={12} /> : "Go Live"}
-              </button>
-            )}
-          </div>
-        </div>
-        
+
         {/* Main Content Card */}
-        <div className="bg-white rounded-[16px] overflow-hidden border-4 border-white">
+        <div className="bg-transaprent overflow-hidden ">
           {tournament.status !== "scheduled" && (
-            <div className="w-full text-lg overflow-x-scroll scrollbar-none">
+            <div className="w-full text-lg overflow-x-scroll scrollbar-none border-b border-white/10">
               <ul className="w-full flex text-sm justify-around ">
                 <li
                   onClick={() => setActiveTab("about")}
-                  className={`text-center cursor-pointer px-4 py-2 flex-1 ${
+                  className={`cursor-pointer px-4 py-2 flex-1 ${
                     activeTab === "about"
-                      ? "bg-white border-b-4 border-light-main-blue text-light-main-blue"
-                      : "bg-white text-light-text-dull-01"
+                      ? "border-b border-dark-blue text-light-main-blue"
+                      : "text-dark-white/50 font-thin"
                   }`}
                 >
                   About
                 </li>
                 <li
                   onClick={() => setActiveTab("games")}
-                  className={`text-center cursor-pointer px-4 py-2 flex-1 ${
+                  className={`cursor-pointer px-4 py-2 flex-1 ${
                     activeTab === "games"
-                      ? "bg-white border-b-4 border-light-main-blue text-light-main-blue"
-                      : "bg-white text-light-text-dull-01"
+                      ? "border-b border-dark-blue text-light-main-blue"
+                      : "text-dark-white/50 font-thin"
                   }`}
                 >
                   Games
                 </li>
                 <li
                   onClick={() => setActiveTab("points")}
-                  className={`text-center cursor-pointer px-4 py-2 flex-1 ${
+                  className={`cursor-pointer px-4 py-2 flex-1 ${
                     activeTab === "points"
-                      ? "bg-white border-b-4 border-light-main-blue text-light-main-blue"
-                      : "bg-white text-light-text-dull-01"
+                      ? "border-b border-dark-blue text-light-main-blue"
+                      : "text-dark-white/50 font-thin"
                   }`}
                 >
                   Points
                 </li>
                 <li
                   onClick={() => setActiveTab("rules")}
-                  className={`text-center cursor-pointer px-4 py-2 flex-1 ${
+                  className={`cursor-pointer px-4 py-2 flex-1 ${
                     activeTab === "rules"
-                      ? "bg-white border-b-4 border-light-main-blue text-light-main-blue"
-                      : "bg-white text-light-text-dull-01"
+                      ? "border-b border-dark-blue text-light-main-blue"
+                      : "text-dark-white/50 font-thin"
                   }`}
                 >
                   Rules
                 </li>
                 <li
+                  onClick={() => setActiveTab("groups")}
+                  className={`cursor-pointer px-4 py-2 flex-1 ${
+                    activeTab === "groups"
+                      ? "border-b border-dark-blue text-light-main-blue"
+                      : "text-dark-white/50 font-thin"
+                  }`}
+                >
+                  Groups
+                </li>
+                <li
                   onClick={() => setActiveTab("teams")}
-                  className={`text-center cursor-pointer px-4 py-2 flex-1 ${
+                  className={`cursor-pointer px-4 py-2 flex-1 ${
                     activeTab === "teams"
-                      ? "bg-white border-b-4 border-light-main-blue text-light-main-blue"
-                      : "bg-white text-light-text-dull-01"
+                      ? "border-b border-dark-blue text-light-main-blue"
+                      : "text-dark-white/50 font-thin"
                   }`}
                 >
                   Teams
@@ -254,11 +259,11 @@ const TournamentDetails = () => {
               </ul>
             </div>
           )}
-          
+
           {/* Tab Content */}
-          {(tournament.status === "live" ||
+          {tournament.status === "live" ||
           tournament.status === "completed" ||
-          tournament.status === "cancelled" ) ? (
+          tournament.status === "cancelled" ? (
             <div>
               {activeTab === "about" && (
                 <div className="p-4">
@@ -281,6 +286,11 @@ const TournamentDetails = () => {
               {activeTab === "rules" && (
                 <div className="p-4">
                   <Rules />
+                </div>
+              )}
+              {activeTab === "groups" && (
+                <div className="p-4">
+                  <Groups />
                 </div>
               )}
               {activeTab === "teams" && (
@@ -306,7 +316,10 @@ const TournamentDetails = () => {
                     className="bg-red-400 text-white px-4 py-2 rounded-full"
                   >
                     {enrollmentLoading ? (
-                      <Loader2 className="animate-spin text-stone-100" size={16} />
+                      <Loader2
+                        className="animate-spin text-stone-100"
+                        size={16}
+                      />
                     ) : (
                       "Enroll"
                     )}

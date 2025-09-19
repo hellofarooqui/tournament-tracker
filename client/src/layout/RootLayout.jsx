@@ -6,8 +6,10 @@ import { AuthContext } from "../context/AuthContext";
 import { Loader2 } from "lucide-react";
 import LoadingScreen from "../components/LoadingScreen";
 
+
 const RootLayout = () => {
   const { user, authLoading } = useContext(AuthContext);
+  
   const navigate = useNavigate();
 
   React.useEffect(() => {

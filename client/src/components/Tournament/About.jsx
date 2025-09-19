@@ -2,8 +2,10 @@ import React from 'react'
 
 const About = ({about}) => {
   return (
-    <div>This is about tournament </div>
-  )
+    <div>
+      <p className='text-dark-white/70'>This is about tournament</p>{" "}
+    </div>
+  );
 }
 
 export default About
