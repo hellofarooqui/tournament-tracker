@@ -61,62 +61,11 @@ const PointsTable = () => {
       <div className="flex flex-col gap-y-4 ">
         {pointsTables.map((pointsTable) => (
           <div key={pointsTable._id} className="w-full">
-            {/* <table className="w-full text-center border-collapse">
-              <thead className="">
-                <tr className=" bg-light-main-blue  text-slate-200 text-sm rounded-[20px]">
-                  <th className="px-2 py-3 text-center">
-                    Team
-                  </th>
-                  <th className="px-4 py-3 text-center">
-                    P
-                  </th>
-                  <th className="px-4 py-3 text-center">
-                    W
-                  </th>
-                  <th className="px-4 py-3 text-center">
-                    L
-                  </th>
-                  <th className="px-4 py-3 text-center">
-                    D
-                  </th>
-                  <th className="px-4 py-3 text-center ">
-                    Points
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-
-                {pointsTable && pointsTable.entries.length > 0 ? (
-                  pointsTable.entries.map((entry, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-slate-200/40 transition-colors text-[16px] border-b text-neutral-500 border-slate-200/30 last:border-b-0"
-                    >
-                      <td className="px-2 py-1 text-center ">
-                        {abbrevation(entry.team.name)}
-                      </td>
-                      <td className="px-4 py-1 text-center ">
-                        {entry.gamesPlayed}
-                      </td>
-                      <td className="px-4 py-1 text-center ">{entry.wins}</td>
-                      <td className="px-4 py-1 text-center ">{entry.losses}</td>
-                      <td className="px-4 py-1 text-center ">{entry.draws}</td>
-                      <td className="px-6 py-1 text-center ">{entry.points}</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td
-                      colSpan="5"
-                      className="px-4 py-2 border-b border-slate-200/30 text-center"
-                    >
-                      No points table entries found.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table> */}
-            <div className="grid grid-cols-[auto_30px_30px_30px_30px_30px] gap-x-2 border-b border-dark-white/10">
+           
+            <div className="grid grid-cols-[30px_auto_30px_30px_30px_30px_30px] gap-x-2 border-b border-dark-white/10">
+              <div className="font-semibold text-sm text-dark-white/50 p-2">
+                #
+              </div>
               <div className="font-semibold text-sm text-dark-white/50 p-2">
                 Team
               </div>
@@ -138,7 +87,10 @@ const PointsTable = () => {
             </div>
             {pointsTable && pointsTable.entries.length > 0 ? (
               pointsTable.entries.map((entry, index) => (
-                <div className="grid grid-cols-[auto_30px_30px_30px_30px_30px] items-center gap-x-2 border-b border-dark-white/10">
+                <div className="grid grid-cols-[30px_auto_30px_30px_30px_30px_30px] items-center gap-x-2 border-b border-dark-white/10">
+                  <div className="p-3 text-center text-sm text-dark-white/90">
+                    {index+1}
+                  </div>
                   <div className="p-3 flex items-center gap-x-2">
                     <div className="rounded-full bg-gray-700 w-8 h-8 flex justify-center items-center">
                       <span className="text-xs text-dark-white/90">

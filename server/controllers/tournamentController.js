@@ -19,7 +19,10 @@ export const getAllTournaments = async (req, res) => {
 export const createTournament = async (req, res) => {
   try {
     console.log("Creating tournament with data:", req.body, req.user);
-    const tournament = await Tournament.create({ ...req.body, tournamentAdmin: req.user.id, });
+    const tournament = await Tournament.create({
+      ...req.body,
+      tournamentAdmin: req.user.id,
+    });
 
     //await tournament.save();
 
@@ -30,10 +33,8 @@ export const createTournament = async (req, res) => {
       return res.status(400).json({ message: "Invalid tournament format" });
     }
 
-
     //add points table if not league
     if (tournamentFormat.name !== "League") {
-
       const pointsTable = await PointsTable.create({
         name: req.body.name + " Points Table",
         tournament: tournament._id,
@@ -44,7 +45,6 @@ export const createTournament = async (req, res) => {
       await tournament.save();
     }
 
-
     res.status(201).json(tournament);
   } catch (error) {
     console.log("Error: ", error);
@@ -54,7 +54,9 @@ export const createTournament = async (req, res) => {
 
 export const getTournamentById = async (req, res) => {
   try {
-    const tournament = await Tournament.findById(req.params.id).populate("format")
+    const tournament = await Tournament.findById(req.params.id).populate(
+      "format"
+    );
     if (!tournament) {
       return res.status(404).json({ message: "Tournament not found" });
     }
@@ -64,7 +66,10 @@ export const getTournamentById = async (req, res) => {
     }
 
     if (tournament?.status === "scheduled") {
-      await tournament.populate({ path: "enrolledUser", select: "firstName lastName" });
+      await tournament.populate({
+        path: "enrolledUser",
+        select: "firstName lastName",
+      });
     }
     res.status(200).json(tournament);
   } catch (error) {
@@ -108,12 +113,14 @@ export const getTournamentTeams = async (req, res) => {
 
     const tournament = await Tournament.findById(req.params.id).populate({
       path: "teams",
-      populate: [{
-        path: "team",
-        populate: {
-          path: "members",
-        }
-      }],
+      populate: [
+        {
+          path: "team",
+          populate: {
+            path: "members",
+          },
+        },
+      ],
     });
 
     if (!tournament) {
@@ -121,8 +128,8 @@ export const getTournamentTeams = async (req, res) => {
       return res.status(404).json({ message: "Tournament not found" });
     }
 
-    if( req.query.filter === "unassigned"){
-      const unassignedTeams = tournament.teams.filter(t => !t.assigned);
+    if (req.query.filter === "unassigned") {
+      const unassignedTeams = tournament.teams.filter((t) => !t.assigned);
       return res.status(200).json(unassignedTeams);
     }
 
@@ -150,10 +157,9 @@ export const addTournamentTeam = async (req, res) => {
 
     //const team = req.body; // Assuming team data is sent in the request body
     //const team = new Team(req.body);
-    const teamCreated = await Team.create(req.body)
+    const teamCreated = await Team.create(req.body);
     tournament.teams.push(teamCreated._id);
     await tournament.save();
-
 
     //check if the tournament has points table
     if (!tournament.pointsTable || tournament.pointsTable.length === 0) {
@@ -192,18 +198,31 @@ export const getPointsTable = async (req, res) => {
     const pointsTable = await PointsTable.find({
       tournament: req.params.id,
     }).populate({
-      path:"entries",
-      populate: { path: "team", select: "name" }
-    })
-    .sort({ 'entries.points': -1 });
+      path: "entries.team",
+      select: "name",
+    });
+
     if (!pointsTable || pointsTable.length === 0) {
-      return res.status(404).json({ message: "Points table not found", tournament:tournament });
+      return res
+        .status(404)
+        .json({ message: "Points table not found", tournament: tournament });
     }
-      //populate("entries.team", "name");
+    //populate("entries.team", "name");
 
-      //pointsTable.entries.sort((a, b) => b.points - a.points);
+    //pointsTable.entries.sort((a, b) => b.points - a.points);
 
-      res.status(200).json(pointsTable);
+    // ✅ Sort entries within each points table
+    const sortedPointsTables = pointsTable.map((table) => {
+      const sortedEntries = [...table.entries].sort(
+        (a, b) => b.points - a.points
+      );
+      return {
+        ...table.toObject(),
+        entries: sortedEntries,
+      };
+    });
+
+    res.status(200).json(sortedPointsTables);
   } catch (error) {
     console.error("Error fetching points table:", error);
     res.status(500).json({ message: "Error fetching points table", error });
@@ -227,7 +246,9 @@ export const enrollIntoTournament = async (req, res) => {
     //   return res.status(400).json({ message: "User is already enrolled" });
     // }
 
-    const existingEnrollment = tournament.enrolledUser.some(enrollment => enrollment.user.toString() === user._id.toString());
+    const existingEnrollment = tournament.enrolledUser.some(
+      (enrollment) => enrollment.user.toString() === user._id.toString()
+    );
 
     if (existingEnrollment) {
       return res.status(400).json({ message: "User is already enrolled" });
@@ -267,7 +288,7 @@ export const getTournamentPlayers = async (req, res) => {
     console.log("Fetching players for tournament with ID:", req.params.id);
     const tournament = await Tournament.findById(req.params.id).populate({
       path: "enrolledUser",
-      select: "firstName lastName"
+      select: "firstName lastName",
     });
 
     if (!tournament) {
@@ -315,13 +336,13 @@ export const getTournamentGroups = async (req, res) => {
   //     return res.status(404).json({ message: "Group not found" });
   //   }
 
-  //   res.status(200).json(group);  
+  //   res.status(200).json(group);
   // } catch (error) {
   //   console.error("Error fetching group details:", error);
   //   res.status(500).json({
   //     message: "Error fetching group details",
   //     error: error.message,
-  //   }); 
+  //   });
 
   // }
 };
@@ -337,7 +358,10 @@ export const addTournamentGroup = async (req, res) => {
     //creating group points table
     // const group = req.body; // Assuming group data is sent in the request body
     // const newGroup = new Group(group);
-    const groupCreated = await Group.create({ ...req.body, tournament: req.params.id });
+    const groupCreated = await Group.create({
+      ...req.body,
+      tournament: req.params.id,
+    });
 
     //adding newly created group to tournament
     tournament.groups.push(groupCreated._id);
@@ -403,9 +427,9 @@ export const getAllFormats = async (req, res) => {
     { name: "Round-Robin", description: "" },
     { name: "Double Round Robin", description: "" },
     { name: "Double Elimination", description: "" },
-    { name: "swiss", description: "" }
-  ])
-}
+    { name: "swiss", description: "" },
+  ]);
+};
 
 export const goLiveTournament = async (req, res) => {
   try {
@@ -416,7 +440,9 @@ export const goLiveTournament = async (req, res) => {
     }
 
     if (tournament.tournamentAdmin.toString() !== req.user.id) {
-      return res.status(403).json({ message: "Only tournament admin can go live" });
+      return res
+        .status(403)
+        .json({ message: "Only tournament admin can go live" });
     }
 
     tournament.status = "live";
@@ -424,14 +450,21 @@ export const goLiveTournament = async (req, res) => {
 
     res.status(200).json({ message: "Tournament is now live", tournament });
   } catch (error) {
-    res.status(500).json({ message: "Error going live with tournament", error });
+    res
+      .status(500)
+      .json({ message: "Error going live with tournament", error });
   }
-}
+};
 
 export const getTournamentFormat = async (req, res) => {
   try {
-    console.log("Fetching tournament format for tournament with ID:", req.params.id);
-    const tournament = await Tournament.findById(req.params.id).populate('format');
+    console.log(
+      "Fetching tournament format for tournament with ID:",
+      req.params.id
+    );
+    const tournament = await Tournament.findById(req.params.id).populate(
+      "format"
+    );
     if (!tournament) {
       return res.status(404).json({ message: "Tournament not found" });
     }
@@ -446,4 +479,4 @@ export const getTournamentFormat = async (req, res) => {
       error: error.message,
     });
   }
-}
+};
