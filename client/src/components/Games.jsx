@@ -36,6 +36,10 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
     }
   };
 
+  const handleSearchClose = () => {
+    setShowSearchBar(false)
+    setFilter("")
+  }
   useEffect(()=>{
 
     console.log("Filter", filter)
@@ -68,7 +72,7 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
           ) : (
             <span className="w-full flex items-center gap-x-2">
               <input onChange={(e)=>setFilter(e.target.value.toLocaleLowerCase())} className="flex-1 text-dark-white/50 focus:outline-none" placeholder="Search game ..." />
-              <X onClick={()=>setShowSearchBar(false)} className="text-dark-white/50" size={16} />
+              <X onClick={handleSearchClose} className="text-dark-white/50" size={16} />
             </span>
           )}
         </div>
