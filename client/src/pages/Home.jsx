@@ -40,7 +40,7 @@ const Home = () => {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col gap-y-4 items-start justify-start font-dynapuff overflow-y-scroll p-6 pb-20 ">
+    <div className="min-h-full flex flex-col gap-y-4 items-start justify-start font-dynapuff overflow-y-scroll p-3 pb-20 ">
       {/* <div className="h-full w-full flex flex-col items-start ">
         <img src={CarromLogo} className="w-24 h-24 mb-12 animate-[spin_9s_linear_infinite]" />
         {user && (

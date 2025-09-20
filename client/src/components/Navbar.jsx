@@ -19,10 +19,10 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <div
+    <nav
       className={`${
         navbar.showNavbar ? "block" : "hidden"
-      } h-16 bg-dark-black text-dark-white font-dynapuff w-screen p-4 px-4 flex justify-between z-30 border-b border-dark-gray`}
+      } h-16 bg-dark-black text-dark-white font-dynapuff w-screen max-w-7xl sticky top-0 p-4 px-4 flex justify-between z-30 border-b border-dark-gray`}
     >
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center gap-x-1">
@@ -66,7 +66,7 @@ const Navbar = () => {
           <p></p>
         )}
       </div>
-    </div>
+    </nav>
   );
 };
 export default Navbar;

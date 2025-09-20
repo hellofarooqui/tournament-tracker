@@ -8,7 +8,7 @@ const BottomBar = () => {
   const isActive = (path) => location.pathname === path;
   
   return (
-    <div className="z-20 fixed bottom-0 w-full h-16 bg-dark-black backdrop-blur-2xl opacity-98 flex items-center justify-center border-t border-light-text-dull-02/50 shadow-sm">
+    <div className="z-50 sticky bottom-0 w-full h-16 bg-dark-black backdrop-blur-2xl opacity-98 flex items-center justify-center border-t border-light-text-dull-02/50 shadow-sm">
       <ul className="w-full flex justify-around">
         <Link to="/">
           <li className={`text-center font-semibold flex flex-col items-center transition-colors  ${

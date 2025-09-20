@@ -46,7 +46,7 @@ const ViewAllTournaments = () => {
 
   if (loading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center py-16 font-dynapuff">
+      <div className="w-full min-h-full flex items-center justify-center py-16 font-dynapuff">
         <div className="flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03">
           <Loader2 className="animate-spin text-light-text-dark" size={40} />
         </div>
@@ -55,8 +55,8 @@ const ViewAllTournaments = () => {
   }
 
   return (
-    <div className="w-full h-screen flex font-dynapuff">
-      <div className="w-full h-full rounded-t-[20px] flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03 p-6">
+    <div className="w-full h-screen flex font-dynapuff p-3">
+      <div className="w-full h-full rounded-t-[20px] flex flex-col gap-y-4 text-xl font-semibold text-light-brown-03">
         
 
           {(user && user.role === 'root-admin') && <button

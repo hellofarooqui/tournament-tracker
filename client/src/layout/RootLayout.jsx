@@ -6,10 +6,9 @@ import { AuthContext } from "../context/AuthContext";
 import { Loader2 } from "lucide-react";
 import LoadingScreen from "../components/LoadingScreen";
 
-
 const RootLayout = () => {
   const { user, authLoading } = useContext(AuthContext);
-  
+
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -20,19 +19,17 @@ const RootLayout = () => {
   }, [user, authLoading, navigate]);
 
   if (authLoading) {
-    return (
-      <LoadingScreen/>
-    );
+    return <LoadingScreen />;
   }
 
   if (!user) return null;
 
   return (
-    <div className="max-w-screen max-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <div className="w-full h-full overflow-hidden">
+      <main className="flex-1 overflow-auto">
         <Outlet />
-      </div>
+      </main>
       <BottomBar />
     </div>
   );

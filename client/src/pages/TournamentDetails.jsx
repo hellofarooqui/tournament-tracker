@@ -158,7 +158,7 @@ const TournamentDetails = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="min-h-screen min-w-screen w-screen font-dynapuff relative">
+    <div className="min-h-full w-full font-dynapuff relative">
       <div className="w-full flex items-start gap-x-4 p-4">
         <div>
           <img

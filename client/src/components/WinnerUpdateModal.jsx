@@ -39,28 +39,33 @@ const WinnerUpdateModal = ({ game, onClose }) => {
 
   const modalContent = (
     <div 
-      className="fixed inset-0 z-50 bg-slate-200/20 backdrop-blur-lg flex items-center justify-center"
+      className="fixed top-0 left-0 inset-0 z-50 bg-dark-gray/50 backdrop-blur-lg p-6"
       onClick={handleCancel}
     >
       <div 
-        className="bg-slate-200/20 p-8 rounded-[20px] border-2 border-slate-200/30 shadow-lg flex flex-col items-center justify-center gap-y-4"
+        className="min-h-full bg-dark-black p-4 rounded-lg border-2 border-dark-white/10 shadow-lg flex flex-col gap-y-4 "
         onClick={(e) => e.stopPropagation()}
       >
-        <form onSubmit={handleUpdateWinner} className="flex flex-col gap-y-4">
-          <select
+        <h2 className="text-dark-white text-2xl font-bold">Update Winner!</h2>
+        <form onSubmit={handleUpdateWinner} className="w-full flex flex-col gap-y-4">
+          <label className="block text-white/70">
+            Select Winner 
+            </label>
+            <select
             onChange={handleWinnerChange}
-            className="w-48 text-lg mb-2 p-2 rounded-md bg-slate-200/40 text-slate-700 focus:outline-none"
+            className="w-full text-base mb-2 p-2 rounded-md bg-dark-blue/10 border-2 border-dark-white/10 text-dark-white/70 focus:outline-none"
           >
-            <option>Select Winner</option>
+            <option className="bg-dark-blue/10">Select Winner</option>
             {game.teams.map((team) => (
               <option key={team._id} value={team._id}>
                 {team.name}
               </option>
             ))}
           </select>
+          
           <button
             type="submit"
-            className=" bg-gradient-to-r from-[#FFA9CC] via-[#FEB2A4] to-[#FFC36B] text-white rounded-md p-1"
+            className=" bg-dark-blue text-white rounded-md p-1 text-sm font-semibold"
             disabled={loading}
           >
             {loading ? <Loader2 className="animate-spin"/> : "Save"}
@@ -68,7 +73,7 @@ const WinnerUpdateModal = ({ game, onClose }) => {
           <button
             type="button"
             onClick={handleCancel}
-            className="text-white border-2 border-[#FFA9CC] rounded-md p-1"
+            className="text-white bg-dark-gray rounded-md p-1 text-sm font-semibold"
           >
             Cancel
           </button>

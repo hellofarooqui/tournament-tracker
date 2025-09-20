@@ -29,11 +29,11 @@ const Profile = () => {
       },[])
 
   return (
-    <div className="flex font-dynapuff">
+    <div className="w-full min-h-full flex font-dynapuff p-3">
       {user && (
-        <div className="w-full full  mx-auto flex flex-col text-xl font-semibold text-slate-200 ">
+        <div className=" flex flex-col text-xl font-semibold text-slate-200 ">
           <div className="w-full relative  flex flex-col gap-y-2 items-center p-6">
-            <div className="w-28 h-28 bg-gradient-to-br from-neutral-50 to-neutral-100 shadow-sm rounded-full mx-auto flex items-center justify-center mb-4">
+            <div className="w-28 h-28 shadow-sm rounded-full mx-auto  mb-4">
               <img className="w-full h-full object-cover" src={Avatar1} />
             </div>
             <h2 className="text-center text-xl text-dark-white leading-2">
