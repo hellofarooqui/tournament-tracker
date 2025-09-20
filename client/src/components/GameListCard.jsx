@@ -11,7 +11,7 @@ const GameListCard = ({ game }) => {
   return (
     <div
       onClick={() => setShowWinnerUpdateModal(true)}
-      className="bg-dark-blue/2 flex flex-col gap-y-2  hover:scale-105 transition-transform ease-in-out duration-200 p-4"
+      className="bg-dark-blue/8 flex flex-col gap-y-2  hover:scale-105 transition-transform ease-in-out duration-200 p-4"
     >
       <div className="flex justify-between text-sm text-white">
         <p className=" text-dark-white/50">

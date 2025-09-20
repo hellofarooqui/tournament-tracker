@@ -53,9 +53,9 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
       {(tournamentAdmin == user._id || user.role == "root-admin") && (
         <button
           onClick={() => navigate("newGame")}
-          className="fixed bottom-20 right-6 z-20 text-sm bg-neutral-700 text-neutral-100 px-2 py-2 rounded-full"
+          className="fixed bottom-20 right-6 z-20 text-sm bg-dark-gray text-neutral-100 px-2 py-2 rounded-full"
         >
-          <Plus size={28} />
+          <Plus className="" size={28} />
         </button>
       )}
 

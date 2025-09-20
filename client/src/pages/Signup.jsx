@@ -57,25 +57,25 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-start justify-center py-16 font-dynapuff bg-light-bg-gray">
+    <div className="w-full h-screen flex items-start justify-center py-16 font-dynapuff">
       <div className="w-[80%] flex flex-col gap-y-4 text-xl font-semibold ">
         <div className="flex flex-col items-center gap-y-4 mb-8">
           <Link to="/">
-            <h1 className="text-[58px] font-semibold text-light-text-dark">
+            <h1 className="text-[58px] font-semibold text-dark-white">
               Tournario
             </h1>
           </Link>
         </div>
-        <h2 className="text-3xl font-thin text-light-text-dark mb-2 leading-0.5">Create account</h2>
+        <h2 className="text-3xl font-thin text-dark-white mb-2 leading-0.5">Create account</h2>
          <p className=" text-[16px] font-thin text-light-text-dull-02 mt-2 mb-4">
                 Already have an account?{" "}
                 <span className="text-light-main-blue" onClick={() => navigate("/login")}>Login</span>
               </p>
-        <div className="w-full bg-white rounded-[20px]">
+        <div className="w-full bg-transparent rounded-[20px]">
           <form
             onSubmit={handleSubmit}
             onReset={handleReset}
-            className="w-full flex flex-col gap-y-4  items-center justify-center text-[16px]   bg-slate-200/20 p-6 py-8 rounded-2xl"
+            className="w-full flex flex-col gap-y-4  items-center justify-center text-[16px]   p-6 py-8 rounded-2xl"
           >
             <input
               placeholder="First Name"
