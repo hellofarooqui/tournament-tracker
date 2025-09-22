@@ -51,7 +51,7 @@ const GameListCard = ({ game }) => {
           <div className="rounded-full bg-gray-700  w-8 h-8 flex justify-center items-center">
             {game.winner &&
               (game.winner._id === team._id && (
-                <Crown className="text-dark-white/50" size={18} />
+                <Crown className="text-emerald-400" size={18} />
               ))}
           </div>
           <p className="text-sm text-center text-dark-white/89 line-clamp-1">
