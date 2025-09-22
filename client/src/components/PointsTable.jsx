@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
-import { useParams } from 'react-router';
-import usePointsTable from '../hooks/usePointsTable';
-import { Loader2 } from 'lucide-react';
-import abbrevation from '../utils/abbrevations';
+import React, { useEffect } from "react";
+import { useParams } from "react-router";
+import usePointsTable from "../hooks/usePointsTable";
+import { Loader2 } from "lucide-react";
+import abbrevation from "../utils/abbrevations";
 
 const PointsTable = () => {
   const params = useParams();
   const tournamentId = params.id;
-  const { fetchTournamentPointsTable } = usePointsTable()
+  const { fetchTournamentPointsTable } = usePointsTable();
   const [pointsTables, setPointsTables] = React.useState();
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
@@ -27,11 +27,11 @@ const PointsTable = () => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     fetchPointsTable();
-  }, [])
+  }, []);
 
   if (loading) {
     return (
@@ -43,7 +43,9 @@ const PointsTable = () => {
   if (error) {
     return (
       <div className="w-full flex items-center justify-center py-16 font-dynapuff">
-        <div className="text-red-500">Error fetching points table: {error.message}</div>
+        <div className="text-red-500">
+          Error fetching points table: {error.message}
+        </div>
       </div>
     );
   }
@@ -61,8 +63,7 @@ const PointsTable = () => {
       <div className="flex flex-col gap-y-4 ">
         {pointsTables.map((pointsTable) => (
           <div key={pointsTable._id} className="w-full">
-           
-            <div className="grid grid-cols-[30px_auto_30px_30px_30px_30px_30px] gap-x-2 border-b border-dark-white/10">
+            <div className="grid grid-cols-[20px_auto_25px_25px_25px_25px_30px] gap-x-2 border-b border-dark-white/10">
               <div className="font-semibold text-sm text-dark-white/50 p-2">
                 #
               </div>
@@ -87,9 +88,9 @@ const PointsTable = () => {
             </div>
             {pointsTable && pointsTable.entries.length > 0 ? (
               pointsTable.entries.map((entry, index) => (
-                <div className="grid grid-cols-[30px_auto_30px_30px_30px_30px_30px] items-center gap-x-2 border-b border-dark-white/10">
+                <div className="grid grid-cols-[20px_auto_25px_25px_25px_25px_30px] items-center gap-x-2 border-b border-dark-white/10">
                   <div className="p-3 text-center text-sm text-dark-white/90">
-                    {index+1}
+                    {index + 1}
                   </div>
                   <div className="p-3 flex items-center gap-x-2">
                     <div className="rounded-full bg-gray-700 w-8 h-8 flex justify-center items-center">
@@ -128,6 +129,6 @@ const PointsTable = () => {
       </div>
     </div>
   );
-}
+};
 
-export default PointsTable
+export default PointsTable;
