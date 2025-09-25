@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { readableDate } from "../utils/readableDate";
 import WinnerUpdateModal from "./WinnerUpdateModal";
 import { CircleCheck, Crown, Frown } from "lucide-react";
 import CrownIcon from "./../assets/crown.png";
 import EggIcon from "./../assets/egg.png";
+import { AuthContext } from "../context/AuthContext";
 
 const GameListCard = ({ game }) => {
   const [showWinnerUpdateModal, setShowWinnerUpdateModal] =
     React.useState(false);
+
+    const {user} = useContext(AuthContext);
+    //console.log("User in GameListCard:", user);
   return (
     <div
-      onClick={() => setShowWinnerUpdateModal(true)}
+      onClick={() => user.role == 'root-admin' ? setShowWinnerUpdateModal(true) : null}
       className="bg-dark-blue/8 flex flex-col gap-y-2  hover:scale-105 transition-transform ease-in-out duration-200 p-4"
     >
       <div className="flex justify-between text-sm text-white">
