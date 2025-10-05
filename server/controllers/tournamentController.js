@@ -52,31 +52,140 @@ export const createTournament = async (req, res) => {
   }
 };
 
+// export const getTournamentById = async (req, res) => {
+
+//   const {populate } = req.query
+//   console.log("Populate", req.query)
+//   try {
+//     const tournament = await Tournament.findById(req.params.id);
+//     if (!tournament) {
+//       return res.status(404).json({ message: "Tournament not found" });
+//     }
+
+//     if (tournament?.status === "completed") {
+//       await tournament.populate({ path: "winner", select: "name" });
+//     }
+
+//     if (tournament?.status === "scheduled") {
+//       await tournament.populate({
+//         path: "enrolledUser",
+//         select: "firstName lastName",
+//       });
+//     }
+//     if(populate){
+//       const fields = populate.split(',')
+//       console.log("Fields to populate:", fields);
+//       fields.forEach(field => {
+//         tournament.populate(field)
+//       })
+//     }
+//     res.status(200).json(tournament);
+//   } catch (error) {
+//     res.status(500).json({ message: "Error fetching tournament", error });
+//   }
+// };
+
 export const getTournamentById = async (req, res) => {
+  const { populate } = req.query;
+  console.log("Populate", req.query);
+
   try {
-    const tournament = await Tournament.findById(req.params.id).populate(
-      "format"
-    );
+    // Start with the base query
+    let query = Tournament.findById(req.params.id);
+
+    // Apply dynamic populate from query params first
+    if (populate) {
+      const fields = populate.split(",").map((f) => f.trim());
+      console.log("Fields to populate:", fields);
+
+      fields.forEach((field) => {
+        query = query.populate(field);
+      });
+    }
+
+    // Execute the query
+    let tournament = await query;
+
     if (!tournament) {
       return res.status(404).json({ message: "Tournament not found" });
     }
 
-    if (tournament?.status === "completed") {
+    // Apply conditional populate based on status (if not already populated)
+    if (tournament?.status === "completed" && !populate?.includes("winner")) {
       await tournament.populate({ path: "winner", select: "name" });
     }
 
-    if (tournament?.status === "scheduled") {
+    if (
+      tournament?.status === "scheduled" &&
+      !populate?.includes("enrolledUser")
+    ) {
       await tournament.populate({
         path: "enrolledUser",
         select: "firstName lastName",
       });
     }
+
     res.status(200).json(tournament);
   } catch (error) {
     res.status(500).json({ message: "Error fetching tournament", error });
   }
 };
-export const updateTournament = async (req, res) => {
+
+export const getTournamentDataForUpdate = async (req, res) => {
+  const { populate } = req.query;
+  console.log("Populate", req.query);
+
+  try {
+    // Start with the base query
+    let query = Tournament.findById(req.params.id);
+
+    // Apply dynamic populate from query params first
+    if (populate) {
+      const fields = populate.split(",").map((f) => f.trim());
+      console.log("Fields to populate:", fields);
+
+      fields.forEach((field) => {
+        query = query.populate(field);
+      });
+    }
+
+    // Execute the query
+    let tournament = await query;
+
+    if (!tournament) {
+      return res.status(404).json({ message: "Tournament not found" });
+    }
+
+    if (populate.includes("teams")) {
+      await tournament.populate({
+        path: "teams.team",
+        
+      });
+    }
+
+    // Apply conditional populate based on status (if not already populated)
+    if (tournament?.status === "completed" && !populate?.includes("winner")) {
+      await tournament.populate({ path: "winner", select: "name" });
+    }
+
+    if (
+      tournament?.status === "scheduled" &&
+      !populate?.includes("enrolledUser")
+    ) {
+      await tournament.populate({
+        path: "enrolledUser",
+        select: "firstName lastName",
+      });
+    }
+
+    res.status(200).json(tournament);
+  } catch (error) {
+    console.log("Error: ", error);  
+    res.status(500).json({ message: "Error fetching tournament", error });
+  }
+};
+
+export const updateTournamentDetails = async (req, res) => {
   try {
     const tournament = await Tournament.findByIdAndUpdate(
       req.params.id,
@@ -86,7 +195,7 @@ export const updateTournament = async (req, res) => {
     if (!tournament) {
       return res.status(404).json({ message: "Tournament not found" });
     }
-    res.status(200).json(tournament);
+    res.status(201).json(tournament);
   } catch (error) {
     res.status(500).json({ message: "Error updating tournament", error });
   }

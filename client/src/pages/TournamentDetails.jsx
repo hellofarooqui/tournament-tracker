@@ -1,7 +1,7 @@
 //libraries
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Calendar1, CircleGauge, Loader2, Trash, Trophy } from "lucide-react";
+import { Calendar1, CircleGauge, EllipsisVertical, Loader2, Menu, Trash, Trophy } from "lucide-react";
 import toast from "react-hot-toast";
 
 //contexts
@@ -47,6 +47,7 @@ const TournamentDetails = () => {
   const [tournament, setTournament] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showUpdateMenu,setShowUpdateMenu] = useState(false);
   const [goingLive, setGoingLive] = useState(false);
 
   const [showGames, setShowGames] = useState(true);
@@ -159,7 +160,15 @@ const TournamentDetails = () => {
 
   return (
     <div className="min-h-full w-full font-dynapuff relative">
-      <div className="w-full flex items-start gap-x-4 p-4">
+      <div className="w-full flex items-start gap-x-4 p-4 relative">
+        <button onClick={()=>setShowUpdateMenu(!showUpdateMenu)} className="absolute right-4 top-4 text-slate-400 focus:text-slate-200 hover:cursor-pointer"><EllipsisVertical size={16} /></button>
+        {(user.role == 'root-admin' && showUpdateMenu) && (
+          <div className="absolute top-10 right-4 bg-dark-gray backdrop-blur-md border border-white/10 rounded-md flex flex-col overflow-hidden z-20 shadow-xl shadow-black shadow-">
+            {tournament.status == 'scheduled' && <button onClick={handleGoLive} className="text-left px-4 py-2 text-sm text-dark-white hover:bg-white/5 transition-colors ease-in-out duration-150">{goingLive ? <Loader2 className="animate-spin inline" size={14} /> : "Go Live"}</button>}
+            <button onClick={()=>navigate(`update`)} className="text-left px-4 py-2 text-sm text-white hover:bg-white/5 transition-colors ease-in-out duration-150">Update Details</button>
+            <button onClick={handleDeleteTournament} className="text-left px-4 py-2 text-sm hover:text-red-600/90 hover:bg-white/5 transition-colors ease-in-out duration-150 text-red-400">Delete Tournament</button>
+          </div>
+        )}
         <div>
           <img
             src={CarromBanner}
@@ -167,10 +176,9 @@ const TournamentDetails = () => {
           />
         </div>
         <div className="flex flex-col gap-y-1">
-          <h2 className="flex-1 text-xl text-white font-bold">
+          <p className="flex-1 text-lg text-white font-bold">
             {tournament.name}
-          </h2>
-          <p className="text-dark-green">{tournament.status}</p>
+          </p>
           <div className="flex  gap-x-4 items-start text-sm text-dark-white/50">
             <p className="text-xs font-thin flex items-center gap-x-1">
               <CircleGauge className="inline" size={12} />
@@ -178,12 +186,14 @@ const TournamentDetails = () => {
             </p>
             <p className="text-xs font-thin flex items-center gap-x-1">
               <Trophy className="inline" size={12} />
-              {tournament.format.name}
+              {tournament.format}
             </p>
           </div>
           <p className="text-dark-white/50 text-sm font-thin ">
             {readableDate(tournament.startDate)}
           </p>
+                    <p className="bg-dark-green self-start px-2 rounded-full text-white text-xs">{tournament.status}</p>
+
         </div>
       </div>
 
