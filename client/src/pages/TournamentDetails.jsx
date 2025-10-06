@@ -307,7 +307,7 @@ const TournamentDetails = () => {
                 </div>
 
                 {enrolled ? (
-                  <button className="bg-cyan-300 text-cyan-700 border-cyan-700 border overflow-hidden py-1 text-base px-4 rounded-full">
+                  <button className="bg-dark-blue text-dark-white border-cyan-700 border overflow-hidden py-1 text-base px-4 rounded-full">
                     Enrolled
                   </button>
                 ) : (

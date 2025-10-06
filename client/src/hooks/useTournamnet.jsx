@@ -36,6 +36,8 @@ const useTournamnet = () => {
 
     const createTournament = async (tournamentData) => {
         console.log("Server URL:", server);
+        console.log("Token:", token);
+
         try {
             console.log("Creating tournament with data:", tournamentData);
             const response = await axios.post(`${server}/api/tournaments`, tournamentData,{
