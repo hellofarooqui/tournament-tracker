@@ -6,7 +6,6 @@ const tournamentFormatSchema = new mongoose.Schema({
     enum: [
       "Knockout",
       "League",
-      "Tournament",
       "Round-Robin",
       "Double Round Robin",
       "Double Elimination",

@@ -22,9 +22,32 @@ const useTournamnet = () => {
         }
     }
 
-    const getTournamentById = async (id) => {
+    const getTournamentById = async (id,populateFields=[]) => {
+        console.log("populateFields:", populateFields);
         try {
-            const response = await axios.get(`${server}/api/tournaments/${id}`);
+            const response = await axios.get(`${server}/api/tournaments/${id}`,{
+                params: {
+                    populate: populateFields.join(',')
+                }
+            });
+            if(response.status === 200) {
+                //console.log("Tournament fetched successfully:", response.data);
+                return response.data; // Return the fetched tournament
+            }
+        } catch (error) {
+            console.error("Error fetching tournament by ID:", error);
+        }
+    }
+
+
+    const getTournamentDataForUpdate = async (id,populateFields=[]) => {
+        console.log("populateFields:", populateFields);
+        try {
+            const response = await axios.get(`${server}/api/tournaments/${id}/update`,{
+                params: {
+                    populate:  ["winner","teams"].join(',')
+                }
+            });
             if(response.status === 200) {
                 //console.log("Tournament fetched successfully:", response.data);
                 return response.data; // Return the fetched tournament
@@ -46,6 +69,28 @@ const useTournamnet = () => {
                 }
             });
             console.log("Tournament created successfully:", response.data);
+            if(response.status === 201) {
+               return response.data;
+            }
+            else throw new Error("Failed to create tournament", response.status);
+            //getAllTournaments(); // Refresh the list after creation
+        } catch (error) {
+            console.error("Error creating tournament:", error);
+        }
+    }
+
+    
+
+     const updateTournamentDetails = async (tournamentId, tournamentData) => {
+        console.log("Server URL:", server);
+        try {
+            console.log("Updating tournament with data:", tournamentData);
+            const response = await axios.put(`${server}/api/tournaments/${tournamentId}/update`, tournamentData,{
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log("Tournament updated successfully:", response.data);
             if(response.status === 201) {
                return response.data;
             }
@@ -142,7 +187,9 @@ const useTournamnet = () => {
   return {
     getAllTournaments,
     createTournament,
+    updateTournamentDetails,
     getTournamentById,
+    getTournamentDataForUpdate,
     getTournamentFormat,
     deleteTournament,
     enrollIntoTournament,

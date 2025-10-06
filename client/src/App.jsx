@@ -23,6 +23,7 @@ import TournamentGroup from "./pages/TournamentGroup.jsx";
 import TournamentFormats from "./pages/TournamentFormats.jsx";
 import TemporayPage from "./pages/TemporayPage.jsx";
 import TournamentNewGame from "./pages/TournamentNewGame.jsx";
+import UpdateTournamentDetails from "./pages/UpdateTournamentDetails.jsx";
 
 const server = import.meta.env.VITE_SERVER_URL;
 
@@ -59,6 +60,7 @@ function App() {
             <Route path="/new-tournament" element={<NewTournament />} />
             <Route path="/tournaments" element={<ViewAllTournaments />} />
             <Route path="/tournament/:id" element={<TournamentDetails />} />
+            <Route path="/tournament/:id/update" element={<UpdateTournamentDetails />} />
             <Route
               path="/tournament/:id/newTeam"
               element={<TournamentNewTeam />}
