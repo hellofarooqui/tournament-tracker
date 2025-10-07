@@ -13,8 +13,8 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [filter,setFilter] = useState("")
-  const [filteredGames,setFilteredGames] = useState([])
+  const [filter, setFilter] = useState("");
+  const [filteredGames, setFilteredGames] = useState([]);
 
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
   const fetchGames = async (tournamentId) => {
     try {
       const fetchedGames = await getGames(tournamentId);
-      console.log("Games",fetchedGames)
+      console.log("Games", fetchedGames);
       setGames(fetchedGames);
     } catch (error) {
       console.error("Error fetching games:", error);
@@ -37,19 +37,20 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
   };
 
   const handleSearchClose = () => {
-    setShowSearchBar(false)
-    setFilter("")
-  }
-  useEffect(()=>{
-
-    console.log("Filter", filter)
-    if(!filter){
-      setFilteredGames(games)
-    }
-    else setFilteredGames(games.filter(game => game.teams.some(team => team.name.toLowerCase().includes(filter))))
-
-
-  },[filter,games])
+    setShowSearchBar(false);
+    setFilter("");
+  };
+  useEffect(() => {
+    console.log("Filter", filter);
+    if (!filter) {
+      setFilteredGames(games);
+    } else
+      setFilteredGames(
+        games.filter((game) =>
+          game.teams.some((team) => team.name.toLowerCase().includes(filter))
+        )
+      );
+  }, [filter, games]);
 
   useEffect(() => {
     setLoading(true);
@@ -66,13 +67,27 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
     <div className="pb-6">
       <div className="flex justify-between gap-x-4 items-center">
         <h2 className="text-dark-white text-lg">Games</h2>
-        <div className={`${showSearchBar ? "w-full" : "w-10"} h-10 transition-width delay-25 duration-100 ease-in-out p-2   flex justify-end items-center border-2 rounded-md border-dark-white/10 mb-2`}>
+        <div
+          className={`${
+            showSearchBar ? "w-full" : "w-10"
+          } h-10 transition-width delay-25 duration-100 ease-in-out p-2   flex justify-end items-center border-2 rounded-md border-dark-white/10 mb-2`}
+        >
           {!showSearchBar ? (
-            <span onClick={()=>setShowSearchBar(true)}><Search className="text-dark-white/50" size={18} /></span>
+            <span onClick={() => setShowSearchBar(true)}>
+              <Search className="text-dark-white/50" size={18} />
+            </span>
           ) : (
             <span className="w-full flex items-center gap-x-2">
-              <input onChange={(e)=>setFilter(e.target.value.toLocaleLowerCase())} className="flex-1 text-dark-white/50 focus:outline-none" placeholder="Search game ..." />
-              <X onClick={handleSearchClose} className="text-dark-white/50" size={16} />
+              <input
+                onChange={(e) => setFilter(e.target.value.toLocaleLowerCase())}
+                className="flex-1 text-dark-white/50 focus:outline-none"
+                placeholder="Search game ..."
+              />
+              <X
+                onClick={handleSearchClose}
+                className="text-dark-white/50"
+                size={16}
+              />
             </span>
           )}
         </div>
@@ -89,8 +104,8 @@ const Games = ({ tournamentId, tournamentAdmin }) => {
       {games.length > 0 ? (
         <GamesList games={filteredGames} />
       ) : (
-        <p className="mt-4 bg-neutral-200 text-neutral-500 text-sm p-4 rounded-[10px] font-thin">
-          No games found
+        <p className="mt-4 bg-dark-blue/20 text-dark-blue/70 text-sm p-4 rounded-[10px] font-thin">
+          The tournament has not started yet, no games are scheduled.
         </p>
       )}
 

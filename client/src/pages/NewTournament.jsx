@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import useSettings from "../hooks/useSettings";
 import { useContext } from "react";
 import { NavbarContext } from "../context/NavbarContext";
+import {TOURNAMENT_FORMATS} from "../constants/carromConstants";
 
 const defaultTournament = {
   name: "",
@@ -17,7 +18,7 @@ const defaultTournament = {
 };
 
 const NewTournament = () => {
-  const [tournamentFormats, setTournamentFormats] = useState([]);
+  const [tournamentFormats, setTournamentFormats] = useState(TOURNAMENT_FORMATS);
   const [tournament, setTournament] = useState(defaultTournament);
   const [loading, setLoading] = useState(false);
   const { createTournament } = useTournamnet();
@@ -137,8 +138,8 @@ const NewTournament = () => {
               >
                 <option>Select Format</option>
                 {tournamentFormats.map((format, index) => (
-                  <option key={format._id} value={format._id}>
-                    {format.name}
+                  <option key={index} value={format}>
+                    {format}
                   </option>
                 ))}
               </select>

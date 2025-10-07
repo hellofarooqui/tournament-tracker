@@ -1,7 +1,15 @@
 //libraries
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Calendar1, CircleGauge, EllipsisVertical, Loader2, Menu, Trash, Trophy } from "lucide-react";
+import {
+  Calendar1,
+  CircleGauge,
+  EllipsisVertical,
+  Loader2,
+  Menu,
+  Trash,
+  Trophy,
+} from "lucide-react";
 import toast from "react-hot-toast";
 
 //contexts
@@ -47,7 +55,7 @@ const TournamentDetails = () => {
   const [tournament, setTournament] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showUpdateMenu,setShowUpdateMenu] = useState(false);
+  const [showUpdateMenu, setShowUpdateMenu] = useState(false);
   const [goingLive, setGoingLive] = useState(false);
 
   const [showGames, setShowGames] = useState(true);
@@ -161,14 +169,60 @@ const TournamentDetails = () => {
   return (
     <div className="min-h-full w-full font-dynapuff relative">
       <div className="w-full flex items-start gap-x-4 p-4 relative">
-        <button onClick={()=>setShowUpdateMenu(!showUpdateMenu)} className="absolute right-4 top-4 text-slate-400 focus:text-slate-200 hover:cursor-pointer"><EllipsisVertical size={16} /></button>
-        {(user.role == 'root-admin' && showUpdateMenu) && (
+        <button
+          onClick={() => setShowUpdateMenu(!showUpdateMenu)}
+          className="absolute right-4 top-4 text-slate-400 focus:text-slate-200 hover:cursor-pointer"
+        >
+          <EllipsisVertical size={16} />
+        </button>
+        {user.role == "root-admin" && showUpdateMenu && (
           <div className="absolute top-10 right-4 bg-dark-gray backdrop-blur-md border border-white/10 rounded-md flex flex-col overflow-hidden z-20 shadow-xl shadow-black shadow-">
-            {tournament.status == 'scheduled' && <button onClick={handleGoLive} className="text-left px-4 py-2 text-sm text-dark-white hover:bg-white/5 transition-colors ease-in-out duration-150">{goingLive ? <Loader2 className="animate-spin inline" size={14} /> : "Go Live"}</button>}
-            <button onClick={()=>navigate(`update`)} className="text-left px-4 py-2 text-sm text-white hover:bg-white/5 transition-colors ease-in-out duration-150">Update Details</button>
-            <button onClick={handleDeleteTournament} className="text-left px-4 py-2 text-sm hover:text-red-600/90 hover:bg-white/5 transition-colors ease-in-out duration-150 text-red-400">Delete Tournament</button>
+            {tournament.status == "scheduled" && (
+              <button
+                onClick={handleGoLive}
+                className="text-left px-4 py-2 text-sm text-dark-white hover:bg-white/5 transition-colors ease-in-out duration-150"
+              >
+                {goingLive ? (
+                  <Loader2 className="animate-spin inline" size={14} />
+                ) : (
+                  "Go Live"
+                )}
+              </button>
+            )}
+            <button
+              onClick={() => navigate(`update`)}
+              className="text-left px-4 py-2 text-sm text-white hover:bg-white/5 transition-colors ease-in-out duration-150"
+            >
+              Update Details
+            </button>
+            <button
+              onClick={handleDeleteTournament}
+              className="text-left px-4 py-2 text-sm hover:text-red-600/90 hover:bg-white/5 transition-colors ease-in-out duration-150 text-red-400"
+            >
+              Delete Tournament
+            </button>
           </div>
         )}
+
+        {/* Enrollment Status */}
+        <div className="absolute bottom-2 right-6">
+          {enrolled ? (
+            <button className="bg-transparent text-dark-blue border-dark-blue border overflow-hidden py-1 text-sm px-2 rounded-sm">
+              Enrolled
+            </button>
+          ) : (
+            <button
+              onClick={handleEnroll}
+              className="bg-dark-blue text-white px-2 py-1 rounded-sm"
+            >
+              {enrollmentLoading ? (
+                <Loader2 className="animate-spin text-stone-100" size={16} />
+              ) : (
+                "Enroll"
+              )}
+            </button>
+          )}
+        </div>
         <div>
           <img
             src={CarromBanner}
@@ -192,8 +246,9 @@ const TournamentDetails = () => {
           <p className="text-dark-white/50 text-sm font-thin ">
             {readableDate(tournament.startDate)}
           </p>
-                    <p className="bg-dark-green self-start px-2 rounded-full text-white text-xs">{tournament.status}</p>
-
+          <p className="bg-dark-green self-start px-2 rounded-full text-white text-xs">
+            {tournament.status}
+          </p>
         </div>
       </div>
 
@@ -203,7 +258,7 @@ const TournamentDetails = () => {
 
         {/* Main Content Card */}
         <div className="bg-transaprent overflow-hidden ">
-          {tournament.status !== "scheduled" && (
+          {/* {tournament.status !== "scheduled" && (
             <div className="w-full text-lg overflow-x-scroll scrollbar-none border-b border-white/10">
               <ul className="w-full flex text-sm justify-around ">
                 <li
@@ -268,10 +323,75 @@ const TournamentDetails = () => {
                 </li>
               </ul>
             </div>
-          )}
+          )} */}
+
+          <div className="w-full text-lg overflow-x-scroll scrollbar-none border-b border-white/10">
+            <ul className="w-full flex text-sm justify-around ">
+              <li
+                onClick={() => setActiveTab("about")}
+                className={`cursor-pointer px-4 py-2 flex-1 ${
+                  activeTab === "about"
+                    ? "border-b border-dark-blue text-light-main-blue"
+                    : "text-dark-white/50 font-thin"
+                }`}
+              >
+                About
+              </li>
+              <li
+                onClick={() => setActiveTab("games")}
+                className={`cursor-pointer px-4 py-2 flex-1 ${
+                  activeTab === "games"
+                    ? "border-b border-dark-blue text-light-main-blue"
+                    : "text-dark-white/50 font-thin"
+                }`}
+              >
+                Games
+              </li>
+              <li
+                onClick={() => setActiveTab("points")}
+                className={`cursor-pointer px-4 py-2 flex-1 ${
+                  activeTab === "points"
+                    ? "border-b border-dark-blue text-light-main-blue"
+                    : "text-dark-white/50 font-thin"
+                }`}
+              >
+                Points
+              </li>
+              <li
+                onClick={() => setActiveTab("rules")}
+                className={`cursor-pointer px-4 py-2 flex-1 ${
+                  activeTab === "rules"
+                    ? "border-b border-dark-blue text-light-main-blue"
+                    : "text-dark-white/50 font-thin"
+                }`}
+              >
+                Rules
+              </li>
+              <li
+                onClick={() => setActiveTab("groups")}
+                className={`cursor-pointer px-4 py-2 flex-1 ${
+                  activeTab === "groups"
+                    ? "border-b border-dark-blue text-light-main-blue"
+                    : "text-dark-white/50 font-thin"
+                }`}
+              >
+                Groups
+              </li>
+              <li
+                onClick={() => setActiveTab("teams")}
+                className={`cursor-pointer px-4 py-2 flex-1 ${
+                  activeTab === "teams"
+                    ? "border-b border-dark-blue text-light-main-blue"
+                    : "text-dark-white/50 font-thin"
+                }`}
+              >
+                Teams
+              </li>
+            </ul>
+          </div>
 
           {/* Tab Content */}
-          {tournament.status === "live" ||
+          {/* {tournament.status === "live" ||
           tournament.status === "completed" ||
           tournament.status === "cancelled" ? (
             <div>
@@ -339,7 +459,42 @@ const TournamentDetails = () => {
 
               <EnrolledUsers players={tournament.enrolledUser} />
             </div>
-          )}
+          )} */}
+          <div>
+            {activeTab === "about" && (
+              <div className="p-4">
+                <About />
+              </div>
+            )}
+            {activeTab === "games" && (
+              <div className="p-4">
+                <Games
+                  tournamentId={tournament._id}
+                  tournamentAdmin={tournament.tournamentAdmin}
+                />
+              </div>
+            )}
+            {activeTab === "points" && (
+              <div className="p-4">
+                <PointsTable />
+              </div>
+            )}
+            {activeTab === "rules" && (
+              <div className="p-4">
+                <Rules />
+              </div>
+            )}
+            {activeTab === "groups" && (
+              <div className="p-4">
+                <Groups />
+              </div>
+            )}
+            {activeTab === "teams" && (
+              <div className="p-4">
+                <Teams />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

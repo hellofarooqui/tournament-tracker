@@ -1,34 +1,39 @@
 import mongoose from "mongoose";
 
 const tableEntrySchema = new mongoose.Schema({
+    teamType:{
+        type: String,
+        enum: ['Team', 'User'],
+        required: true,
+    },
     team: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Team',
+        refPath: 'teamType',
         required: true,
     },
     points: {
         type: Number,
-        required: true,
+  
         default: 0,
     },
     gamesPlayed: {
         type: Number,
-        required: true,
+      
         default: 0,
     },
     wins: {
         type: Number,
-        required: true,
+   
         default: 0,
     },
     losses: {
         type: Number,
-        required: true,
+    
         default: 0,
     },
     draws: {
         type: Number,
-        required: true,
+  
         default: 0,
     },
     results: [{

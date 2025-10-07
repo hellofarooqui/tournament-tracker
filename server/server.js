@@ -12,6 +12,7 @@ import authRouter from './routers/authRouter.js';
 import groupRouter from './routers/groupRouter.js';
 import settingsRouter from './routers/settingsRouter.js';
 import pollRouter from './routers/pollRouter.js';
+import userRouter from './routers/userRouter.js';
 
 
 import webpush from "web-push";
@@ -46,6 +47,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/groups', groupRouter);
 app.use('/api/settings', settingsRouter);
 app.use('/api/poll', pollRouter)
+app.use('/api/users', userRouter)
 
 app.use('api/subscribe', (req, res) => (req, res) => {
   const subscription = req.body;

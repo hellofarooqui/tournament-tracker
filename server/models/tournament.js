@@ -56,6 +56,10 @@ const tournamentSchema = new mongoose.Schema(
         },
       },
     ],
+    hasGroups: {
+      type: Boolean,
+      default: false,
+    },
     groups: [
       {
         type: mongoose.Schema.Types.ObjectId,

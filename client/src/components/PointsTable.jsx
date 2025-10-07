@@ -50,11 +50,11 @@ const PointsTable = () => {
     );
   }
 
-  if (pointsTables.length === 0) {
+  if (pointsTables.entries.length === 0) {
     return (
-      <div className="w-full flex items-center justify-center py-16 font-dynapuff">
-        <div className="text-gray-500">No points table available.</div>
-      </div>
+      <p className="mt-4 bg-dark-blue/20 text-dark-blue/70 text-sm p-4 rounded-[10px] font-thin">
+        The tournament has not started ye.
+      </p>
     );
   }
 
