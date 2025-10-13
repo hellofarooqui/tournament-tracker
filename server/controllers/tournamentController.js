@@ -243,7 +243,8 @@ export const getTournamentTeams = async (req, res) => {
     }
 
     // If no teams yet, return an empty array
-    res.status(200).json(tournament.teams || []);
+    console.log(tournament.teams)
+    res.status(200).json(tournament.teams);
   } catch (error) {
     console.error("Error fetching tournament teams:", error);
     res.status(500).json({
@@ -267,7 +268,7 @@ export const addTournamentTeam = async (req, res) => {
     //const team = req.body; // Assuming team data is sent in the request body
     //const team = new Team(req.body);
     const teamCreated = await Team.create(req.body);
-    tournament.teams.push(teamCreated._id);
+    tournament.teams.push({team:teamCreated._id,assigned:false,assignedGroup:null});
     await tournament.save();
 
     //check if the tournament has points table

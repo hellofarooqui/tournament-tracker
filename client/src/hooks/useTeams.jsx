@@ -9,7 +9,7 @@ const useTeams = () => {
         try {
             const response = await axios.get(`${server}/api/tournaments/${tournamentId}/teams`);
             if(response.status === 200) {
-                //console.log("Teams fetched successfully:", response.data);
+                console.log("Teams fetched successfully:", response.data);
                 return response.data; // Return the fetched teams
             }
         } catch (error) {

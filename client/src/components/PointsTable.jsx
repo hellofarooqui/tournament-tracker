@@ -98,9 +98,9 @@ const PointsTable = () => {
                         {abbrevation(entry.team.name)}
                       </span>
                     </div>
-                    <span className="text-sm text-dark-white/90">
+                    {/* <span className="text-sm text-dark-white/90">
                       {entry.team.name.split(" ")[1]}
-                    </span>
+                    </span> */}
                   </div>
                   <div className="p-3 text-center text-sm text-dark-white/90">
                     {entry.gamesPlayed}

@@ -93,7 +93,7 @@ const Teams = () => {
           )}
         </div>
         {teams.length < 1 ? (
-          <p>No Teams Found</p>
+          <p className="text-dark-white/50">No Teams Found</p>
         ) : (
           <div className="flex flex-col gap-y-4 pb-6">
             {teams.map((entry) => (
