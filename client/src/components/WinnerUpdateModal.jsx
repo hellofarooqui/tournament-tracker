@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import useGame from "../hooks/useGame";
 import toast from "react-hot-toast";
@@ -8,6 +8,7 @@ const WinnerUpdateModal = ({ game, onClose }) => {
   const [winner, setWinner] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [result,setResult] = useState(false)
   const { updateWinner } = useGame();
 
   const handleWinnerChange = (e) => {
@@ -23,7 +24,7 @@ const WinnerUpdateModal = ({ game, onClose }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const updated = await updateWinner(game._id, winner);
+      const updated = await updateWinner(game._id, winner, result);
       if (updated) {
         toast.success("Winner updated successfully!");
         setLoading(false);
@@ -37,6 +38,10 @@ const WinnerUpdateModal = ({ game, onClose }) => {
     }
   };
 
+  useEffect(()=>{
+    console.log("Result value" , result)
+  },[result])
+
   const modalContent = (
     <div 
       className="fixed top-0 left-0 inset-0 z-50 bg-dark-gray/50 backdrop-blur-lg p-6"
@@ -48,7 +53,19 @@ const WinnerUpdateModal = ({ game, onClose }) => {
       >
         <h2 className="text-dark-white text-2xl font-bold">Update Winner!</h2>
         <form onSubmit={handleUpdateWinner} className="w-full flex flex-col gap-y-4">
-          <label className="block text-white/70">
+           <label className="block text-white/70">
+           Result
+            </label>
+            <select
+            onChange={(e)=>setResult(e.target.value === "true")}
+            className="w-full text-base mb-2 p-2 rounded-md bg-dark-blue/10 border-2 border-dark-white/10 text-dark-white/70 focus:outline-none"
+          >
+            <option value="" disabled className="bg-dark-blue/10">Match Result</option>
+            <option value="false">Draw</option>
+            <option value="true">Won</option>
+
+          </select>
+          {result && (<div><label className="block text-white/70">
             Select Winner 
             </label>
             <select
@@ -61,7 +78,7 @@ const WinnerUpdateModal = ({ game, onClose }) => {
                 {team.name}
               </option>
             ))}
-          </select>
+          </select></div>)}
           
           <button
             type="submit"

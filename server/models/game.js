@@ -12,6 +12,10 @@ const gameSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team',
     }],
+    result: {
+        type: Boolean,
+        default : true
+    },
     winner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Team',    

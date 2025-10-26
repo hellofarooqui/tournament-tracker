@@ -25,9 +25,9 @@ const useGame = () => {
     }
   }
 
-  const updateWinner = async (gameId, winnerId) => {
+  const updateWinner = async (gameId, winnerId, result) => {
     try {
-      const response = await axios.patch(`${server}/api/games/${gameId}`, { winnerId });
+      const response = await axios.patch(`${server}/api/games/${gameId}`, { winnerId , result });
       return response.data;
     } catch (error) {
       console.error("Error updating game winner:", error);

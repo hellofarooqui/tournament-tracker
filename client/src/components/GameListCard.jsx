@@ -12,6 +12,7 @@ const GameListCard = ({ game, matchNumber }) => {
 
     const {user} = useContext(AuthContext);
     //console.log("User in GameListCard:", user);
+    //console.log("Game", game)
   return (
     <div
       onClick={() => user.role == 'root-admin' ? setShowWinnerUpdateModal(true) : null}
@@ -21,25 +22,26 @@ const GameListCard = ({ game, matchNumber }) => {
         <p className=" text-dark-white/30 text-xs">
           {game.name ? game.name : `Game ${matchNumber}`} - {readableDate(game.scheduledDate)}
         </p>
-        {game.winner ? (
+        {game.winner || !game.result ? (
           <p className="text-dark-green text-sm">Finished</p>
         ) : (
           <p className="text-orange-300/70 text-sm">Upcoming</p>
         )}
       </div>
       <div className="flex flex-col  w-full items-start">
-        {game.teams.map((team) => (<div key={team._id} className="w-full flex gap-x-2 p-2  items-center first:border-b border-dark-white/10">
+        {game.teams.map((team) => (<div key={team._id} className={` ${game.winner ? (game.winner._id === team._id ? "" : "opacity-40") : ""} w-full flex gap-x-2 p-2  items-center first:border-b border-dark-white/10`}>
           <div className="rounded-full bg-gray-700  w-8 h-8 flex justify-center items-center">
-            {game.winner &&
-              (game.winner._id === team._id && (
-                <Crown className="text-emerald-400" size={18} />
-              ))}
+           
           </div>
           <p className="text-sm text-center text-dark-white/89 line-clamp-1">
             {team.name}
           </p>
         </div>))}
       </div>
+
+      {game.winner ?  <p className="text-dark-green/80 text-xs font-thin">{game?.winner?.name} Won</p> : (game.result == false ?<p className="text-yellow-200 text-xs font-thin"> No Result</p> : <p></p>) }
+
+     
 
       {showWinnerUpdateModal && (
         <WinnerUpdateModal
